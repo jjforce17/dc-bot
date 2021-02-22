@@ -32,7 +32,7 @@ bot.on('message', msg=>{
         }
         else
         {
-
+            msg.channel.send(ganggu);
         }
 
     }
