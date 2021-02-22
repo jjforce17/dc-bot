@@ -16,13 +16,13 @@ bot.on('message', msg=>{
     if(msg.content === "$wa")
     {
         ganggu = Math.floor(Math.random() * 15) + 1;
-        if(ganggu <= 4)
+        if(ganggu <= 2)
         {
 
             msg.channel.send('ganggu dlu wkwkkww');
             msg.channel.send('ganggu dlu wkwkkwkw');
         }
-        else if(ganggu <=5)
+        else if(ganggu <=3)
         {
 
             msg.channel.send('ganggu dlu wkwkkww');
