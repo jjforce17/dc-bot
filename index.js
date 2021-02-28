@@ -37,14 +37,6 @@ bot.on('message', msg=>{
         break;
     }
 })
-mongoose.connect(process.env.MONGODB_SRV, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    userFindAndModify: false,
-}).then(()=>{
-    console.log("Connected to the database!");
-}).catch(()=>{
-    console.log(err);
-});
+
 
 bot.login(process.env.token);
