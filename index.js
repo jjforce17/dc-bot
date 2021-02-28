@@ -47,4 +47,4 @@ mongoose.connect(process.env.MONGODB_SRV, {
     console.log(err);
 });
 
-bot.login(process.env.token);
+bot.login(process.env.TOKEN);
