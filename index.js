@@ -4,7 +4,10 @@ const bot = new Discord.Client();
 
 var ganggu = 0;
 
-bot.on('message', msg=>{
+bot.on('ready', () =>{
+    console.log("nomo");
+})
+bot.on('message', msg =>{
     if(msg.content === "bgn")
     {
         msg.reply('おはよ');
