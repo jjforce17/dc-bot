@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 var ganggu = 0;
 
 bot.on('message', msg=>{
-    if(msg.content === "bot")
+    if(msg.content === "bgn")
     {
         msg.reply('おはよ');
     }
