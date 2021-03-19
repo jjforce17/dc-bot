@@ -6,7 +6,6 @@ module.exports = (client, Discord) =>{
         const command = require(`../commands/${file}`);
         if(command.name){
             client.commands.set(command.name, command);
-            console.log('yes cmd2')
         }   else{
             continue;
         }
