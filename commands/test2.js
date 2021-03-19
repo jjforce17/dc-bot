@@ -1,5 +1,6 @@
 module.exports = {
     name: 'testg2',
+    permission : ["ADMINISTRATOR"],
     description: "this is the ping command!",
     execute(client, message, args, Discord, profileData) {
         const mooney = profileData.dollar 
