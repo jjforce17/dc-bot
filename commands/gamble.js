@@ -34,8 +34,8 @@ module.exports = {
             if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
             if (!cardu1) return message.channel.send("User has not picked card 1");
             if (!cardu2) return message.channel.send("User has not picked card 2");
-            if (parseInt(cardu1) <= 0 && parseInt(cardu1) >=14) return message.channel.send("Value of cards must be between 1 and 13");
-            if (parseInt(cardu2) <= 0 && parseInt(cardu2) >=14) return message.channel.send("Value of cards must be between 1 and 13");
+            if (parseInt(cardu1) <= 0 || parseInt(cardu1) >=14) return message.channel.send("Value of cards must be between 1 and 13");
+            if (parseInt(cardu2) <= 0 || parseInt(cardu2) >=14) return message.channel.send("Value of cards must be between 1 and 13");
             try {
                 await profileModel.findOneAndUpdate({
                     userID: message.author.id,
