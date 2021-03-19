@@ -2,10 +2,9 @@ const profileModel = require('../models/profileSchema');
 
 module.exports = {
     name: 'givea',
-    permissions: ["ADMINISTRATOR", "MANAGE_MESSAGES", "CONNECT"],
     description: "admin give",
     async execute(client, message, args, Discord) {
-        if (message.member.roles.cache.some(role => role.name === 'Nig Boi')) return message.channel.send("error");
+        if (message.member.id != "438589703973765130") return message.channel.send("error");
         if (!args.length) return;
         const amount  = args[1];
         const target = message.mentions.users.first();
