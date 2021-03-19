@@ -21,7 +21,6 @@ module.exports = async(Discord, client, message) => {
     }
 
     if(message.content.startsWith(prefix)){
-        console.log('is com');
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();
         const command = client.commands.get(cmd);
