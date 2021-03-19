@@ -4,7 +4,7 @@ module.exports = {
     name: 'givea',
     permissions: ["ADMINISTRATOR"],
     description: "admin give",
-    execute(client, message, args, Discord) {
+    async execute(client, message, args, Discord) {
         if (!args.length) return;
         const amount  = args[1];
         const target = message.mentions.users.first();
