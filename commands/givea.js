@@ -5,7 +5,7 @@ module.exports = {
     permissions: ["ADMINISTRATOR", "MANAGE_MESSAGES", "CONNECT"],
     description: "admin give",
     async execute(client, message, args, Discord) {
-        if (message.role.id != "803841418589110303") return message.channel.send("error");
+        if (message.member.roles.cache.some(role => role.name === 'Nig Boi')) return message.channel.send("error");
         if (!args.length) return;
         const amount  = args[1];
         const target = message.mentions.users.first();
