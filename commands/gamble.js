@@ -20,15 +20,15 @@ module.exports = {
             return message.channel.send('dasar miskin');
             }
             while (card2 == card1) {
-                var card2 = Math.floor(Math.random() * 13) + 1;
+                card2 = Math.floor(Math.random() * 13) + 1;
                 console.log(card2);
             }
             while (card3 == card1) {
-                var card3 = Math.floor(Math.random() * 13) + 1;
+                card3 = Math.floor(Math.random() * 13) + 1;
                 console.log(card3);
             }
             while (card3 == card2) {
-                var card2 = Math.floor(Math.random() * 13) + 1;
+                card2 = Math.floor(Math.random() * 13) + 1;
                 console.log(card3);
             };
             if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
@@ -47,8 +47,8 @@ module.exports = {
                     }
                 );
                 message.channel.send(card1);
-        message.channel.send(card2);
-        message.channel.send(card3);
+                message.channel.send(card2);
+                message.channel.send(card3);
         if (cardu1 == card1 || cardu1 == card2 || cardu1 == card3) {
             if (cardu2 == card1 || cardu2 == card2 || cardu2 == card3) {
                 message.channel.send("Nice! You got both right!");

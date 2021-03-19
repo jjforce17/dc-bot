@@ -2,9 +2,23 @@ module.exports = {
     name: 'testg2',
     description: "this is the ping command!",
     execute(client, message, args, Discord, profileData) {
-        const mooney = profileData.dollar 
-        if(mooney <= 0) {
-            message.channel.send('dasar miskin');
+        var card1 = Math.floor(Math.random() * 13) + 1;
+        var card2 = Math.floor(Math.random() * 13) + 1;
+        var card3 = Math.floor(Math.random() * 13) + 1;
+        while (card2 == card1) {
+            card2 = Math.floor(Math.random() * 13) + 1;
+            console.log(card2);
         }
+        while (card3 == card1) {
+            card3 = Math.floor(Math.random() * 13) + 1;
+            console.log(card3);
+        }
+        while (card3 == card2) {
+            card2 = Math.floor(Math.random() * 13) + 1;
+            console.log(card3);
+        };
+        message.channel.send(card1);
+        message.channel.send(card2);
+        message.channel.send(card3);
     }
 }
