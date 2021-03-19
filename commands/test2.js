@@ -2,9 +2,9 @@ module.exports = {
     name: 'testg2',
     description: "this is the ping command!",
     execute(client, message, args, Discord, profileData) {
-        var card1 = Math.floor(Math.random() * 13) + 1;
-        var card2 = Math.floor(Math.random() * 13) + 1;
-        var card3 = Math.floor(Math.random() * 13) + 1;
+        var card1 = Math.floor(Math.random() * 4) + 1;
+        var card2 = Math.floor(Math.random() * 4) + 1;
+        var card3 = Math.floor(Math.random() * 4) + 1;
         while (card2 == card1) {
             card2 = Math.floor(Math.random() * 13) + 1;
             console.log(card2);
