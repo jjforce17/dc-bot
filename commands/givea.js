@@ -11,7 +11,7 @@ module.exports = {
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
         if(!target) return;
         try {
-            const targetData = await profileModel.findOne({userID: target,id});
+            const targetData = await profileModel.findOne({userID: target.id});
             if (!targetData) return;
             await profileModel.findOneAndUpdate({
                 userID: target.id,
