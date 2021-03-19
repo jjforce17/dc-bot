@@ -24,23 +24,4 @@ mongoose.connect(process.env.mongodbsrv, {
     console.log(err);
 })
 
-client.on('message', message =>{
-    if(message.content === "$wa")
-    {
-        ganggu = Math.floor(Math.random() * 15) + 1;
-        if(ganggu <= 4)
-        {
-            message.channel.send('ganggu dlu wkwkkww');
-            message.channel.send('ganggu dlu wkwkkwkw');
-        }
-        else if(ganggu <= 5)
-        {
-            message.channel.send('ganggu dlu wkwkkww');
-            message.channel.send('ganggu dlu wkwkkwkw');
-            message.channel.send('ganggu dlu wkwkkww');
-            message.channel.send('ganggu dlu wkwkkwkw');
-        }
-    }
-})
-
 client.login(process.env.token);
