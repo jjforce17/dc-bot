@@ -64,7 +64,7 @@ module.exports = async(Discord, client, message) => {
       ]
     
       if(command.permissions.length){
-        let invalidPerms = []
+        let invalidPerms = [];
         for(const perm of command.permissions){
           if(!validPermissions.includes(perm)){
             return console.log(`Invalid Permissions ${perm}`);
