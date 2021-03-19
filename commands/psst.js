@@ -14,6 +14,5 @@ module.exports = {
             },
         }
     );
-    return message.channel.send(`${message.author.username}, balance increased by $1`);
     }
 }
