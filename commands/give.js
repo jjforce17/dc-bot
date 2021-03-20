@@ -18,7 +18,7 @@ module.exports = {
                     errors: ['time']
                  })
                 .then(message => {
-                    message = message.first()
+                    
                     if (message.content.toUpperCase() == 'Y') {
                         
                     } else if (message.content.toUpperCase() == 'N') {
