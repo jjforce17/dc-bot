@@ -1,7 +1,7 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'givea',
+    name: 'give',
     description: "normal give",
     async execute(client, message, args, Discord) {
         if (message.member.roles.cache.has("803841418589110303")){
