@@ -18,6 +18,7 @@ module.exports = {
                     errors: ['time']
                  })
                 .then(message => {
+                    message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
                         const targetData = await profileModel.findOne({userID: target.id});
                             if (!targetData) return;
@@ -39,11 +40,11 @@ module.exports = {
                                 },
                             }
                         );
+
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
-                    }
-                    else {
-                        message.channel.send('error');
+                    } else {
+                    message.channel.send('Invalid response');
                     }
                     })
                    .catch(collected => {
