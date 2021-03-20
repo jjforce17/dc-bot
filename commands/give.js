@@ -10,7 +10,7 @@ module.exports = {
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
         if(!target) return;
         try {
-            let filter = m => m.author.id === message.author.id
+            let filter = async m => m.author.id === message.author.id
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
                     max: 1,
