@@ -13,19 +13,18 @@ module.exports = {
         try {
             const targetData = await profileModel.findOne({userID: target.id});
             if (!targetData) return;
-            await profileModel.findOneAndUpdate({
-                userID: message.author.id,
-            }, 
-            {
-                $inc : {
-                    dollar: -amount,
-                },
-            }
-        );
-            message.channel.send("given" + target.username + amount);
             if (message.author.id = user) {
-                if (message.content == y)
-                {await profileModel.findOneAndUpdate({
+                if (message.content == y){
+                await profileModel.findOneAndUpdate({
+                    userID: message.author.id,
+                }, 
+                {
+                    $inc : {
+                        dollar: -amount,
+                    },
+                }
+            );
+                await profileModel.findOneAndUpdate({
                     userID: target.id,
                 }, 
                 {
@@ -33,7 +32,9 @@ module.exports = {
                         dollar: amount,
                     },
                 }
-            );}
+            );
+            message.channel.send("given" + target.username + amount);
+        }
             }
         } catch (err) {
             console.log(err);
