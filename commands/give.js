@@ -39,8 +39,8 @@ module.exports = {
                                 dollar: amount,
                                 },
                             }
-                        );
-
+                            );
+                            message.channel.send("Given" + target.username + amount);
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
                     } else {
