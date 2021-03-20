@@ -14,7 +14,7 @@ module.exports = {
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
                     max: 1,
-                    time: 100,
+                    time: 1000,
                     errors: ['time']
                  })
                 .then(message => {
