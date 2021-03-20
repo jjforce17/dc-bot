@@ -27,6 +27,8 @@ module.exports = {
             console.log(err);
             }
         }
-        else return message.channel.send("error")
+        else {
+            return message.channel.send("error");
+        }
     }
 }
