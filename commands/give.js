@@ -9,6 +9,7 @@ module.exports = {
         const target = message.mentions.users.first();
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
         if(!target) return;
+        const user = message.author.id;
         try {
             const targetData = await profileModel.findOne({userID: target.id});
             if (!targetData) return;
@@ -22,15 +23,18 @@ module.exports = {
             }
         );
             message.channel.send("given" + target.username + amount);
-            await profileModel.findOneAndUpdate({
-                userID: target.id,
-            }, 
-            {
-                $inc : {
-                    dollar: amount,
-                },
+            if (message.author.id = user) {
+                if (message.content == y)
+                {await profileModel.findOneAndUpdate({
+                    userID: target.id,
+                }, 
+                {
+                    $inc : {
+                        dollar: amount,
+                    },
+                }
+            );}
             }
-        );
         } catch (err) {
             console.log(err);
             }
