@@ -18,11 +18,32 @@ module.exports = {
                     errors: ['time']
                  })
                 .then(message => {
-                    
                     if (message.content.toUpperCase() == 'Y') {
-                        
+                        const targetData = await profileModel.findOne({userID: target.id});
+                            if (!targetData) return;
+                            await profileModel.findOneAndUpdate({
+                                userID: message.author.id,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            }
+                            );
+                            await profileModel.findOneAndUpdate({
+                                userID: target.id,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: amount,
+                                },
+                            }
+                        );
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
+                    }
+                    else {
+                        message.channel.send('error');
                     }
                     })
                    .catch(collected => {
