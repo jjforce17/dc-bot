@@ -20,7 +20,7 @@ module.exports = {
                 .then(message => {
                     message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
-                    
+                        message.channel.send('Invalid response');
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
                     } else {
@@ -31,27 +31,7 @@ module.exports = {
                         message.channel.send('Timed out');
                     });
             })
-            const targetData = await profileModel.findOne({userID: target.id});
-            if (!targetData) return;
-            await profileModel.findOneAndUpdate({
-                userID: message.author.id,
-            }, 
-            {
-                $inc : {
-                    dollar: -amount,
-                },
-            }
-        );
-            message.channel.send("given" + target.username + amount);
-            await profileModel.findOneAndUpdate({
-                userID: target.id,
-            }, 
-            {
-                $inc : {
-                    dollar: amount,
-                },
-            }
-        );
+            
         } catch (err) {
             console.log(err);
             }
