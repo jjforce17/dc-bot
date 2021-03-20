@@ -20,11 +20,9 @@ module.exports = {
                 .then(message => {
                     message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
-                        message.channel.send('Invalid response');
+                        
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
-                    } else {
-                    message.channel.send('Invalid response');
                     }
                     })
                    .catch(collected => {
