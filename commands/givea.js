@@ -4,7 +4,7 @@ module.exports = {
     name: 'givea',
     description: "admin give",
     async execute(client, message, args, Discord) {
-        if (message.member.roles.cache.has("803841418589110303")) return message.channel.send("error");
+        if (message.member.roles.cache.has("803841418589110303")){
         if (!args.length) return;
         const amount  = args[1];
         const target = message.mentions.users.first();
@@ -25,6 +25,8 @@ module.exports = {
         );
         } catch (err) {
             console.log(err);
+            }
         }
+        else return message.channel.send("error")
     }
 }
