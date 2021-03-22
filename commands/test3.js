@@ -7,8 +7,8 @@ module.exports = {
             let filter = m => m.author.id === message.author.id
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
-                    max: 1,
-                    time: 10000,
+                    max: 2,
+                    time: 20000,
                     errors: ['time']
                  })
                  .then((message) => {
@@ -24,17 +24,6 @@ module.exports = {
                     message.channel.send('Invalid response');
                     }
                 })
-                .catch(collected => {
-                    message.channel.send('Timed out');
-                });
-            })
-            let filter2 = m => m.author.id === message.author.id
-                message.channel.send("Press Y to confirm, N to cancel").then(() => {
-                message.channel.awaitMessages(filter2, {
-                    max: 1,
-                    time: 10000,
-                    errors: ['time']
-                 })
                  .then((message) => {
                     message = message.first()
                     if (message.content.toUpperCase() == 'Z') {
