@@ -7,27 +7,45 @@ module.exports = {
             let filter = m => m.author.id === message.author.id
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
-                    max: 3,
-                    time: 20000,
+                    max: 1,
+                    time: 10000,
                     errors: ['time']
                  })
-                 .then(collected => {
+                 .then(async (message) => {
+                    message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
                     console.log("y");
-                    }
-                    if (message.content.toUpperCase() == 'N') {
-                    message.channel.send('N');
-                    console.log("n");
                     } 
+                    else if (message.content.toUpperCase() == 'N') {
+                    message.channel.send('N');
+                    console.log("n"); 
+                    } else {
+                    message.channel.send('Invalid response');
+                    }
+                })
+                .catch(collected => {
+                    message.channel.send('Timed out');
+                });
+            })
+            let filter2 = m => m.author.id === message.author.id
+                message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                message.channel.awaitMessages(filter2, {
+                    max: 1,
+                    time: 10000,
+                    errors: ['time']
+                 })
+                 .then(async (message) => {
+                    message = message.first()
                     if (message.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
                     console.log("z");
-                    }
-                    if (message.content.toUpperCase() == 'V') {
+                    } else if (message.content.toUpperCase() == 'V') {
                     message.channel.send('V');
                     console.log("v");
-                    } 
+                    } else {
+                    message.channel.send('Invalid response');
+                    }
                 })
                 .catch(collected => {
                     message.channel.send('Timed out');
