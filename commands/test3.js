@@ -11,8 +11,22 @@ module.exports = {
                     time: 20000,
                     errors: ['time']
                  })
-                 .then(collected => console.log(collected.size))
-                 .catch(collected => console.log(`After a minute, only ${collected.size} out of 4 voted.`));
+                 .then(async (message) => {
+                    if (message.content.toUpperCase() == 'Y') {
+                    message.channel.send('Y');
+                    } else if (message.content.toUpperCase() == 'N') {
+                    message.channel.send('N');
+                    } else if (message.content.toUpperCase() == 'Z') {
+                    message.channel.send('Z');
+                    } else if (message.content.toUpperCase() == 'V') {
+                    message.channel.send('V');
+                    } else {
+                    message.channel.send('Invalid response');
+                    }
+                })
+                .catch(collected => {
+                    message.channel.send('Timed out');
+                });
             })
             
         } catch (err) {
