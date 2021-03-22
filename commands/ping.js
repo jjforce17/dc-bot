@@ -3,5 +3,7 @@ module.exports = {
     description: "this is the ping command!",
     execute(client, message, args, Discord) {
         message.channel.send('pong');
+            let welcomeRole = guildMember.guild.roles.cache.find(role => role.name === 'boi');
+            guildMember.roles.add(welcomeRole);
     }
 }
