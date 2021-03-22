@@ -16,16 +16,26 @@ module.exports = {
                     if (message.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
                     console.log("y");
-                    } else if (message.content.toUpperCase() == 'N') {
+                    }
+                    else {
+                        message.channel.send('Invalid response'); 
+                    if (message.content.toUpperCase() == 'N') {
                     message.channel.send('N');
                     console.log("n");
-                    } else if (message.content.toUpperCase() == 'Z') {
+                    } 
+                    else {
+                        message.channel.send('Invalid response');
+                    if (message.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
                     console.log("z");
-                    } else if (message.content.toUpperCase() == 'V') {
+                    }
+                    else {
+                        message.channel.send('Invalid response');
+                    if (message.content.toUpperCase() == 'V') {
                     message.channel.send('V');
                     console.log("v");
-                    } else {
+                    } 
+                    else {
                     message.channel.send('Invalid response');
                     }
                 })
