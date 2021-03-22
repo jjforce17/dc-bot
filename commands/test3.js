@@ -18,14 +18,12 @@ module.exports = {
                  })
                 .then(async (message) => {
                     if (message.content.toUpperCase() == 'Y') {
-                        const targetData = await profileModel.findOne({userID: target.id});
-                            if (!targetData) return;
-                            message.channel.send('Y');
+                    message.channel.send('Y');
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('N');
-                } else if (message.content.toUpperCase() == 'Z') {
+                    } else if (message.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
-                } else if (message.content.toUpperCase() == 'V') {
+                    } else if (message.content.toUpperCase() == 'V') {
                     message.channel.send('V');
                     return;
                     } else {
