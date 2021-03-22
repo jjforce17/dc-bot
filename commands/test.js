@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'testg2',
+    name: 'testg',
     description: "this is the ping command!",
     execute(client, message, args, Discord, profileData) {
         const mooney = profileData.dollar 

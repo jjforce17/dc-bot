@@ -1,9 +1,7 @@
-const profileModel = require('../models/profileSchema');
-
 module.exports = {
-    name: 'give',
-    description: "normal give",
-    async execute(client, message, args, Discord) {
+    name: 'testg3',
+    description: "this is the ping command!",
+    execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if (!args.length) return;
         const amount  = args[1];
@@ -19,35 +17,28 @@ module.exports = {
                     errors: ['time']
                  })
                 .then(async (message) => {
-                    message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
                         const targetData = await profileModel.findOne({userID: target.id});
                             if (!targetData) return;
-                            await profileModel.findOneAndUpdate({
-                                userID: message.author.id,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            }
-                            );
-                            await profileModel.findOneAndUpdate({
-                                userID: target.id,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: amount,
-                                },
-                            }
-                            );
-                            message.channel.send("Given" + target.username + " " + amount);
+                            message.channel.send('Y');
                     } else if (message.content.toUpperCase() == 'N') {
-                    message.channel.send('Cancelled');
+                    message.channel.send('N');
+                    return;
                     } else {
                     message.channel.send('Invalid response');
+                    return;
                     }
                     })
+                    .then(async (message) => {
+                        if (message.content.toUpperCase() == 'Z') {
+                            message.channel.send('Z');
+                        } else if (message.content.toUpperCase() == 'X') {
+                        message.channel.send('X');
+                        } else {
+                        message.channel.send('Invalid response');
+                        return;
+                        }
+                        })
                    .catch(collected => {
                         message.channel.send('Timed out');
                     });
@@ -56,5 +47,5 @@ module.exports = {
         } catch (err) {
             console.log(err);
             }
+        }
     }
-}
