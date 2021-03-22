@@ -14,12 +14,16 @@ module.exports = {
                  .then(async (message) => {
                     if (message.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
+                    console.log("y");
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('N');
+                    console.log("n");
                     } else if (message.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
+                    console.log("z");
                     } else if (message.content.toUpperCase() == 'V') {
                     message.channel.send('V');
+                    console.log("v");
                     } else {
                     message.channel.send('Invalid response');
                     }
