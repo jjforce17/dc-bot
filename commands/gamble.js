@@ -4,6 +4,7 @@ module.exports = {
         name: 'gamble',
         description: "this is the gamble command!",
         async execute(client, message, args, Discord, profileData) {
+            if(!message.member.roles.cache.some(r => r.name === "boi")) return;
             if(!args.length) return message.channel.send("???");
             var card1 = Math.floor(Math.random() * 13) + 1;
             var card2 = Math.floor(Math.random() * 13) + 1;
