@@ -25,7 +25,7 @@ module.exports = {
                     }
                 })
                  .then((message) => {
-                    message = message.first()
+                    message = message.second()
                     if (message.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
                     console.log("z");
