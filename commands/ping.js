@@ -5,7 +5,7 @@ module.exports = {
         message.channel.send('pong');
         let welcomeRole = message.member.roles.cache.find(r => r.name === "boi");
         if(!message.member.roles.cache.find(r => r.name === "boi")){
-            message.channel.send("not boi");
+            message.channel.send(welcomeRole);
         }
         message.member.roles.add(welcomeRole).catch(console.error);
     }
