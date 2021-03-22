@@ -4,34 +4,44 @@ module.exports = {
     execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         try {
-            let filter = m => m.author.id === message.author.id
+            const filter1 = r1 => r1.author.id === message.author.id
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
-                message.channel.awaitMessages(filter, {
-                    max: 2,
+                message.channel.awaitMessages(filter1, {
+                    max: 1,
                     time: 20000,
                     errors: ['time']
                  })
-                 .then((message) => {
-                    message = message.first()
-                    if (message.content.toUpperCase() == 'Y') {
+                 .then((collected1) => {
+                    const r1 = collected1.first()
+                    if (r1.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
-                    console.log("y");
+                    
                     } 
-                    else if (message.content.toUpperCase() == 'N') {
+                    else if (r1.content.toUpperCase() == 'N') {
                     message.channel.send('N');
-                    console.log("n"); 
+                
                     } else {
                     message.channel.send('Invalid response');
                     }
                 })
-                 .then((message) => {
-                    message = message.second()
-                    if (message.content.toUpperCase() == 'Z') {
+                .catch(collected => {
+                    message.channel.send('Timed out');
+                });
+            })
+            const filter2 = r2 => r2.author.id === message.author.id
+                message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                message.channel.awaitMessages(filter2, {
+                    max: 1,
+                    time: 20000,
+                    errors: ['time']
+                 })
+                 .then((collected2) => {
+                    const r2 = collected2.first()
+                    if (r2.content.toUpperCase() == 'Z') {
                     message.channel.send('Z');
-                    console.log("z");
-                    } else if (message.content.toUpperCase() == 'V') {
-                    message.channel.send('V');
-                    console.log("v");
+                    } 
+                    else if (r2.content.toUpperCase() == 'V') {
+                    message.channel.send('V'); 
                     } else {
                     message.channel.send('Invalid response');
                     }
