@@ -16,10 +16,12 @@ module.exports = {
                     if (message.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
                     console.log("y");
+                    let filter2 = m => m.author.id === message.author.id
                     } 
                     else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('N');
                     console.log("n"); 
+                    let filter2 = m => m.author.id === message.author.id
                     } else {
                     message.channel.send('Invalid response');
                     }
@@ -28,7 +30,7 @@ module.exports = {
                     message.channel.send('Timed out');
                 });
             })
-            let filter2 = m => m.author.id === message.author.id
+            
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter2, {
                     max: 1,
