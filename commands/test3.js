@@ -12,8 +12,8 @@ module.exports = {
             let filter = m => m.author.id === message.author.id
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
-                    max: 1,
-                    time: 10000,
+                    max: 3,
+                    time: 20000,
                     errors: ['time']
                  })
                 .then(async (message) => {
@@ -23,22 +23,16 @@ module.exports = {
                             message.channel.send('Y');
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('N');
+                } else if (message.content.toUpperCase() == 'Z') {
+                    message.channel.send('Z');
+                } else if (message.content.toUpperCase() == 'V') {
+                    message.channel.send('V');
                     return;
                     } else {
                     message.channel.send('Invalid response');
                     return;
                     }
                     })
-                    .then(async (message) => {
-                        if (message.content.toUpperCase() == 'Z') {
-                            message.channel.send('Z');
-                        } else if (message.content.toUpperCase() == 'X') {
-                        message.channel.send('X');
-                        } else {
-                        message.channel.send('Invalid response');
-                        return;
-                        }
-                        })
                    .catch(collected => {
                         message.channel.send('Timed out');
                     });
