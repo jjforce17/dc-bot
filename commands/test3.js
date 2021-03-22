@@ -12,6 +12,7 @@ module.exports = {
                     errors: ['time']
                  })
                  .then(async (message) => {
+                    message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
                     message.channel.send('Y');
                     console.log("y");
