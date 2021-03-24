@@ -16,7 +16,7 @@ module.exports = {
                     BCard3 = 0,
                     BCard4 = 0,
                     BCard5 = 0,
-                    Player1 = "",
+                    player1 = "",
                     player2 = "",
                     player3 = "",
                     });
