@@ -1,8 +1,8 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'psst',
-    description: "psst",
+    name: 'testg5',
+    description: "testg5",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         const response = await profileModel.findOneAndUpdate({
