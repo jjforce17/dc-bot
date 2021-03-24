@@ -10,14 +10,14 @@ module.exports = {
         }, 
         {
             $addFields : {
-                BCard1 = 0,
-                BCard2 = 0,
-                BCard3 = 0,
-                BCard4 = 0,
-                BCard5 = 0,
-                player1 = "",
-                player2 = "",
-                player3 = "",
+                BCard1 : 0,
+                BCard2 : 0,
+                BCard3 : 0,
+                BCard4 : 0,
+                BCard5 : 0,
+                player1 : "",
+                player2 : "",
+                player3 : "",
             },
         }
     );
