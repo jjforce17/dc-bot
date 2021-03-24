@@ -9,17 +9,11 @@ module.exports = {
             profileData = await profileModel.findOne({ userID: botID});
             if(!profileData){
                 let profile = await profileModel.create({
-                    userID: botID,
+                    userID: message.author.id,
                     serverID: message.guild.id,
-                    BCard1 = 0,
-                    BCard2 = 0,
-                    BCard3 = 0,
-                    BCard4 = 0,
-                    BCard5 = 0,
-                    player1 = "",
-                    player2 = "",
-                    player3 = "",
-                    });
+                    dollar: 300,
+                    bank: 0,
+                });
                 profile.save();
             }
         }catch(err){
