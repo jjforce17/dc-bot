@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         const botID = "803868333341802499";
         try {
-            await profileModel.findOneAndUpdate({
+            const profile = await profileModel.findOneAndUpdate({
                 userID: botID,
             }, 
             {
