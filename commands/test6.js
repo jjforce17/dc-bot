@@ -11,7 +11,7 @@ module.exports = {
         }, 
         {
             $set : {
-                Bcard1: 0,
+                BCard1: 0,
             },
         }
     );
