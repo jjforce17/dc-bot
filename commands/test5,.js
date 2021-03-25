@@ -7,11 +7,11 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         const botID = "803868333341802499";
         try {
-            const profile = await profileModel.findOneAndUpdate({
+            await profileModel.findOneAndUpdate({
                 userID: botID,
             }, 
             {
-                $addFields : {
+                $set: {
                     BCard1 : 0,
                     BCard2 : 0,
                     BCard3 : 0,
@@ -20,10 +20,9 @@ module.exports = {
                     player1 : "",
                     player2 : "",
                     player3 : "",
-                },
+                }
             }
         );
-        profile.save();
         } catch (err) {
             console.log(err);
             }
