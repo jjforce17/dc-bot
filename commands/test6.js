@@ -5,8 +5,7 @@ module.exports = {
     description: "testg6",
     async execute(client, message, args, Discord, profileData) {
         const user = args[0];
-        const fuser = message.guild.members.get(user.id);
-        message.channel.send(fuser);
+        client.users.cache.find(u => u.id === user);
     }
 }
 
