@@ -6,23 +6,28 @@ module.exports = {
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         const botID = "803868333341802499";
-        await profileModel.findOneAndUpdate({
-            userID: botID,
-        }, 
-        {
-            $addFields : {
-                BCard1 : 0,
-                BCard2 : 0,
-                BCard3 : 0,
-                BCard4 : 0,
-                BCard5 : 0,
-                player1 : "",
-                player2 : "",
-                player3 : "",
-            },
-        }
-    );
-    profile.save();
+        try {
+            await profileModel.findOneAndUpdate({
+                userID: botID,
+            }, 
+            {
+                $addFields : {
+                    BCard1 : 0,
+                    BCard2 : 0,
+                    BCard3 : 0,
+                    BCard4 : 0,
+                    BCard5 : 0,
+                    player1 : "",
+                    player2 : "",
+                    player3 : "",
+                },
+            }
+        );
+        profile.save();
+        } catch (err) {
+            console.log(err);
+            }
+        
     }
 }
 
