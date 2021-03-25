@@ -11,7 +11,7 @@ module.exports = {
         }, 
         {
             $set : {
-                BCard1: 0,
+                dollar: 0,
             },
         }
     );
