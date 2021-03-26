@@ -6,7 +6,7 @@ module.exports = {
     async execute(client, message, args, Discord) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         try {
-            let filter = m => m.author.id === message.author.id && message.content == "y" || message.content == "Y";
+            let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y";
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter, {
                     max: 1,
