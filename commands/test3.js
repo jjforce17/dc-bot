@@ -14,8 +14,7 @@ module.exports = {
                     console.log(msg.content);
                 })
                 collector.on("end", (collected) => {
-                    var c1 = collected.slice(collected.first());
-                    console.log(c1);
+                    console.log(collected.content);
                     console.log(collected.size);
                 })
         } catch (err) {
