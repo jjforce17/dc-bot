@@ -13,14 +13,6 @@ module.exports = {
                     errors: ['time']
                  })
                  .then((collected) => {
-                    const filter2 = r2 => r2.content === "y" || r2.content === "Y" || r2.content === "n" || r2.content === "N"
-                message.channel.send("Press Y to confirm, N to cancel").then(() => {
-                message.channel.awaitMessages(filter2, {
-                    max: 3,
-                    time: 20000,
-                    errors: ['time']
-                 })
-                 .then((collected) => {
                     message.channel.send('collected');
                     var c1 = collected[1];
                     message.channel.send(c1);
@@ -28,8 +20,6 @@ module.exports = {
                 .catch(collected => {
                     message.channel.send('Timed out');
                 });
-            })
-                })
         } catch (err) {
             console.log(err);
             }
