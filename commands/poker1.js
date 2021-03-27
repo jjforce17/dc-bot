@@ -7,7 +7,8 @@ module.exports = {
         var rolea = message.guild.roles.cache.find(r => r.name === "Poker1");
         console.log(rolea.id);
         var mRole = message.guild.roles.cache.get(rolea.id).members;
-        if(mRole == 3) return console.log("3");
+        console.log(mRole);
+        if(mRole.size == 3) return console.log("3");
         message.member.roles.add(rolea).catch(console.error);
     }
 }
