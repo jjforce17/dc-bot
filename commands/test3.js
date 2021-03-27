@@ -14,7 +14,8 @@ module.exports = {
                     console.log(msg.content);
                 })
                 collector.on("end", (collected) => {
-                    console.log(collected.content);
+                    var c1 = collected.shift;
+                    console.log(c1);
                     console.log(collected.size);
                 })
         } catch (err) {
