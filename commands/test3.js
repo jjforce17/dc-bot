@@ -12,9 +12,9 @@ module.exports = {
                 })
                 collector.on("collect", (msg) => {
                     console.log(msg.content);
-                    console.log(msg.first());
                 })
                 collector.on("end", (collected) => {
+                    console.log(msg.first());
                     console.log(collected.size);
                 })
         } catch (err) {
