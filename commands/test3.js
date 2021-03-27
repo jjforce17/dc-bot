@@ -4,16 +4,14 @@ module.exports = {
     execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         try {
-            const target = message.mentions.users.first();
-            if(!target) return;
             const filter1 = r1 => r1.author.id === message.author.id;
                 message.channel.awaitMessages(filter1, {
                     max: 1,
-                    time: 20000,
+                    time: 10000,
                     errors: ['time']
                  })
                  .then((collected) => {
-                    message.channel.send('collected');
+                    message.channel.send(collected);
                     var c1 = collected[1];
                     message.channel.send(c1);
                 })
