@@ -12,9 +12,8 @@ module.exports = {
                 })
                 collector.on("collect", (msg) => {
                     console.log(msg.content);
-                    console.log(msg[1].content);
                 })
-                collector.on("end"), (collected => {
+                collector.on("end", (collected) => {
                     console.log(collected.size);
                 })
         } catch (err) {
