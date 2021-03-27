@@ -11,9 +11,9 @@ module.exports = {
                     errors: ['time']
                  })
                  .then(collected => {
-                    message.channel.send(collected);
+                    console.log(collected.content());
                     var c1 = collected[1];
-                    message.channel.send(c1);
+                    console.log(c1);
                 })
                 .catch(collected => {
                     message.channel.send('Timed out');
