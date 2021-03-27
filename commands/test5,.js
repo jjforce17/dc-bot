@@ -17,6 +17,8 @@ module.exports = {
                     player1: "000",
                     player2: "000",
                     player3: "000",
+                    BetStage: 0,
+                    TotalBet: 0,
                 }
             }
         )
