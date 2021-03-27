@@ -16,22 +16,14 @@ module.exports = {
                     const filter2 = r2 => r2.content === "y" || r2.content === "Y" || r2.content === "n" || r2.content === "N"
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
                 message.channel.awaitMessages(filter2, {
-                    max: 1,
+                    max: 3,
                     time: 20000,
                     errors: ['time']
                  })
-                 .then((collected2) => {
-                    const r2 = collected2.first();
-                    if (r2.content.toUpperCase() == 'Y') {
-                    message.channel.send('Y');
-                    
-                    } 
-                    else if (r2.content.toUpperCase() == 'N') {
-                    message.channel.send('N');
-                
-                    } else {
-                    message.channel.send('Invalid response');
-                    }
+                 .then((collected) => {
+                    message.channel.send('collected');
+                    var c1 = collected[1];
+                    message.channel.send(c1);
                 })
                 .catch(collected => {
                     message.channel.send('Timed out');
