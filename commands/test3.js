@@ -10,7 +10,7 @@ module.exports = {
                     time: 10000,
                     errors: ['time']
                  })
-                 .then((collected) => {
+                 .then(collected => {
                     message.channel.send(collected);
                     var c1 = collected[1];
                     message.channel.send(c1);
