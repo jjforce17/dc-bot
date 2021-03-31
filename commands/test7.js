@@ -2,7 +2,7 @@ const { MessageCollector } = require("discord.js");
 
 module.exports = {
     name: 'testg7',
-    description: "this is the ping command!",
+    description: "test7",
     execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
             const DealerCard1 = Math.floor(Math.random() * 52) + 1;
