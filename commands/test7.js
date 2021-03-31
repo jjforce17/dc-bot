@@ -1,7 +1,7 @@
 const { MessageCollector } = require("discord.js");
 
 module.exports = {
-    name: 'testg3',
+    name: 'testg7',
     description: "this is the ping command!",
     execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
