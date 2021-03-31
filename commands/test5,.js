@@ -19,6 +19,15 @@ module.exports = {
                     player3: "000",
                     BetStage: 0,
                     TotalBet: 0,
+                    NowTurn: 0,
+                    GameState: 0,
+                    NowBet: 0,
+                    P1Card1: 0,
+                    P1Card2: 0,
+                    P2Card1: 0,
+                    P2Card2: 0,
+                    P3Card1: 0,
+                    P3Card2: 0,
                 }
             }
         )

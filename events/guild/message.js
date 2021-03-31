@@ -3,7 +3,6 @@ const profileModel = require('../../models/profileSchema');
 module.exports = async(Discord, client, message) => {
     const prefix = '?';
     if(!message.content.startsWith(prefix) || message.author.bot) return;
-
     let profileData;
     try{
         profileData = await profileModel.findOne({ userID: message.author.id});
