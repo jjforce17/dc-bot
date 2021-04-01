@@ -67,5 +67,6 @@ module.exports = {
         message.channel.send(Player2Card2);
         message.channel.send(Player3Card1);
         message.channel.send(Player3Card2);
+        console.log("done");
         }
     }
