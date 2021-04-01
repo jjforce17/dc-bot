@@ -14,7 +14,7 @@ module.exports = {
             var Player1Card2 = Math.floor(Math.random() * 11) + 1;
             var Player2Card1 = Math.floor(Math.random() * 11) + 1;
             var Player2Card2 = Math.floor(Math.random() * 11) + 1;
-            var Player3Card1 = Math.floor(Math.random() * 1) + 1;
+            var Player3Card1 = Math.floor(Math.random() * 11) + 1;
             var Player3Card2 = Math.floor(Math.random() * 11) + 1;
             while (DealerCard2 == DealerCard1 || DealerCard2 == DealerCard3 || DealerCard2 == DealerCard4 ||DealerCard2 == DealerCard5 ||DealerCard2 == Player1Card1  || DealerCard2 == Player1Card2  ||DealerCard2 == Player2Card1  ||DealerCard2 == Player2Card2  ||DealerCard2 == Player3Card1  ||DealerCard2 == Player3Card2) {
                 DealerCard2 = Math.floor(Math.random() * 11) + 1;
@@ -40,7 +40,7 @@ module.exports = {
             while (Player2Card2 == DealerCard1 || Player2Card2 == DealerCard3 || Player2Card2 == DealerCard4 ||Player2Card2 == DealerCard5 ||Player2Card2 == Player1Card1 || Player2Card2 == Player1Card2  ||Player2Card2 == Player2Card1  ||Player2Card2 == DealerCard2  ||Player2Card2 == Player3Card1  ||Player2Card2 == Player3Card2) {
                 Player2Card2 = Math.floor(Math.random() * 11) + 1;
             }
-            while (Player3Card1 == DealerCard1 || Player3Card1 == DealerCard3 || Player3Card1 == DealerCard4 ||Player3Card1 == DealerCard5 ||Player3Card1 == Player1Card1 || Player3Card1 == Player1Card2  ||Player3Card1 == Player2Card1  ||Player3Card1 ==  layer2Card2 ||Player3Card1 == DealerCard2  ||Player3Card1 == Player3Card2) {
+            while (Player3Card1 == DealerCard1 || Player3Card1 == DealerCard3 || Player3Card1 == DealerCard4 ||Player3Card1 == DealerCard5 ||Player3Card1 == Player1Card1 || Player3Card1 == Player1Card2  ||Player3Card1 == Player2Card1  ||Player3Card1 ==  Player2Card2 ||Player3Card1 == DealerCard2  ||Player3Card1 == Player3Card2) {
                 Player3Card1 = Math.floor(Math.random() * 11) + 1;
             }
             while (Player3Card2 == DealerCard1 || Player3Card2 == DealerCard3 || Player3Card2 == DealerCard4 ||Player3Card2 == DealerCard5 ||Player3Card2 == Player1Card1 || Player3Card2 == Player1Card2  ||Player3Card2 == Player2Card1  ||Player3Card2 ==  layer2Card2 ||Player3Card2 == Player3Card2  ||Player3Card2 == DealerCard2) {
