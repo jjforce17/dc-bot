@@ -5,17 +5,17 @@ module.exports = {
     description: "test7",
     execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
-            const DealerCard1 = Math.floor(Math.random() * 11) + 1;
-            const DealerCard2 = Math.floor(Math.random() * 11) + 1;
-            const DealerCard3 = Math.floor(Math.random() * 11) + 1;
-            const DealerCard4 = Math.floor(Math.random() * 11) + 1;
-            const DealerCard5 = Math.floor(Math.random() * 11) + 1;
-            const Player1Card1 = Math.floor(Math.random() * 11) + 1;
-            const Player1Card2 = Math.floor(Math.random() * 11) + 1;
-            const Player2Card1 = Math.floor(Math.random() * 11) + 1;
-            const Player2Card2 = Math.floor(Math.random() * 11) + 1;
-            const Player3Card1 = Math.floor(Math.random() * 1) + 1;
-            const Player3Card2 = Math.floor(Math.random() * 11) + 1;
+            var DealerCard1 = Math.floor(Math.random() * 11) + 1;
+            var DealerCard2 = Math.floor(Math.random() * 11) + 1;
+            var DealerCard3 = Math.floor(Math.random() * 11) + 1;
+            var DealerCard4 = Math.floor(Math.random() * 11) + 1;
+            var DealerCard5 = Math.floor(Math.random() * 11) + 1;
+            var Player1Card1 = Math.floor(Math.random() * 11) + 1;
+            var Player1Card2 = Math.floor(Math.random() * 11) + 1;
+            var Player2Card1 = Math.floor(Math.random() * 11) + 1;
+            var Player2Card2 = Math.floor(Math.random() * 11) + 1;
+            var Player3Card1 = Math.floor(Math.random() * 1) + 1;
+            var Player3Card2 = Math.floor(Math.random() * 11) + 1;
             while (DealerCard2 == DealerCard1 || DealerCard2 == DealerCard3 || DealerCard2 == DealerCard4 ||DealerCard2 == DealerCard5 ||DealerCard2 == Player1Card1  || DealerCard2 == Player1Card2  ||DealerCard2 == Player2Card1  ||DealerCard2 == Player2Card2  ||DealerCard2 == Player3Card1  ||DealerCard2 == Player3Card2) {
                 DealerCard2 = Math.floor(Math.random() * 11) + 1;
             }
