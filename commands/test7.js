@@ -41,7 +41,6 @@ module.exports = {
             message.channel.send(DealerCard1);
             message.channel.send(DealerCard2);
             message.channel.send(DealerCard3);
-            message.channel.send(DealerCard3);
             message.channel.send(Player1Card1);
             message.channel.send(Player1Card2);
             message.channel.send(Player2Card1);

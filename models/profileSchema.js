@@ -13,9 +13,13 @@ const profileSchema = new mongoose.Schema({
     player1: { type: String },
     player2: { type: String },
     player3: { type: String },
-    BetStage: { type: Number }, //0 = no bet, 1 = first pay, 2 = 3 cards bet/fold, 3 = 4 cards bet/ fold, 4 = 5 cards bet/fold, 4 = 5 cards all in immediately.
-    PlayerState: { type: Boolean }, //bet/fold user
-    PlayerRound: { type: Number}, //round number User
+    BetStage: { type: Number }, //0 = no bet, 1 = 3 cards bet/fold, 2 = 4 cards bet/ fold, 3 = 5 cards bet/fold, 4 = 5 cards all in immediately .5 = end
+    Player1State: { type: Boolean },
+    Player2State: { type: Boolean },
+    Player3State: { type: Boolean }, //bet/fold user
+    Player1Round: { type: Number},
+    Player2Round: { type: Number},
+    Player3Round: { type: Number}, //round number User
     TotalBet: { type: Number },
     P1Card1: { type: Number },
     P1Card2: { type: Number },
