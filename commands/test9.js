@@ -10,8 +10,8 @@ module.exports = {
         var user2 = 0;
         var user3 = 123;
         if (PlayerRandNum == 1) {
-            if (user1 != 0) {
-                while (PlayerRandNum == 1) {
+            if (user1 != 0 && user12 != 0) {
+                while (PlayerRandNum == 1 || PlayerRandNum == 2) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
