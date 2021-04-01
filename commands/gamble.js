@@ -20,18 +20,14 @@ module.exports = {
             if(mooney <= 0) {
             return message.channel.send('dasar miskin');
             }
-            while (card2 == card1) {
-                card2 = Math.floor(Math.random() * 13) + 1;
+            while (card2 == card1 || card2 == card3) {
+                card2 = Math.floor(Math.random() * 3) + 1;
                 console.log(card2);
             }
-            while (card3 == card1) {
-                card3 = Math.floor(Math.random() * 13) + 1;
+            while (card3 == card1 || card3 == card2) {
+                card3 = Math.floor(Math.random() * 3) + 1;
                 console.log(card3);
             }
-            while (card3 == card2) {
-                card2 = Math.floor(Math.random() * 13) + 1;
-                console.log(card3);
-            };
             if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
             if (!cardu1) return message.channel.send("User has not picked card 1");
             if (!cardu2) return message.channel.send("User has not picked card 2");
