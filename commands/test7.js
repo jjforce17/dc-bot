@@ -20,5 +20,8 @@ module.exports = {
             card2 = Math.floor(Math.random() * 4) + 1;
             console.log(card3);
         }
+        message.channel.send(card1);
+        message.channel.send(card2);
+        message.channel.send(card3);
         }
     }
