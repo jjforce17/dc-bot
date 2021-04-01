@@ -9,7 +9,6 @@ module.exports = {
         var user1 = 123;
         var user2 = 0;
         var user3 = 123;
-        if (botData.player1 == message.author.id) return message.channel.send("You already registered.");
         if (PlayerRandNum == 1) {
             if (user1 != 0) {
                 while (PlayerRandNum == 1) {
