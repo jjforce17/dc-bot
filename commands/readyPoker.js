@@ -15,12 +15,12 @@ module.exports = {
         if (botData.player3 == message.author.id) return message.channel.send("You already registered.");
         if (PlayerRandNum == 1) {
             if (botData.player1 == "000" && botData.player2 == "000") {
-                while (PlayerRandNum == 1 && PlayerRandNum == 2) {
+                while (PlayerRandNum == 1 || PlayerRandNum == 2) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
             else if (botData.player1 == "000" && botData.player3 == "000") {
-                while (PlayerRandNum == 1 && PlayerRandNum == 3) {
+                while (PlayerRandNum == 1 || PlayerRandNum == 3) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
@@ -32,12 +32,12 @@ module.exports = {
         }
         else if (PlayerRandNum == 2) {
             if (botData.player2 == "000" && botData.player1 == "000") {
-                while (PlayerRandNum == 2 && PlayerRandNum == 1) {
+                while (PlayerRandNum == 2 || PlayerRandNum == 1) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
             else if (botData.player2 == "000" && botData.player3 == "000") {
-                while (PlayerRandNum == 2 && PlayerRandNum == 3) {
+                while (PlayerRandNum == 2 || PlayerRandNum == 3) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
@@ -50,12 +50,12 @@ module.exports = {
         }
         else if (PlayerRandNum == 3) {
             if (botData.player3 == "000" && botData.player1 == "000") {
-                while (PlayerRandNum == 3 && PlayerRandNum == 1) {
+                while (PlayerRandNum == 3 || PlayerRandNum == 1) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
             else if (botData.player3 == "000" && botData.player2 == "000") {
-                while (PlayerRandNum == 3 && PlayerRandNum == 2) {
+                while (PlayerRandNum == 3 || PlayerRandNum == 2) {
                     PlayerRandNum = Math.floor(Math.random() * 3) + 1;
                 }
             }
