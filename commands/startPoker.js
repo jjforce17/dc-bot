@@ -10,7 +10,7 @@ module.exports = {
         botData = await profileModel.findOne({ userID: botID });
         var Player1ID = botData.player1;
         var Player2ID = botData.player2;
-        var Player3ID = botData.player2;
+        var Player3ID = botData.player3;
         var amount = 50;
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000" ) return message.channel.send("Require 3 players")
         if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000" ) {
