@@ -11,8 +11,8 @@ module.exports = {
         var Player1ID = botData.player1;
         var Player2ID = botData.player2;
         var Player3ID = botData.player2;
+        var amount = 50;
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000" ) return message.channel.send("Require 3 players")
-        var place = 0;
         if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000" ) {
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
             var DealerCard2 = Math.floor(Math.random() * 52) + 1;
@@ -77,6 +77,24 @@ module.exports = {
                     }
                 }
             )
+            await profileModel.findOneAndUpdate({ userID: Player1ID }, 
+                {$inc : {
+                        dollar: -amount,
+                        },
+                    }
+                )
+            await profileModel.findOneAndUpdate({ userID: Player2ID }, 
+                {$inc : {
+                        dollar: -amount,
+                        },
+                    }
+                )
+            await profileModel.findOneAndUpdate({ userID: Player3ID }, 
+                {$inc : {
+                        dollar: -amount,
+                        },
+                    }
+                )    
             } catch (err) {
                 console.log(err);
                 }
