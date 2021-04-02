@@ -8,8 +8,10 @@ module.exports = {
         if (!args.length) return;
         const amount  = args[1];
         const target = message.mentions.users.first();
+        const targetData = await profileModel.findOne({ userID: target.id});
+        if(!target) return message.channel.send("User doesn't exist");
+        if (!targetData) return message.channel.send("user doesn't have an account");
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
-        if(!target) return;
         try {
             let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
@@ -41,7 +43,7 @@ module.exports = {
                                 },
                             }
                             );
-                            message.channel.send("Given" + target.username + " " + amount);
+                            message.channel.send("Given " + target.username + " " + amount);
                     } else if (message.content.toUpperCase() == 'N') {
                     message.channel.send('Cancelled');
                     } else {

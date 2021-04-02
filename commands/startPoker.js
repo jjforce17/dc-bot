@@ -10,6 +10,18 @@ module.exports = {
         botData = await profileModel.findOne({ userID: botID });
         var PlayerRandNum = Math.floor(Math.random() * 3) + 1;
         var place = 0;
+        var checkPlayer1 = false;
+        var checkPlayer2 = false;
+        var checkPlayer3 = false;
+        if  (botData.player1 != "000") {
+            checkPlayer1 = true;
+        }
+        if  (botData.player2 != "000") {
+            checkPlayer2 = true;
+        }
+        if  (botData.player3 != "000") {
+            checkPlayer3 = true;
+        }
         if (botData.player1 == message.author.id) return message.channel.send("You already registered.");
         if (PlayerRandNum == 1) {
             if (botData.player1 != "000") {
@@ -36,6 +48,7 @@ module.exports = {
         place = PlayerRandNum;
         if (place == 1) {
             try {
+                checkPlayer1 = true;
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                 {$set: {
                         player1: message.author.id,
@@ -50,6 +63,7 @@ module.exports = {
         }
         if (place == 2) {
             try {
+                checkPlayer2 = true;
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                 {$set: {
                         player2: message.author.id,
@@ -64,6 +78,7 @@ module.exports = {
         }
         if (place == 3) {
             try {
+                checkPlayer3 = true;
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                 {$set: {
                         player3: message.author.id,
@@ -76,7 +91,7 @@ module.exports = {
                 console.log(err);
                 }
         }
-        if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000") {
+        if (checkPlayer1 == true && checkPlayer2 == true && checkPlayer3 == true) {
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
             var DealerCard2 = Math.floor(Math.random() * 52) + 1;
             var DealerCard3 = Math.floor(Math.random() * 52) + 1;
