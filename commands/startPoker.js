@@ -8,90 +8,12 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         const botID = "803868333341802499";
         botData = await profileModel.findOne({ userID: botID });
-        var PlayerRandNum = Math.floor(Math.random() * 3) + 1;
+        var Player1ID = botData.player1;
+        var Player2ID = botData.player2;
+        var Player3ID = botData.player2;
+        if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000" ) return message.channel.send("Require 3 players")
         var place = 0;
-        var checkPlayer1 = false;
-        var checkPlayer2 = false;
-        var checkPlayer3 = false;
-        if  (botData.player1 != "000") {
-            checkPlayer1 = true;
-        }
-        if  (botData.player2 != "000") {
-            checkPlayer2 = true;
-        }
-        if  (botData.player3 != "000") {
-            checkPlayer3 = true;
-        }
-        if (botData.player1 == message.author.id) return message.channel.send("You already registered.");
-        if (PlayerRandNum == 1) {
-            if (botData.player1 != "000") {
-                while (PlayerRandNum == 1) {
-                    PlayerRandNum = Math.floor(Math.random() * 3) + 1;
-                }
-            }
-        }
-        else if (PlayerRandNum == 2) {
-            if (botData.player2 != "000") {
-                while (PlayerRandNum == 2) {
-                    PlayerRandNum = Math.floor(Math.random() * 3) + 1;
-                }
-            }
-            
-        }
-        else if (PlayerRandNum == 3) {
-            if (botData.player3 != "000") {
-                while (PlayerRandNum == 3) {
-                    PlayerRandNum = Math.floor(Math.random() * 3) + 1;
-                }
-            }
-        }
-        place = PlayerRandNum;
-        if (place == 1) {
-            try {
-                checkPlayer1 = true;
-                await profileModel.findOneAndUpdate({ userID: botID }, 
-                {$set: {
-                        player1: message.author.id,
-                        Player1State: true,
-                        Player1Round: 1,
-                    }
-                }
-            )
-            } catch (err) {
-                console.log(err);
-                }
-        }
-        if (place == 2) {
-            try {
-                checkPlayer2 = true;
-                await profileModel.findOneAndUpdate({ userID: botID }, 
-                {$set: {
-                        player2: message.author.id,
-                        Player2State: true,
-                        Player2Round: 1,
-                    }
-                }
-            )
-            } catch (err) {
-                console.log(err);
-                }
-        }
-        if (place == 3) {
-            try {
-                checkPlayer3 = true;
-                await profileModel.findOneAndUpdate({ userID: botID }, 
-                {$set: {
-                        player3: message.author.id,
-                        Player3State: true,
-                        Player3Round: 1,
-                    }
-                }
-            )
-            } catch (err) {
-                console.log(err);
-                }
-        }
-        if (checkPlayer1 == true && checkPlayer2 == true && checkPlayer3 == true) {
+        if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000" ) {
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
             var DealerCard2 = Math.floor(Math.random() * 52) + 1;
             var DealerCard3 = Math.floor(Math.random() * 52) + 1;
@@ -159,6 +81,14 @@ module.exports = {
                 console.log(err);
                 }
         }
-        message.channel.send("You are" + place);
+        client.users.cache.get(Player1ID).send('Your cards are');
+        client.users.cache.get(Player1ID).send(Player1Card1);
+        client.users.cache.get(Player1ID).send(Player1Card2);
+        client.users.cache.get(Player2ID).send('Your cards are');
+        client.users.cache.get(Player2ID).send(Player2Card1);
+        client.users.cache.get(Player2ID).send(Player2Card2);
+        client.users.cache.get(Player3ID).send('Your cards are');
+        client.users.cache.get(Player3ID).send(Player3Card1);
+        client.users.cache.get(Player3ID).send(Player3Card2);
     }
 }
