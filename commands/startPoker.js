@@ -12,7 +12,7 @@ module.exports = {
         var Player2ID = botData.player2;
         var Player3ID = botData.player3;
         var amount = 50;
-        if (!botData.GameState != 0) return message.channel.send("Game has started."); 
+        if (botData.GameState != 0) return message.channel.send("Game has started."); 
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000" ) return message.channel.send("Require 3 players")
         if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000" ) {
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
