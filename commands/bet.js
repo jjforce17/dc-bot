@@ -112,6 +112,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                        Player1Round: 1,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -191,6 +192,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                        Player1Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
@@ -204,7 +206,7 @@ module.exports = {
                                         })
                                         p2continue = true;
                                     }
-                                    if (p2continue == false) {
+                                    if (p2continue == false && botData.Player1Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -309,6 +311,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                            Player2Round: 0,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -388,6 +391,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                        Player2Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
@@ -401,7 +405,7 @@ module.exports = {
                                         })
                                         p3continue = true;
                                     }
-                                    if (p3continue == false) {
+                                    if (p3continue == false && botData.Player2Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -506,6 +510,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                        Player3Round: 1,
                                         },
                                     })
                                     if (p1continue == false) {
@@ -595,6 +600,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
+                                        Player3Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
@@ -608,7 +614,7 @@ module.exports = {
                                         })
                                         p1continue = true;
                                     }
-                                    if (p1continue == false) {
+                                    if (p1continue == false && Player3Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
