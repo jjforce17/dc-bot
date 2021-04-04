@@ -623,7 +623,7 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
-                                        message.channel.send("round 2")
+                                        message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
