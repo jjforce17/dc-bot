@@ -513,7 +513,7 @@ module.exports = {
                                         Player3Round: 1,
                                         },
                                     })
-                                    if (p1continue == false && Player3Round > 1) {
+                                    if (p1continue == false && botData.Player3Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -614,7 +614,7 @@ module.exports = {
                                         })
                                         p1continue = true;
                                     }
-                                    if (p1continue == false && Player3Round > 1) {
+                                    if (p1continue == false && botData.Player3Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
