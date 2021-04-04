@@ -34,6 +34,13 @@ module.exports = {
                     Player1Round: 0,
                     Player2Round: 0,
                     Player3Round: 0,
+                    Player1Turn: false,
+                    Player2Turn: false,
+                    Player3Turn: false,
+                    NowBetSet: false,
+                    Player1TurnContinue: false,
+                    Player2TurnContinue: false,
+                    Player3TurnContinue: false,
                 }
             }
         )

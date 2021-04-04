@@ -12,6 +12,7 @@ module.exports = {
         var Player2ID = botData.player2;
         var Player3ID = botData.player3;
         var amount = 50;
+        if (!botData.GameState != 0) return message.channel.send("Game has started."); 
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000" ) return message.channel.send("Require 3 players")
         if (botData.player1 != "000" && botData.player2 != "000" && botData.player3 != "000" ) {
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
@@ -74,6 +75,16 @@ module.exports = {
                     P2Card2: Player2Card2,
                     P3Card1: Player3Card1,
                     P3Card2: Player3Card2,
+                    Player1Turn: true,
+                    Player2Turn: false,
+                    Player3Turn: false,
+                    Player1State: true,
+                    Player2State: true,
+                    Player3State: true,
+                    NowBetSet: false,
+                    Player1TurnContinue: false,
+                    Player2TurnContinue: false,
+                    Player3TurnContinue: false,
                     }
                 }
             )
@@ -108,5 +119,9 @@ module.exports = {
         client.users.cache.get(Player3ID).send('Your cards are');
         client.users.cache.get(Player3ID).send(Player3Card1);
         client.users.cache.get(Player3ID).send(Player3Card2);
+        message.channel.send("The 3 cards are");
+        message.channel.send(DealerCard1);
+        message.channel.send(DealerCard3);
+        message.channel.send(DealerCard2);
     }
 }

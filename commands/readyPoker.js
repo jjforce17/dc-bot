@@ -10,6 +10,7 @@ module.exports = {
         botData = await profileModel.findOne({ userID: botID });
         var PlayerRandNum = Math.floor(Math.random() * 3) + 1;
         var place = 0;
+        if (botData.GameState != 0) return message.channel.send("Game has started."); 
         if (botData.player1 == message.author.id) return message.channel.send("You already registered.");
         if (botData.player2 == message.author.id) return message.channel.send("You already registered.");
         if (botData.player3 == message.author.id) return message.channel.send("You already registered.");

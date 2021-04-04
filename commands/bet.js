@@ -15,52 +15,631 @@ module.exports = {
         const player1Data = await profileModel.findOne({ userID: Player1ID });
         const player2Data = await profileModel.findOne({ userID: Player2ID });
         const player3Data = await profileModel.findOne({ userID: Player3ID });
+        var p1max = player1Data.dollar - 1;
+        var p2max = player2Data.dollar - 1;
+        var p3max = player3Data.dollar - 1;
+        var p1continue = botData.Player1TurnContinue;
+        var p2continue = botData.Player2TurnContinue;
+        var p3continue = botData.Player3TurnContinue;
         const amount = args[0];
         const allin = args[1];
-        
-        if (amount == "all" && allin == "in") {
-            amount = profileData.dollar - 1;
-            try {
-                let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
-                    message.channel.send("Press Y to confirm, N to cancel").then(() => {
-                    message.channel.awaitMessages(filter, {
-                        max: 1,
-                        time: 15000,
-                        errors: ['time']
-                     })
-                    .then(async (message) => {
-                        message = message.first()
-                        if (message.content.toUpperCase() == 'Y') {
-                            const targetData = await profileModel.findOne({userID: target.id});
-                                if (!targetData) return;
-                                await profileModel.findOneAndUpdate({
-                                    userID: message.author.id,
-                                }, 
-                                {
-                                    $inc : {
-                                    dollar: -amount,
-                                    },
-                                }
-                                );
-                                message.channel.send("All in" + amount);
-                        } else if (message.content.toUpperCase() == 'N') {
-                        message.channel.send('Cancelled');
-                        } else {
-                        message.channel.send('Invalid response');
-                        }
-                        })
-                       .catch(collected => {
-                            message.channel.send('Timed out');
-                        });
-                })
-                
-            } catch (err) {
-                console.log(err);
-                }
+        if(amount == "all" && allin == "in"){
+            message.channel.send("All in!");
         }
-        else if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
+        else if(amount % 1 != 0){
+            return message.channel.send("Value must be a whole number.");
+        } 
+        else if(amount < 50) {
+            return message.channel.send("You must bet at least 50 dollars.");
+        }
+        if (amount >= p1max || amount >= p2max || amount >= p3max) {
+            return message.channel.send("Amount is too big")
+        }
         if (botData.BetStage == 1) {
-            
+            if (botData.Player1Turn == true) {
+                if (botData.Player1State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: false,
+                            Player2Turn: true,
+                            Player3Turn: false,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    return message.channel.send("Player 1 has folded");
+                }
+                if (botData.Player1State == true) {
+                    if (botData.NowBetSet == false) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: true,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        Player1TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: true,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        Player1TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    if (amount > botData.NowBet){
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            Player2TurnContinue: true,    
+                                            },
+                                        })
+                                        p2continue = true;
+                                    }
+                                    if (p2continue == false) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            BetStage: 2,    
+                                            },
+                                        })
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
+            if (botData.Player2Turn == true) {
+                if (botData.Player2State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: false,
+                            Player2Turn: false,
+                            Player3Turn: true,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    message.channel.send("Player 2 has folded");
+                }
+                if (botData.Player2State == true) {
+                    if (botData.NowBetSet == false) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: false,
+                                        Player3Turn: true,
+                                        NowBetSet: true,
+                                        Player2TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: false,
+                                        Player3Turn: true,
+                                        NowBetSet: true,
+                                        Player2TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    if (amount > botData.NowBet){
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            Player3TurnContinue: true,    
+                                            },
+                                        })
+                                        p3continue = true;
+                                    }
+                                    if (p3continue == false) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            BetStage: 2,    
+                                            },
+                                        })
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
+            if (botData.Player3Turn == true) {
+                if (botData.Player3State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: true,
+                            Player2Turn: false,
+                            Player3Turn: false,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    return message.channel.send("Player 3 has folded");
+                }
+                if (botData.Player3State == true) {
+                    if (botData.NowBetSet == false) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: true,
+                                        Player2Turn: false,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        Player3TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    if (p1continue == false) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            BetStage: 2,    
+                                            },
+                                        })
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount == "all" && allin == "in") {
+                            if (p1max < p2max && p1max < p3max) {
+                                amount = p1max
+                            }
+                            else if (p2max < p1max && p2max < p3max) {
+                                amount = p2max
+                            }
+                            else if (p3max < p2max && p3max < p1max) {
+                                amount = p3max
+                            }
+                            else if(p1max == p2max && p1max < p3max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p3max && p1max < p2max) {
+                                amount = p1max;
+                            }
+                            else if(p3max == p2max && p2max < p1max) {
+                                amount = p1max;
+                            }
+                            else if(p1max == p2max && p1max == p3max) {
+                                amount = p1max;
+                            }
+                        }
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: message.author.id,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -amount,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1Turn: true,
+                                        Player2Turn: false,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        Player3TurnContinue: false,
+                                        },
+                                        $inc : {
+                                        TotalBet: amount,
+                                        },
+                                    })
+                                    if (amount > botData.NowBet){
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            Player1TurnContinue: true,    
+                                            },
+                                        })
+                                        p1continue = true;
+                                    }
+                                    if (p1continue == false) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $set : {
+                                            BetStage: 2,    
+                                            },
+                                        })
+                                        message.channel.send("round 2")
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
         }
+        
+        
     }
 }

@@ -17,6 +17,9 @@ module.exports = {
                     message = message.first()
                     if (message.content.toUpperCase() == 'Y') {
                             message.channel.send("test");
+                    if (message.content.toUpperCase() == 'N') {
+                            message.channel.send("testn");
+                    }
                     } else {
                     message.channel.send('Invalid response');
                     }
