@@ -311,7 +311,7 @@ module.exports = {
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                            Player2Round: 0,
+                                        Player2Round: 0,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -513,7 +513,7 @@ module.exports = {
                                         Player3Round: 1,
                                         },
                                     })
-                                    if (p1continue == false) {
+                                    if (p1continue == false && Player3Round > 1) {
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
