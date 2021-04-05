@@ -91,14 +91,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -171,14 +163,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -208,6 +192,30 @@ module.exports = {
                                         p2continue = true;
                                     }
                                     if (p2continue == false && botData.Player1Round == 1) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player1,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player2,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player3,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -291,14 +299,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -371,14 +371,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -408,6 +400,30 @@ module.exports = {
                                         p3continue = true;
                                     }
                                     if (p3continue == false && botData.Player2Round == 1) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player1,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player2,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player3,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -491,14 +507,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -581,14 +589,6 @@ module.exports = {
                                 message = message.first()
                                 if (message.content.toUpperCase() == 'Y') {
                                     await profileModel.findOneAndUpdate({
-                                        userID: message.author.id,
-                                    }, 
-                                    {
-                                        $inc : {
-                                        dollar: -amount,
-                                        },
-                                    })
-                                    await profileModel.findOneAndUpdate({
                                         userID: botID,
                                     }, 
                                     {
@@ -618,6 +618,30 @@ module.exports = {
                                         p1continue = true;
                                     }
                                     if (p1continue == false && botData.Player3Round == 1) {
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player1,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player2,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botData.player3,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            dollar: -amount,
+                                            },
+                                        })
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
