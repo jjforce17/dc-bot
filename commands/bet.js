@@ -201,7 +201,8 @@ module.exports = {
                                         }, 
                                         {
                                             $set : {
-                                            Player2TurnContinue: true,    
+                                            Player2TurnContinue: true,
+                                            Player2Round: 0,    
                                             },
                                         })
                                         p2continue = true;
@@ -400,7 +401,8 @@ module.exports = {
                                         }, 
                                         {
                                             $set : {
-                                            Player3TurnContinue: true,    
+                                            Player3TurnContinue: true,
+                                            Player3Round: 0,    
                                             },
                                         })
                                         p3continue = true;
@@ -609,7 +611,8 @@ module.exports = {
                                         }, 
                                         {
                                             $set : {
-                                            Player1TurnContinue: true,    
+                                            Player1TurnContinue: true,
+                                            Player1Round: 0,    
                                             },
                                         })
                                         p1continue = true;
