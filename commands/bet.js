@@ -35,6 +35,21 @@ module.exports = {
         if (amount >= p1max || amount >= p2max || amount >= p3max) {
             return message.channel.send("Amount is too big")
         }
+        if (message.author.id == Player1ID) {
+            if (Player1Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
+        if (message.author.id == Player2ID) {
+            if (Player3Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
+        if (message.author.id == Player3ID) {
+            if (Player1Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
                 if (botData.Player1State == false) {
