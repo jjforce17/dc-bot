@@ -36,17 +36,17 @@ module.exports = {
             return message.channel.send("Amount is too big")
         }
         if (message.author.id == Player1ID) {
-            if (Player1Turn == false) {
+            if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
         }
         if (message.author.id == Player2ID) {
-            if (Player3Turn == false) {
+            if (botData.Player2Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
         }
         if (message.author.id == Player3ID) {
-            if (Player1Turn == false) {
+            if (botData.Player3Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
         }
