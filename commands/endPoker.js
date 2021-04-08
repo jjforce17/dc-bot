@@ -1,8 +1,8 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'endp',
-    description: "end poker",
+    name: 'endpoker',
+    description: "endp",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         const botID = "803868333341802499";
