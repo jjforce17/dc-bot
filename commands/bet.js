@@ -116,10 +116,10 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player1TurnContinue: false,
+                                        Player1Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player1Round: 1,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -188,10 +188,10 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player1TurnContinue: false,
+                                        Player1Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player1Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
@@ -239,6 +239,7 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -324,10 +325,10 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
+                                        Player2Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player2Round: 0,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -396,10 +397,10 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
+                                        Player2Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player2Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
@@ -532,10 +533,10 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player3TurnContinue: false,
+                                        Player3Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player3Round: 1,
                                         },
                                     })
                                     if (p1continue == false && botData.Player3Round == 1) {
@@ -547,6 +548,7 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -614,10 +616,10 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player3TurnContinue: false,
+                                        Player3Round: 1,
                                         },
                                         $inc : {
                                         TotalBet: amount,
-                                        Player3Round: 1,
                                         },
                                     })
                                     if (amount > botData.NowBet){
