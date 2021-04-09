@@ -1,0 +1,14 @@
+
+const profileModel = require('../models/profileSchema');
+
+module.exports = {
+    name: 'endpoker',
+    description: "endp",
+    async execute(client, message, args, Discord, profileData) {
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
+        message.delete();
+        const fetched = await msg.channel.fetchMessages({limit: 99});
+        message.channel.bulkDelete(fetched);
+        
+    }
+}
