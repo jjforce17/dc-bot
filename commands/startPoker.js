@@ -85,9 +85,9 @@ module.exports = {
                     Player1TurnContinue: false,
                     Player2TurnContinue: false,
                     Player3TurnContinue: false,
-                    Player1Round: 1,
-                    Player2Round: 1,
-                    Player3Round: 1,
+                    Player1Round: 0,
+                    Player2Round: 0,
+                    Player3Round: 0,
                     }
                 }
             )

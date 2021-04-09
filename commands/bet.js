@@ -702,7 +702,7 @@ module.exports = {
                 }
             }
         }
-        async function callcard4(client, message, args, Discord, profileData) {
+        function callcard4(client, message, args, Discord, profileData) {
             message.channel.send("The 3 cards are");
             message.channel.send(DealerCard1);
             message.channel.send(DealerCard3);
