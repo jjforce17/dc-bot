@@ -8,8 +8,7 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         try {
             message.delete();
-            const fetched = await message.channel.fetchMessages({limit: 99});
-            message.channel.bulkDelete(fetched);  
+            message.channel.bulkDelete(99);  
         } catch (error) {
            console.log(error); 
         }
