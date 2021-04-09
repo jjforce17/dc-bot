@@ -11,6 +11,11 @@ module.exports = {
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
         const Player3ID = botData.player3;
+        var DealerCard1 = botData.BCard1;
+        var DealerCard2 = botData.BCard2;
+        var DealerCard3 = botData.BCard3;
+        var DealerCard4 = botData.BCard4;
+        var DealerCard5 = botData.BCard5;
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000") return message.channel.send("3 Players Required.");
         const player1Data = await profileModel.findOne({ userID: Player1ID });
         const player2Data = await profileModel.findOne({ userID: Player2ID });
@@ -245,6 +250,7 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
+                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -451,8 +457,10 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
+                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -554,6 +562,7 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
+                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -673,6 +682,7 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
+                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -692,7 +702,13 @@ module.exports = {
                 }
             }
         }
-        
+        async function callcard4(client, message, args, Discord, profileData) {
+            message.channel.send("The 3 cards are");
+            message.channel.send(DealerCard1);
+            message.channel.send(DealerCard3);
+            message.channel.send(DealerCard2);
+            message.channel.send(DealerCard4);
+        }
         
     }
 }
