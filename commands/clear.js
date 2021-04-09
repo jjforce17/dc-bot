@@ -6,11 +6,12 @@ module.exports = {
     description: "clear",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
-        async function clear() {
+        try {
             message.delete();
             const fetched = await message.channel.fetchMessages({limit: 99});
             message.channel.bulkDelete(fetched);  
+        } catch (error) {
+           console.log(error); 
         }
-        clear();
     }
 }
