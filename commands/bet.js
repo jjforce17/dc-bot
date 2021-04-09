@@ -250,7 +250,6 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
-                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -460,7 +459,6 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
-                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -562,7 +560,6 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
-                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -682,7 +679,6 @@ module.exports = {
                                         message.channel.send("round 2");
                                     }
                                     message.channel.send("Betted " + amount);
-                                    callcard4();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
