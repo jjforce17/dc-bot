@@ -26,6 +26,9 @@ module.exports = {
         if(amount == "all" && allin == "in"){
             message.channel.send("All in!");
         }
+        else if(amount == "fold"){
+            console.log(fold);
+        }
         else if(amount % 1 != 0){
             return message.channel.send("Value must be a whole number.");
         } 
