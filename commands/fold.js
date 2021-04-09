@@ -1,8 +1,8 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'endp',
-    description: "testg5",
+    name: 'fold',
+    description: "fold",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");

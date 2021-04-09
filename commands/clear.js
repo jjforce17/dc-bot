@@ -2,8 +2,8 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'endpoker',
-    description: "endp",
+    name: 'clear',
+    description: "clear",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         message.delete();
