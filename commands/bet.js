@@ -28,21 +28,6 @@ module.exports = {
         var p3continue = botData.Player3TurnContinue;
         const amount = args[0];
         const allin = args[1];
-        if(amount == "all" && allin == "in"){
-            message.channel.send("All in!");
-        }
-        else if(amount == "fold"){
-            console.log(fold);
-        }
-        else if(amount % 1 != 0){
-            return message.channel.send("Value must be a whole number.");
-        } 
-        else if(amount < 50) {
-            return message.channel.send("You must bet at least 50 dollars.");
-        }
-        if (amount >= p1max || amount >= p2max || amount >= p3max) {
-            return message.channel.send("Amount is too big")
-        }
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
@@ -57,6 +42,38 @@ module.exports = {
             if (botData.Player3Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
+        }
+        if(amount == "all" && allin == "in"){
+            message.channel.send("All in!");
+        }
+        else if(amount == "fold"){
+            if (message.author.id == Player1ID) {
+                if (botData.Player1State == false) {
+                    console.log("folded");
+                }
+            }
+            else if (message.author.id == Player2ID) {
+                if (botData.Player2State == false) {
+                    console.log("folded");
+                }
+            }
+            else if (message.author.id == Player3ID) {
+                if (botData.Player3State == false) {
+                    console.log("folded");
+                }
+            }
+            else {
+                return message.chnnel.send("You have not folded.")
+            }
+        }
+        else if(amount % 1 != 0){
+            return message.channel.send("Value must be a whole number.");
+        } 
+        else if(amount < 50) {
+            return message.channel.send("You must bet at least 50 dollars.");
+        }
+        if (amount >= p1max || amount >= p2max || amount >= p3max) {
+            return message.channel.send("Amount is too big")
         }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
