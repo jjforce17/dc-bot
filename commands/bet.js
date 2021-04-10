@@ -63,7 +63,7 @@ module.exports = {
                 }
             }
             else {
-                return message.chnnel.send("You have not folded.")
+                return message.chnnel.send("You have not folded.");
             }
         }
         else if(amount % 1 != 0){
