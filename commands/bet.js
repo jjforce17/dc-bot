@@ -51,19 +51,25 @@ module.exports = {
                 if (botData.Player1State == false) {
                     console.log("folded");
                 }
+                else {
+                    return message.channel.send("You have not folded.");
+                }
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
                     console.log("folded");
+                }
+                else {
+                    return message.channel.send("You have not folded.");
                 }
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
                     console.log("folded");
                 }
-            }
-            else {
-                return message.channel.send("You have not folded.");
+                else {
+                    return message.channel.send("You have not folded.");
+                }
             }
         }
         else if(amount % 1 != 0){
@@ -120,7 +126,7 @@ module.exports = {
                             }
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -189,7 +195,7 @@ module.exports = {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -332,7 +338,7 @@ module.exports = {
                             }
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -401,7 +407,7 @@ module.exports = {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -544,7 +550,7 @@ module.exports = {
                             }
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -657,7 +663,7 @@ module.exports = {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
                         try {
-                        let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,

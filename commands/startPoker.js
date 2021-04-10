@@ -109,7 +109,7 @@ module.exports = {
                         },
                     }
                 )  
-                await profileModel.findOneAndUpdate({ userID: botData }, 
+                await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$inc : {
                             TotalBet: amount * 3,
                             },
