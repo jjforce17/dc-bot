@@ -62,8 +62,20 @@ module.exports = {
                     console.log("folded");
                 }
             }
-            else {
-                return message.chnnel.send("You have not folded.");
+            else if (message.author.id == Player1ID) {
+                if (botData.Player1State == true) {
+                    return message.chnnel.send("You have not folded.");
+                }
+            }
+            else if (message.author.id == Player2ID) {
+                if (botData.Player2State == true) {
+                    return message.chnnel.send("You have not folded.");
+                }
+            }
+            else if (message.author.id == Player3ID) {
+                if (botData.Player3State == true) {
+                    return message.chnnel.send("You have not folded.");
+                }
             }
         }
         else if(amount % 1 != 0){
