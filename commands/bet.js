@@ -62,20 +62,8 @@ module.exports = {
                     console.log("folded");
                 }
             }
-            else if (message.author.id == Player1ID) {
-                if (botData.Player1State == true) {
-                    return message.chnnel.send("You have not folded.");
-                }
-            }
-            else if (message.author.id == Player2ID) {
-                if (botData.Player2State == true) {
-                    return message.chnnel.send("You have not folded.");
-                }
-            }
-            else if (message.author.id == Player3ID) {
-                if (botData.Player3State == true) {
-                    return message.chnnel.send("You have not folded.");
-                }
+            else {
+                return message.channel.send("You have not folded.");
             }
         }
         else if(amount % 1 != 0){
@@ -155,9 +143,6 @@ module.exports = {
                                         Player1TurnContinue: false,
                                         Player1Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -227,9 +212,6 @@ module.exports = {
                                         Player1TurnContinue: false,
                                         Player1Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     if (amount > botData.NowBet){
                                         await profileModel.findOneAndUpdate({
@@ -278,6 +260,9 @@ module.exports = {
                                             userID: botID,
                                         }, 
                                         {
+                                            $inc : {
+                                            TotalBet: amount * 3,
+                                             },
                                             $set : {
                                             BetStage: 2,    
                                             },
@@ -370,9 +355,6 @@ module.exports = {
                                         Player2TurnContinue: false,
                                         Player2Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -442,9 +424,6 @@ module.exports = {
                                         Player2TurnContinue: false,
                                         Player2Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     if (amount > botData.NowBet){
                                         await profileModel.findOneAndUpdate({
@@ -493,6 +472,9 @@ module.exports = {
                                             userID: botID,
                                         }, 
                                         {
+                                            $inc : {
+                                            TotalBet: amount * 3,
+                                             },
                                             $set : {
                                             BetStage: 2,    
                                             },
@@ -585,9 +567,6 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         Player3Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     if (p1continue == false && botData.Player1Round == 1) {
                                         if (botData.Player1State == true) {
@@ -624,6 +603,9 @@ module.exports = {
                                             userID: botID,
                                         }, 
                                         {
+                                            $inc : {
+                                            TotalBet: amount * 3,
+                                             },
                                             $set : {
                                             BetStage: 2,    
                                             },
@@ -698,9 +680,6 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         Player3Round: 1,
                                         },
-                                        $inc : {
-                                        TotalBet: amount,
-                                        },
                                     })
                                     if (amount > botData.NowBet){
                                         await profileModel.findOneAndUpdate({
@@ -749,6 +728,9 @@ module.exports = {
                                             userID: botID,
                                         }, 
                                         {
+                                            $inc : {
+                                            TotalBet: amount * 3,
+                                             },
                                             $set : {
                                             BetStage: 2,    
                                             },

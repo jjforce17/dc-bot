@@ -108,7 +108,13 @@ module.exports = {
                         dollar: -amount,
                         },
                     }
-                )    
+                )  
+                await profileModel.findOneAndUpdate({ userID: botData }, 
+                    {$inc : {
+                            TotalBet: amount * 3,
+                            },
+                        }
+                    )    
             } catch (err) {
                 console.log(err);
                 }
