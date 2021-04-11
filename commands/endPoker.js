@@ -1,10 +1,10 @@
 const profileModel = require('../models/profileSchema');
 
 module.exports = {
-    name: 'endpoker',
+    name: 'endp',
     description: "endp",
     async execute(client, message, args, Discord, profileData) {
-        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return message.channel.send("Admin Command");
         const botID = "803868333341802499";
         try {
             await profileModel.findOneAndUpdate({ userID: botID }, 
@@ -42,8 +42,8 @@ module.exports = {
                     Player2TurnContinue: false,
                     Player3TurnContinue: false,
                 }
-            }
-        )
+            })
+        message.channel.send("Ended");
         } catch (err) {
             console.log(err);
             }

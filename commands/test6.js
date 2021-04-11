@@ -4,7 +4,7 @@ module.exports = {
     name: 'testg6',
     description: "test6",
     async execute(client, message, args, Discord) {
-        if(!message.member.roles.cache.some(r => r.name === "boi")) return;
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         try {
             let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {

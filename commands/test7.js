@@ -4,7 +4,7 @@ module.exports = {
     name: 'testg7',
     description: "test7",
     execute(client, message, args, Discord, profileData) {
-        if(!message.member.roles.cache.some(r => r.name === "boi")) return;
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
             var DealerCard1 = Math.floor(Math.random() * 12) + 1;
             var DealerCard2 = Math.floor(Math.random() * 12) + 1;
             var DealerCard3 = Math.floor(Math.random() * 12) + 1;

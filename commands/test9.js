@@ -4,6 +4,7 @@ module.exports = {
     name: 'testg9',
     description: "test9",
     async execute(client, message, args, Discord, profileData) {
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         var PlayerRandNum = Math.floor(Math.random() * 3) + 1;
         var place = 0;
         var user1 = 123;

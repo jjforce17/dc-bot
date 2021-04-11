@@ -43,13 +43,52 @@ module.exports = {
                 return message.channel.send("This in not your turn yet");
             }
         }
-        if(amount == "all" && allin == "in"){
-            message.channel.send("All in!");
+        if (amount == "all" && allin == "in") {
+            if (p1max < p2max && p1max < p3max) {
+                amount = p1max
+            }
+            else if (p2max < p1max && p2max < p3max) {
+                amount = p2max
+            }
+            else if (p3max < p2max && p3max < p1max) {
+                amount = p3max
+            }
+            else if(p1max == p2max && p1max < p3max) {
+                amount = p1max;
+            }
+            else if(p1max == p3max && p1max < p2max) {
+                amount = p1max;
+            }
+            else if(p3max == p2max && p2max < p1max) {
+                amount = p3max;
+            }
+            else if(p1max == p2max && p1max == p3max) {
+                amount = p1max;
+            }
+            else {
+                return message.channel.send("error");
+            }
         }
         else if(amount == "fold"){
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: false,
+                            Player2Turn: true,
+                            Player3Turn: false,
+                            Player1Round: 1,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
                     console.log("folded");
+                    return message.channel.send("Player 1 has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -57,7 +96,23 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: false,
+                            Player2Turn: false,
+                            Player3Turn: true,
+                            Player2Round: 1,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
                     console.log("folded");
+                    return message.channel.send("Player 2 has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -65,7 +120,23 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
+                    try {
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $set : {
+                            Player1Turn: true,
+                            Player2Turn: false,
+                            Player3Turn: false,
+                            Player3Round: 1,
+                            },
+                        })
+                    } catch (error) {
+                        console.log(error);
+                    }
                     console.log("folded");
+                    return message.channel.send("Player 3 has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -83,48 +154,8 @@ module.exports = {
         }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
-                if (botData.Player1State == false) {
-                    try {
-                        await profileModel.findOneAndUpdate({
-                            userID: botID,
-                        }, 
-                        {
-                            $set : {
-                            Player1Turn: false,
-                            Player2Turn: true,
-                            Player3Turn: false,
-                            },
-                        })
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    return message.channel.send("Player 1 has folded");
-                }
                 if (botData.Player1State == true) {
                     if (botData.NowBetSet == false) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         try {
                         let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
@@ -168,29 +199,6 @@ module.exports = {
                             }
                     }
                     if (botData.NowBetSet == true) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         if (amount < botData.NowBet) {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
@@ -273,7 +281,9 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
+                                        callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -295,48 +305,8 @@ module.exports = {
                 }
             }
             if (botData.Player2Turn == true) {
-                if (botData.Player2State == false) {
-                    try {
-                        await profileModel.findOneAndUpdate({
-                            userID: botID,
-                        }, 
-                        {
-                            $set : {
-                            Player1Turn: false,
-                            Player2Turn: false,
-                            Player3Turn: true,
-                            },
-                        })
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    message.channel.send("Player 2 has folded");
-                }
                 if (botData.Player2State == true) {
                     if (botData.NowBetSet == false) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         try {
                         let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
@@ -380,29 +350,6 @@ module.exports = {
                             }
                     }
                     if (botData.NowBetSet == true) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         if (amount < botData.NowBet) {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
@@ -485,7 +432,9 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
+                                        callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -507,48 +456,8 @@ module.exports = {
                 }
             }
             if (botData.Player3Turn == true) {
-                if (botData.Player3State == false) {
-                    try {
-                        await profileModel.findOneAndUpdate({
-                            userID: botID,
-                        }, 
-                        {
-                            $set : {
-                            Player1Turn: true,
-                            Player2Turn: false,
-                            Player3Turn: false,
-                            },
-                        })
-                    } catch (error) {
-                        console.log(error);
-                    }
-                    return message.channel.send("Player 3 has folded");
-                }
                 if (botData.Player3State == true) {
                     if (botData.NowBetSet == false) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         try {
                         let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
@@ -616,7 +525,9 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
+                                        callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -636,29 +547,6 @@ module.exports = {
                             }
                     }
                     if (botData.NowBetSet == true) {
-                        if (amount == "all" && allin == "in") {
-                            if (p1max < p2max && p1max < p3max) {
-                                amount = p1max
-                            }
-                            else if (p2max < p1max && p2max < p3max) {
-                                amount = p2max
-                            }
-                            else if (p3max < p2max && p3max < p1max) {
-                                amount = p3max
-                            }
-                            else if(p1max == p2max && p1max < p3max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p3max && p1max < p2max) {
-                                amount = p1max;
-                            }
-                            else if(p3max == p2max && p2max < p1max) {
-                                amount = p1max;
-                            }
-                            else if(p1max == p2max && p1max == p3max) {
-                                amount = p1max;
-                            }
-                        }
                         if (amount < botData.NowBet) {
                             return message.channel.send("Bet must be same or bigger than previous bet.")
                         }
@@ -741,7 +629,9 @@ module.exports = {
                                             BetStage: 2,    
                                             },
                                         })
+                                        message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
+                                        callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 

@@ -4,7 +4,7 @@ module.exports = {
     name: 'testg5',
     description: "testg5",
     async execute(client, message, args, Discord, profileData) {
-        if(!message.member.roles.cache.some(r => r.name === "boi")) return;
+        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         const botID = "803868333341802499";
         try {
             await profileModel.findOneAndUpdate({ userID: botID }, 
