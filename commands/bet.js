@@ -5,14 +5,14 @@ module.exports = {
     description: "bet Poker",
     async execute(client, message, args, Discord, profileData) {
         function callcard4() {
-            message.channel.send("The 3 cards are");
+            message.channel.send("The 4 cards are");
             message.channel.send(DealerCard1);
             message.channel.send(DealerCard3);
             message.channel.send(DealerCard2);
             message.channel.send(DealerCard4);
         }
         function callcard5() {
-            message.channel.send("The 3 cards are");
+            message.channel.send("The 5 cards are");
             message.channel.send(DealerCard1);
             message.channel.send(DealerCard3);
             message.channel.send(DealerCard2);
@@ -30,6 +30,7 @@ module.exports = {
         var DealerCard2 = botData.BCard2;
         var DealerCard3 = botData.BCard3;
         var DealerCard4 = botData.BCard4;
+        if (botData.GameState != 1) return message.channel.send("Game has not started.");
         var DealerCard5 = botData.BCard5;
         if (botData.player1 == "000" || botData.player2 == "000" || botData.player3 == "000") return message.channel.send("3 Players Required.");
         const player1Data = await profileModel.findOne({ userID: Player1ID });
@@ -43,6 +44,7 @@ module.exports = {
         var p3continue = botData.Player3TurnContinue;
         const amount = args[0];
         const allin = args[1];
+        var PlayerAmountLocal = botData.PlayerAmount;
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
@@ -87,6 +89,106 @@ module.exports = {
         else if(amount == "fold"){
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
+                    if (p2continue == false && botData.Player2Round == 1) {
+                        if (botData.Player1State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player1,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player1State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player1FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player2State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player2,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player2State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player2FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player3State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player3,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player3State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player3FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $inc : {
+                            TotalBet: amount * PlayerAmountLocal,
+                            },
+                            $set : {
+                            BetStage: 2,
+                            NowBet : 0,
+                            Player1Turn: true,
+                            Player2Turn: false,
+                            Player3Turn: false,
+                            NowBetSet: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1Round: 0,
+                            Player1Round: 0,    
+                            Player1Round: 0,
+                            },
+                        })
+                        message.channel.send("Player 1 has folded");
+                        message.channel.send("Betted " + amount);
+                        message.channel.send("round 2");
+                        return callcard4();
+                    }
                     try {
                         await profileModel.findOneAndUpdate({
                             userID: botID,
@@ -111,6 +213,106 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
+                    if (p3continue == false && botData.Player3Round == 1) {
+                        if (botData.Player1State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player1,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player1State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player1FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player2State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player2,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player2State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player2FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player3State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player3,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player3State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player3FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $inc : {
+                            TotalBet: amount * PlayerAmountLocal,
+                            },
+                            $set : {
+                            BetStage: 2,
+                            NowBet : 0,
+                            Player1Turn: true,
+                            Player2Turn: false,
+                            Player3Turn: false,
+                            NowBetSet: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1Round: 0,
+                            Player1Round: 0,    
+                            Player1Round: 0,
+                            },
+                        })
+                        message.channel.send("Player 2 has folded");
+                        message.channel.send("Betted " + amount);
+                        message.channel.send("round 2");
+                        return callcard4();
+                    }
                     try {
                         await profileModel.findOneAndUpdate({
                             userID: botID,
@@ -135,6 +337,106 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
+                    if (p1continue == false && botData.Player1Round == 1) {
+                        if (botData.Player1State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player1,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player1State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player1FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player2State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player2,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player2State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player2FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        if (botData.Player3State == true) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botData.player3,
+                            }, 
+                            {
+                                $inc : {
+                                dollar: -amount,
+                                },
+                            })
+                        }
+                        else if (botData.Player3State == false) {
+                            await profileModel.findOneAndUpdate({
+                                userID: botID,
+                            }, 
+                            {
+                                $inc : {
+                                PlayerAmount: -1,
+                                },
+                                $set : {
+                                Player3FoldConfirm : true,
+                                },
+                            })
+                            PlayerAmountLocal = PlayerAmountLocal -1;
+                        }
+                        await profileModel.findOneAndUpdate({
+                            userID: botID,
+                        }, 
+                        {
+                            $inc : {
+                            TotalBet: amount * PlayerAmountLocal,
+                            },
+                            $set : {
+                            BetStage: 2,
+                            NowBet : 0,
+                            Player1Turn: true,
+                            Player2Turn: false,
+                            Player3Turn: false,
+                            NowBetSet: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1TurnContinue: false,
+                            Player1Round: 0,
+                            Player1Round: 0,    
+                            Player1Round: 0,
+                            },
+                        })
+                        message.channel.send("Player 3 has folded");
+                        message.channel.send("Betted " + amount);
+                        message.channel.send("round 2");
+                        return callcard4();
+                    }
                     try {
                         await profileModel.findOneAndUpdate({
                             userID: botID,
@@ -265,6 +567,20 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player1State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player1FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         if (botData.Player2State == true) {
                                             await profileModel.findOneAndUpdate({
                                                 userID: botData.player2,
@@ -274,6 +590,20 @@ module.exports = {
                                                 dollar: -amount,
                                                 },
                                             })
+                                        }
+                                        else if (botData.Player2State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player2FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
                                         }
                                         if (botData.Player3State == true) {
                                             await profileModel.findOneAndUpdate({
@@ -285,20 +615,45 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player3State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player3FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
                                         {
                                             $inc : {
-                                            TotalBet: amount * 3,
-                                             },
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            },
                                             $set : {
-                                            BetStage: 2,    
+                                            BetStage: 2,
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1Round: 0,
+                                            Player1Round: 0,    
+                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        callcard4();
+                                        return callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -416,6 +771,20 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player1State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player1FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         if (botData.Player2State == true) {
                                             await profileModel.findOneAndUpdate({
                                                 userID: botData.player2,
@@ -425,6 +794,20 @@ module.exports = {
                                                 dollar: -amount,
                                                 },
                                             })
+                                        }
+                                        else if (botData.Player2State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player2FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
                                         }
                                         if (botData.Player3State == true) {
                                             await profileModel.findOneAndUpdate({
@@ -436,20 +819,45 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player3State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player3FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
                                         {
                                             $inc : {
-                                            TotalBet: amount * 3,
-                                             },
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            },
                                             $set : {
-                                            BetStage: 2,    
+                                            BetStage: 2,
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1Round: 0,
+                                            Player1Round: 0,    
+                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        callcard4();
+                                        return callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -509,6 +917,20 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player1State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player1FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         if (botData.Player2State == true) {
                                             await profileModel.findOneAndUpdate({
                                                 userID: botData.player2,
@@ -518,6 +940,20 @@ module.exports = {
                                                 dollar: -amount,
                                                 },
                                             })
+                                        }
+                                        else if (botData.Player2State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player2FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
                                         }
                                         if (botData.Player3State == true) {
                                             await profileModel.findOneAndUpdate({
@@ -529,20 +965,45 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player3State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player3FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
                                         {
                                             $inc : {
-                                            TotalBet: amount * 3,
-                                             },
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            },
                                             $set : {
-                                            BetStage: 2,    
+                                            BetStage: 2,
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1Round: 0,
+                                            Player1Round: 0,    
+                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        callcard4();
+                                        return callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -613,6 +1074,20 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player1State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player1FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         if (botData.Player2State == true) {
                                             await profileModel.findOneAndUpdate({
                                                 userID: botData.player2,
@@ -622,6 +1097,20 @@ module.exports = {
                                                 dollar: -amount,
                                                 },
                                             })
+                                        }
+                                        else if (botData.Player2State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player2FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
                                         }
                                         if (botData.Player3State == true) {
                                             await profileModel.findOneAndUpdate({
@@ -633,20 +1122,45 @@ module.exports = {
                                                 },
                                             })
                                         }
+                                        else if (botData.Player3State == false) {
+                                            await profileModel.findOneAndUpdate({
+                                                userID: botID,
+                                            }, 
+                                            {
+                                                $inc : {
+                                                PlayerAmount: -1,
+                                                },
+                                                $set : {
+                                                Player3FoldConfirm : true,
+                                                },
+                                            })
+                                            PlayerAmountLocal = PlayerAmountLocal -1;
+                                        }
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
                                         {
                                             $inc : {
-                                            TotalBet: amount * 3,
-                                             },
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            },
                                             $set : {
-                                            BetStage: 2,    
+                                            BetStage: 2,
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1TurnContinue: false,
+                                            Player1Round: 0,
+                                            Player1Round: 0,    
+                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        callcard4();
+                                        return callcard4();
                                     }
                                     message.channel.send("Betted " + amount);
                                 } 
@@ -667,6 +1181,8 @@ module.exports = {
                     }
                 }
             }
-        }        
+        } 
+        
+        
     }
 }

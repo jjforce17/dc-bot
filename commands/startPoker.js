@@ -88,6 +88,10 @@ module.exports = {
                     Player1Round: 0,
                     Player2Round: 0,
                     Player3Round: 0,
+                    PlayerAmount: 3,
+                    Player1FoldConfirm : false,
+                    Player2FoldConfirm : false,
+                    Player3FoldConfirm : false,
                     }
                 }
             )

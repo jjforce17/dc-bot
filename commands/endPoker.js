@@ -41,6 +41,10 @@ module.exports = {
                     Player1TurnContinue: false,
                     Player2TurnContinue: false,
                     Player3TurnContinue: false,
+                    PlayerAmount: 0,
+                    Player1FoldConfirm : false,
+                    Player2FoldConfirm : false,
+                    Player3FoldConfirm : false,
                 }
             })
         message.channel.send("Ended");
