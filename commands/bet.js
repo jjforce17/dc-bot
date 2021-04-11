@@ -4,6 +4,21 @@ module.exports = {
     name: 'betp',
     description: "bet Poker",
     async execute(client, message, args, Discord, profileData) {
+        function callcard4() {
+            message.channel.send("The 3 cards are");
+            message.channel.send(DealerCard1);
+            message.channel.send(DealerCard3);
+            message.channel.send(DealerCard2);
+            message.channel.send(DealerCard4);
+        }
+        function callcard5() {
+            message.channel.send("The 3 cards are");
+            message.channel.send(DealerCard1);
+            message.channel.send(DealerCard3);
+            message.channel.send(DealerCard2);
+            message.channel.send(DealerCard4);
+            message.channel.send(DealerCard5);
+        }
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         const botID = "803868333341802499";
@@ -652,14 +667,6 @@ module.exports = {
                     }
                 }
             }
-        }
-        function callcard4(client, message, args, Discord, profileData) {
-            message.channel.send("The 3 cards are");
-            message.channel.send(DealerCard1);
-            message.channel.send(DealerCard3);
-            message.channel.send(DealerCard2);
-            message.channel.send(DealerCard4);
-        }
-        
+        }        
     }
 }
