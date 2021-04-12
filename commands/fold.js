@@ -10,7 +10,7 @@ module.exports = {
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
         const Player3ID = botData.player3;
-        botData = await profileModel.findOne({ userID: botID });
+        const botData = await profileModel.findOne({ userID: botID });
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
