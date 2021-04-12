@@ -89,7 +89,8 @@ module.exports = {
         else if(amount == "fold"){
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
-                    if (p2continue == false && botData.Player2Round == 1) {
+                    if (p2continue == false && botData.Player2Round == 1 && botData.BetStage == 1) {
+                        try{
                         if (botData.Player1State == true) {
                             await profileModel.findOneAndUpdate({
                                 userID: botData.player1,
@@ -188,6 +189,9 @@ module.exports = {
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
+                    }catch (error) {
+                            console.log(error);
+                        }
                     }
                     try {
                         await profileModel.findOneAndUpdate({
@@ -213,7 +217,8 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
-                    if (p3continue == false && botData.Player3Round == 1) {
+                    if (p3continue == false && botData.Player3Round == 1 && botData.BetStage == 1) {
+                        try{
                         if (botData.Player1State == true) {
                             await profileModel.findOneAndUpdate({
                                 userID: botData.player1,
@@ -312,6 +317,9 @@ module.exports = {
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
+                        }catch (error) {
+                            console.log(error);
+                        }
                     }
                     try {
                         await profileModel.findOneAndUpdate({
@@ -337,7 +345,8 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
-                    if (p1continue == false && botData.Player1Round == 1) {
+                    if (p1continue == false && botData.Player1Round == 1 && botData.BetStage == 1) {
+                        try{
                         if (botData.Player1State == true) {
                             await profileModel.findOneAndUpdate({
                                 userID: botData.player1,
@@ -436,6 +445,9 @@ module.exports = {
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
+                        }catch (error) {
+                            console.log(error);
+                        }
                     }
                     try {
                         await profileModel.findOneAndUpdate({
