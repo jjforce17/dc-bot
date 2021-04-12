@@ -8,6 +8,21 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         const botID = "803868333341802499";
         botData = await profileModel.findOne({ userID: botID });
+        if (message.author.id == Player1ID) {
+            if (botData.Player1Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
+        if (message.author.id == Player2ID) {
+            if (botData.Player2Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
+        if (message.author.id == Player3ID) {
+            if (botData.Player3Turn == false) {
+                return message.channel.send("This in not your turn yet");
+            }
+        }
         try {
             if(message.author.id == botData.player1) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 

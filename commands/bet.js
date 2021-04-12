@@ -49,15 +49,30 @@ module.exports = {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
+            if (botData.Player1State == false) {
+                if(amount != "fold") {
+                    return message.channel.send("Player 1 has folded, please use ?betp fold")
+                }
+            }
         }
         if (message.author.id == Player2ID) {
             if (botData.Player2Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
+            if (botData.Player2State == false) {
+                if(amount != "fold") {
+                    return message.channel.send("Player 2 has folded, please use ?betp fold")
+                }
+            }
         }
         if (message.author.id == Player3ID) {
             if (botData.Player3Turn == false) {
                 return message.channel.send("This in not your turn yet");
+            }
+            if (botData.Player3State == false) {
+                if(amount != "fold") {
+                    return message.channel.send("Player 3 has folded, please use ?betp fold")
+                }
             }
         }
         if (amount == "all" && allin == "in") {
