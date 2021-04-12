@@ -30,23 +30,35 @@ module.exports = {
             if(message.author.id == botData.player1) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
-                        Player1State: false,
-                        }
+                    Player1State: false,
+                    Player1FoldConfirm : true,
+                    },
+                    $inc : {
+                    PlayerAmount: -1,
+                    },
                     })
             }
             if(message.author.id == botData.player2) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
                         Player2State: false,
-                        }
-                    })
+                        Player2FoldConfirm : true,
+                        },
+                        $inc : {
+                        PlayerAmount: -1,
+                        },
+                        })
             }
             if(message.author.id == botData.player3) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
                         Player3State: false,
-                        }
-                    })
+                        Player3FoldConfirm : true,
+                        },
+                        $inc : {
+                        PlayerAmount: -1,
+                        },
+                        })
             }
             
         } catch (err) {
