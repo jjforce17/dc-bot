@@ -44,6 +44,7 @@ module.exports = {
         var p3continue = botData.Player3TurnContinue;
         var amount = args[0];
         const allin = args[1];
+        var PlayerAmountLocal = botData.PlayerAmount;
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");

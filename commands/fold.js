@@ -26,6 +26,21 @@ module.exports = {
                 return message.channel.send("This in not your turn yet");
             }
         }
+        if(message.author.id == botData.player1) {
+            if (botData.Player1FoldConfirm == true) {
+                return message.channel.send("You have folded, continue by typing ?betp fold.")
+            }
+        }
+        if(message.author.id == botData.player2) {
+            if (botData.Player2FoldConfirm == true) {
+                return message.channel.send("You have folded, continue by typing ?betp fold.")
+            }
+        }
+        if(message.author.id == botData.player3) {
+            if (botData.Player3FoldConfirm == true) {
+                return message.channel.send("You have folded, continue by typing ?betp fold.")
+            }
+        }
         try {
             if(message.author.id == botData.player1) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
