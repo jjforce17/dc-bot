@@ -101,7 +101,11 @@ module.exports = {
             }
         }
         else if(amount == "fold"){
+            try{
             amount = botData.NowBet;
+            }catch(error) {
+                console.log(error);
+            }
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
                     if (p2continue == false && botData.Player2Round == 1) {
