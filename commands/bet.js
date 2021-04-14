@@ -302,7 +302,7 @@ module.exports = {
                                 },
                             })
                         }
-                        if (botData.Player3State == tru && botData.Player3FoldConfirm == false) {
+                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
                             await profileModel.findOneAndUpdate({
                                 userID: botData.player3,
                             }, 
