@@ -42,7 +42,7 @@ module.exports = {
         var p1continue = botData.Player1TurnContinue;
         var p2continue = botData.Player2TurnContinue;
         var p3continue = botData.Player3TurnContinue;
-        const amount = args[0];
+        var amount = args[0];
         const allin = args[1];
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
