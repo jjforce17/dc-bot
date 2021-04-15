@@ -142,7 +142,7 @@ module.exports = {
             }
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
-                    if (amount == botData.Player2NowBet == botData.Player3NowBet == botData.NowBet) {
+                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -192,7 +192,7 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
-                    if (botData.Player1NowBet == amount == botData.Player3NowBet == botData.NowBet) {
+                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -242,7 +242,7 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
-                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
+                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -373,7 +373,7 @@ module.exports = {
                                         NowBetSet: true,
                                         },
                                     })
-                                    if (amount == botData.Player2NowBet == botData.Player3NowBet == botData.NowBet) {
+                                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -488,7 +488,7 @@ module.exports = {
                                         Player2TurnContinue: false,
                                         },
                                     })
-                                    if (botData.Player1NowBet == amount == botData.Player3NowBet == botData.NowBet) {
+                                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -557,7 +557,7 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
+                                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -625,7 +625,7 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
+                                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
