@@ -1,4 +1,5 @@
 const profileModel = require('../models/profileSchema');
+//check fold confrim seperate
 
 module.exports = {
     name: 'fold',
@@ -11,6 +12,7 @@ module.exports = {
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
         const Player3ID = botData.player3;
+        if (botData.GameState != 1) return message.channel.send("Game has not started.");
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
@@ -26,54 +28,57 @@ module.exports = {
                 return message.channel.send("This in not your turn yet");
             }
         }
-        if(message.author.id == botData.player1) {
-            if (botData.Player1FoldConfirm == true) {
-                return message.channel.send("You have folded, continue by typing ?betp fold.")
-            }
-        }
-        if(message.author.id == botData.player2) {
-            if (botData.Player2FoldConfirm == true) {
-                return message.channel.send("You have folded, continue by typing ?betp fold.")
-            }
-        }
-        if(message.author.id == botData.player3) {
-            if (botData.Player3FoldConfirm == true) {
-                return message.channel.send("You have folded, continue by typing ?betp fold.")
-            }
-        }
         try {
             if(message.author.id == botData.player1) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
-                    Player1State: false,
-                    Player1FoldConfirm : true,
-                    },
-                    $inc : {
-                    PlayerAmount: -1,
-                    },
+                        Player1State: false,
+                        Player1FoldConfirm : true,
+                        p1continue : false,
+                        },
                     })
+                        if (botData.Player1FoldConfirm == false) {
+                            await profileModel.findOneAndUpdate({ userID: botID }, 
+                                {$inc : {
+                                    PlayerAmount: -1,
+                                    },
+                                })
+                        }
+                    message.channel.send("You have folded, continue by typing ?betp fold.");
             }
             if(message.author.id == botData.player2) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
                         Player2State: false,
                         Player2FoldConfirm : true,
+                        p2continue : false,
                         },
-                        $inc : {
-                        PlayerAmount: -1,
-                        },
-                        })
+                    })
+                        if (botData.Player2FoldConfirm == false) {
+                            await profileModel.findOneAndUpdate({ userID: botID }, 
+                                {$inc : {
+                                    PlayerAmount: -1,
+                                    },
+                                })
+                        }
+                    message.channel.send("You have folded, continue by typing ?betp fold.");
             }
             if(message.author.id == botData.player3) {
                 await profileModel.findOneAndUpdate({ userID: botID }, 
                     {$set: {
                         Player3State: false,
                         Player3FoldConfirm : true,
-                        },
-                        $inc : {
-                        PlayerAmount: -1,
+                        p3continue : false,
                         },
                         })
+                        if (botData.Player3FoldConfirm == false) {
+                            await profileModel.findOneAndUpdate({ userID: botID }, 
+                                {$inc : {
+                                    PlayerAmount: -1,
+                                    },
+                                })
+                        }
+                    message.channel.send("You have folded, continue by typing ?betp fold.");
             }
             
         } catch (err) {

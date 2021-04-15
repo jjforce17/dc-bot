@@ -45,6 +45,9 @@ module.exports = {
                     Player1FoldConfirm : false,
                     Player2FoldConfirm : false,
                     Player3FoldConfirm : false,
+                    Player1NowBet: 0,
+                    Player2NowBet: 0,
+                    Player3NowBet: 0, 
                 }
             })
         message.channel.send("Ended");

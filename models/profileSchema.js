@@ -19,13 +19,13 @@ const profileSchema = new mongoose.Schema({
     Player3State: { type: Boolean }, //bet/fold user
     Player1Round: { type: Number },
     Player2Round: { type: Number },
-    Player3Round: { type: Number }, //round number User 
+    Player3Round: { type: Number }, //check if use
     Player1Turn: { type: Boolean },
     Player2Turn: { type: Boolean },
     Player3Turn: { type: Boolean },
     Player1TurnContinue: { type: Boolean },
     Player2TurnContinue: { type: Boolean },
-    Player3TurnContinue: { type: Boolean }, 
+    Player3TurnContinue: { type: Boolean }, //check if use
     TotalBet: { type: Number },
     P1Card1: { type: Number },
     P1Card2: { type: Number },
@@ -41,6 +41,9 @@ const profileSchema = new mongoose.Schema({
     Player1FoldConfirm : { type: Boolean },
     Player2FoldConfirm : { type: Boolean },
     Player3FoldConfirm : { type: Boolean },
+    Player1NowBet: { type: Number },
+    Player2NowBet: { type: Number },
+    Player3NowBet: { type: Number }, //player bet --- compare with now bet
 });
 
 const model = mongoose.model("ProfileModels", profileSchema);

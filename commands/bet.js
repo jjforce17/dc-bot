@@ -19,6 +19,42 @@ module.exports = {
             message.channel.send(DealerCard4);
             message.channel.send(DealerCard5);
         }
+        function EndRoundTake() {
+            try {
+                if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
+                    await profileModel.findOneAndUpdate({
+                        userID: botData.player1,
+                    }, 
+                    {
+                        $inc : {
+                        dollar: -amount,
+                        },
+                    })
+                }
+                if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
+                    await profileModel.findOneAndUpdate({
+                        userID: botData.player2,
+                    }, 
+                    {
+                        $inc : {
+                        dollar: -amount,
+                        },
+                    })
+                }
+                if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
+                    await profileModel.findOneAndUpdate({
+                        userID: botData.player3,
+                    }, 
+                    {
+                        $inc : {
+                        dollar: -amount,
+                        },
+                    })
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         const botID = "803868333341802499";
@@ -39,9 +75,6 @@ module.exports = {
         var p1max = player1Data.dollar - 1;
         var p2max = player2Data.dollar - 1;
         var p3max = player3Data.dollar - 1;
-        var p1continue = botData.Player1TurnContinue;
-        var p2continue = botData.Player2TurnContinue;
-        var p3continue = botData.Player3TurnContinue;
         var amount = args[0];
         const allin = args[1];
         var PlayerAmountLocal = botData.PlayerAmount;
@@ -109,38 +142,9 @@ module.exports = {
             }
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
-                    if (p2continue == false && botData.Player2Round == 1) {
+                    if (amount == botData.Player2NowBet == botData.Player3NowBet == botData.NowBet) {
                         try{
-                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player1,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player2,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player3,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
+                        EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -151,16 +155,10 @@ module.exports = {
                             $set : {
                             BetStage: 2,
                             NowBet : 0,
-                            Player1Turn: true,
-                            Player2Turn: false,
+                            Player1Turn: false,
+                            Player2Turn: true,
                             Player3Turn: false,
                             NowBetSet: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1Round: 0,
-                            Player1Round: 0,    
-                            Player1Round: 0,
                             },
                         })
                         message.channel.send("Player 1 has folded");
@@ -180,7 +178,6 @@ module.exports = {
                             Player1Turn: false,
                             Player2Turn: true,
                             Player3Turn: false,
-                            Player1Round: 1,
                             },
                         })
                     } catch (error) {
@@ -195,38 +192,9 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
-                    if (p3continue == false && botData.Player3Round == 1 && botData.BetStage == 1) {
+                    if (botData.Player1NowBet == amount == botData.Player3NowBet == botData.NowBet) {
                         try{
-                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player1,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player2,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player3,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
+                        EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -241,12 +209,6 @@ module.exports = {
                             Player2Turn: false,
                             Player3Turn: false,
                             NowBetSet: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1Round: 0,
-                            Player1Round: 0,    
-                            Player1Round: 0,
                             },
                         })
                         message.channel.send("Player 2 has folded");
@@ -266,7 +228,6 @@ module.exports = {
                             Player1Turn: false,
                             Player2Turn: false,
                             Player3Turn: true,
-                            Player2Round: 1,
                             },
                         })
                     } catch (error) {
@@ -281,38 +242,9 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
-                    if (p1continue == false && botData.Player1Round == 1 && botData.BetStage == 1) {
+                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
                         try{
-                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player1,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player2,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
-                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                            await profileModel.findOneAndUpdate({
-                                userID: botData.player3,
-                            }, 
-                            {
-                                $inc : {
-                                dollar: -amount,
-                                },
-                            })
-                        }
+                        EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -327,12 +259,6 @@ module.exports = {
                             Player2Turn: false,
                             Player3Turn: false,
                             NowBetSet: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1TurnContinue: false,
-                            Player1Round: 0,
-                            Player1Round: 0,    
-                            Player1Round: 0,
                             },
                         })
                         message.channel.send("Player 3 has folded");
@@ -352,7 +278,6 @@ module.exports = {
                             Player1Turn: true,
                             Player2Turn: false,
                             Player3Turn: false,
-                            Player3Round: 1,
                             },
                         })
                     } catch (error) {
@@ -396,12 +321,11 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player1NowBet : amount,
                                         Player1Turn: false,
                                         Player2Turn: true,
                                         Player3Turn: false,
                                         NowBetSet: true,
-                                        Player1TurnContinue: false,
-                                        Player1Round: 1,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -442,57 +366,15 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player1NowBet : amount,
                                         Player1Turn: false,
                                         Player2Turn: true,
                                         Player3Turn: false,
                                         NowBetSet: true,
-                                        Player1TurnContinue: false,
-                                        Player1Round: 1,
                                         },
                                     })
-                                    if (amount > botData.NowBet){
-                                        await profileModel.findOneAndUpdate({
-                                            userID: botID,
-                                        }, 
-                                        {
-                                            $set : {
-                                            Player2TurnContinue: true,
-                                            Player2Round: 0,    
-                                            },
-                                        })
-                                        p2continue = true;
-                                    }
-                                    if (p2continue == false && botData.Player2Round == 1) {
-                                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player1,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player2,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player3,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
+                                    if (amount == botData.Player2NowBet == botData.Player3NowBet == botData.NowBet) {
+                                        EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -507,12 +389,6 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1Round: 0,
-                                            Player1Round: 0,    
-                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -558,12 +434,12 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player2NowBet : amount,
                                         Player1Turn: false,
                                         Player2Turn: false,
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
-                                        Player2Round: 1,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -604,57 +480,16 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player2NowBet : amount,
                                         Player1Turn: false,
                                         Player2Turn: false,
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
-                                        Player2Round: 1,
                                         },
                                     })
-                                    if (amount > botData.NowBet){
-                                        await profileModel.findOneAndUpdate({
-                                            userID: botID,
-                                        }, 
-                                        {
-                                            $set : {
-                                            Player3TurnContinue: true,
-                                            Player3Round: 0,    
-                                            },
-                                        })
-                                        p3continue = true;
-                                    }
-                                    if (p3continue == false && botData.Player3Round == 1) {
-                                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player1,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player2,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player3,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
+                                    if (botData.Player1NowBet == amount == botData.Player3NowBet == botData.NowBet) {
+                                        EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -669,12 +504,6 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1Round: 0,
-                                            Player1Round: 0,    
-                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -720,45 +549,16 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player3NowBet : amount,
                                         Player1Turn: true,
                                         Player2Turn: false,
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player3TurnContinue: false,
-                                        Player3Round: 1,
                                         },
                                     })
-                                    if (p1continue == false && botData.Player1Round == 1) {
-                                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player1,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player2,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player3,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
+                                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
+                                        EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -773,12 +573,6 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1Round: 0,
-                                            Player1Round: 0,    
-                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -823,57 +617,16 @@ module.exports = {
                                     {
                                         $set : {
                                         NowBet : amount,
+                                        Player3NowBet : amount,
                                         Player1Turn: true,
                                         Player2Turn: false,
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         Player3TurnContinue: false,
-                                        Player3Round: 1,
                                         },
                                     })
-                                    if (amount > botData.NowBet){
-                                        await profileModel.findOneAndUpdate({
-                                            userID: botID,
-                                        }, 
-                                        {
-                                            $set : {
-                                            Player1TurnContinue: true,
-                                            Player1Round: 0,    
-                                            },
-                                        })
-                                        p1continue = true;
-                                    }
-                                    if (p1continue == false && botData.Player1Round == 1) {
-                                        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player1,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player2,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
-                                        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                                            await profileModel.findOneAndUpdate({
-                                                userID: botData.player3,
-                                            }, 
-                                            {
-                                                $inc : {
-                                                dollar: -amount,
-                                                },
-                                            })
-                                        }
+                                    if (botData.Player1NowBet == botData.Player2NowBet == amount == botData.NowBet) {
+                                        EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -888,12 +641,6 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1TurnContinue: false,
-                                            Player1Round: 0,
-                                            Player1Round: 0,    
-                                            Player1Round: 0,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
