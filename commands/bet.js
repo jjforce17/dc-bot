@@ -1,5 +1,5 @@
 const profileModel = require('../models/profileSchema');
-//etp
+
 module.exports = {
     name: 'betp',
     description: "bet Poker",
@@ -19,7 +19,7 @@ module.exports = {
             message.channel.send(DealerCard4);
             message.channel.send(DealerCard5);
         }
-        function EndRoundTake() {
+        async function EndRoundTake() {
             try {
                 if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
                     await profileModel.findOneAndUpdate({
