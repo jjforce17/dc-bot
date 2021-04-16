@@ -301,6 +301,7 @@ module.exports = {
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
                     if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet && botData.p1continue == true && botData.p2continue == true && botData.p3continue == true) {
+                        console.log("endfold3");
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
