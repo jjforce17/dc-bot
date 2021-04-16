@@ -626,6 +626,7 @@ module.exports = {
                                         },
                                     })
                                     if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                                        console.log("p3end");
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
