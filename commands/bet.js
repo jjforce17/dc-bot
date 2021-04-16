@@ -242,7 +242,7 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
-                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -305,7 +305,7 @@ module.exports = {
                 if (botData.Player1State == true) {
                     if (botData.NowBetSet == false) {
                         try {
-                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";
                             message.channel.send("Press Y to confirm, N to cancel").then(() => {
                             message.channel.awaitMessages(filter, {
                                 max: 1,
@@ -557,7 +557,7 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -625,7 +625,7 @@ module.exports = {
                                         Player3TurnContinue: false,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBett && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
                                         console.log("p3end");
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
