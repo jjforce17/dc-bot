@@ -12,6 +12,7 @@ module.exports = {
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
         const Player3ID = botData.player3;
+        var nowbet = botData.NowBet;
         if (botData.GameState != 1) return message.channel.send("Game has not started.");
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
@@ -35,6 +36,7 @@ module.exports = {
                         Player1State: false,
                         Player1FoldConfirm : true,
                         p1continue : true,
+                        Player1NowBet : nowbet,
                         },
                     })
                         if (botData.Player1FoldConfirm == false) {
@@ -52,6 +54,7 @@ module.exports = {
                         Player2State: false,
                         Player2FoldConfirm : true,
                         p2continue : true,
+                        Player2NowBet : nowbet,
                         },
                     })
                         if (botData.Player2FoldConfirm == false) {
@@ -69,6 +72,7 @@ module.exports = {
                         Player3State: false,
                         Player3FoldConfirm : true,
                         p3continue : true,
+                        Player3NowBet : nowbet,
                         },
                         })
                         if (botData.Player3FoldConfirm == false) {
