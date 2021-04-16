@@ -112,6 +112,54 @@ module.exports = {
                 }
             }
         }
+        if (botData.Player1State == false) {
+            console.log("p1fold");
+            console.log(nowbetlocal);
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player1NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (botData.Player2State == false) {
+            console.log("p2fold");
+            console.log(nowbetlocal);
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player2NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (botData.Player3State == false) {
+            console.log("p3fold");
+            console.log(nowbetlocal);
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player3NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
         if (amount == "all" && allin == "in") {
             if (p1max < p2max && p1max < p3max) {
                 amount = p1max
@@ -312,54 +360,6 @@ module.exports = {
         }
         if (amount >= p1max || amount >= p2max || amount >= p3max) {
             return message.channel.send("Amount is too big")
-        }
-        if (botData.Player1State == false) {
-            console.log("p1fold");
-            console.log(nowbetlocal);
-            try {
-                await profileModel.findOneAndUpdate({
-                    userID: botID,
-                }, 
-                {
-                    $set : {
-                    Player1NowBet: nowbetlocal,
-                    },
-                })
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        if (botData.Player2State == false) {
-            console.log("p2fold");
-            console.log(nowbetlocal);
-            try {
-                await profileModel.findOneAndUpdate({
-                    userID: botID,
-                }, 
-                {
-                    $set : {
-                    Player2NowBet: nowbetlocal,
-                    },
-                })
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        if (botData.Player3State == false) {
-            console.log("p3fold");
-            console.log(nowbetlocal);
-            try {
-                await profileModel.findOneAndUpdate({
-                    userID: botID,
-                }, 
-                {
-                    $set : {
-                    Player3NowBet: nowbetlocal,
-                    },
-                })
-            } catch (error) {
-                console.log(error);
-            }
         }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
