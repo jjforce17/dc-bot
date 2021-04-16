@@ -23,9 +23,9 @@ const profileSchema = new mongoose.Schema({
     Player1Turn: { type: Boolean },
     Player2Turn: { type: Boolean },
     Player3Turn: { type: Boolean },
-    Player1TurnContinue: { type: Boolean },
-    Player2TurnContinue: { type: Boolean },
-    Player3TurnContinue: { type: Boolean }, //check if use
+    p1continue: { type: Boolean },
+    p2continue: { type: Boolean },
+    p3continue: { type: Boolean }, 
     TotalBet: { type: Number },
     P1Card1: { type: Number },
     P1Card2: { type: Number },

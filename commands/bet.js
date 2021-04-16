@@ -75,6 +75,9 @@ module.exports = {
         var p1max = player1Data.dollar - 1;
         var p2max = player2Data.dollar - 1;
         var p3max = player3Data.dollar - 1;
+        var p1continuelocal = botData.p1continue;
+        var p2continuelocal = botData.p2continue;
+        var p3continuelocal = botData.p3continue;
         var amount = args[0];
         const allin = args[1];
         var PlayerAmountLocal = botData.PlayerAmount;
@@ -142,7 +145,7 @@ module.exports = {
             }
             if (message.author.id == Player1ID) {
                 if (botData.Player1State == false) {
-                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
+                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet && botData.p1continue == true && botData.p2continue == true && botData.p3continue == true) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -159,6 +162,9 @@ module.exports = {
                             Player2Turn: true,
                             Player3Turn: false,
                             NowBetSet: false,
+                            p1continue: false,
+                            p2continue: false,
+                            p3continue: false,
                             },
                         })
                         message.channel.send("Player 1 has folded");
@@ -192,7 +198,7 @@ module.exports = {
             }
             else if (message.author.id == Player2ID) {
                 if (botData.Player2State == false) {
-                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
+                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet && botData.p1continue == true && botData.p2continue == true && botData.p3continue == true) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -209,6 +215,9 @@ module.exports = {
                             Player2Turn: false,
                             Player3Turn: false,
                             NowBetSet: false,
+                            p1continue: false,
+                            p2continue: false,
+                            p3continue: false,
                             },
                         })
                         message.channel.send("Player 2 has folded");
@@ -242,7 +251,7 @@ module.exports = {
             }
             else if (message.author.id == Player3ID) {
                 if (botData.Player3State == false) {
-                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet && botData.p1continue == true && botData.p2continue == true && botData.p3continue == true) {
                         try{
                         EndRoundTake();
                         await profileModel.findOneAndUpdate({
@@ -259,6 +268,9 @@ module.exports = {
                             Player2Turn: false,
                             Player3Turn: false,
                             NowBetSet: false,
+                            p1continue: false,
+                            p2continue: false,
+                            p3continue: false,
                             },
                         })
                         message.channel.send("Player 3 has folded");
@@ -326,6 +338,7 @@ module.exports = {
                                         Player2Turn: true,
                                         Player3Turn: false,
                                         NowBetSet: true,
+                                        p1continue: true,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -371,9 +384,11 @@ module.exports = {
                                         Player2Turn: true,
                                         Player3Turn: false,
                                         NowBetSet: true,
+                                        p1continue: true,
                                         },
                                     })
-                                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
+                                    p1continuelocal = true;
+                                    if (amount == botData.Player2NowBet && botData.Player2NowBet == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet && p1continuelocal == true && botData.p2continue == true && botData.p3continue == true) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -389,6 +404,9 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -439,7 +457,7 @@ module.exports = {
                                         Player2Turn: false,
                                         Player3Turn: true,
                                         NowBetSet: true,
-                                        Player2TurnContinue: false,
+                                        p2continue: true,
                                         },
                                     })
                                     message.channel.send("Betted " + amount);
@@ -486,9 +504,11 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
+                                        p2continue: true,
                                         },
                                     })
-                                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet) {
+                                    p2continuelocal = true;
+                                    if (botData.Player1NowBet == amount && amount == botData.Player3NowBet && botData.Player3NowBet == botData.NowBet && botData.p1continue == true && p2continuelocal == true && botData.p3continue == true) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -504,6 +524,9 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -554,10 +577,11 @@ module.exports = {
                                         Player2Turn: false,
                                         Player3Turn: false,
                                         NowBetSet: true,
-                                        Player3TurnContinue: false,
+                                        p3continue: true,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                                    p3continuelocal = true;
+                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet && botData.p1continue == true && botData.p2continue == true && p3continuelocal == true) {
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
@@ -573,6 +597,9 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);
@@ -622,10 +649,11 @@ module.exports = {
                                         Player2Turn: false,
                                         Player3Turn: false,
                                         NowBetSet: true,
-                                        Player3TurnContinue: false,
+                                        p3continue: true,
                                         },
                                     })
-                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet) {
+                                    p3continuelocal =  true;
+                                    if (botData.Player1NowBet == botData.Player2NowBet && botData.Player2NowBet == amount && amount == botData.NowBet && botData.p1continue == true && botData.p2continue == true && p3continuelocal == true) {
                                         console.log("p3end");
                                         EndRoundTake();
                                         await profileModel.findOneAndUpdate({
@@ -642,6 +670,9 @@ module.exports = {
                                             Player2Turn: false,
                                             Player3Turn: false,
                                             NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
                                             },
                                         })
                                         message.channel.send("Betted " + amount);

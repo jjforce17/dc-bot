@@ -34,7 +34,7 @@ module.exports = {
                     {$set: {
                         Player1State: false,
                         Player1FoldConfirm : true,
-                        p1continue : false,
+                        p1continue : true,
                         },
                     })
                         if (botData.Player1FoldConfirm == false) {
@@ -51,7 +51,7 @@ module.exports = {
                     {$set: {
                         Player2State: false,
                         Player2FoldConfirm : true,
-                        p2continue : false,
+                        p2continue : true,
                         },
                     })
                         if (botData.Player2FoldConfirm == false) {
@@ -68,7 +68,7 @@ module.exports = {
                     {$set: {
                         Player3State: false,
                         Player3FoldConfirm : true,
-                        p3continue : false,
+                        p3continue : true,
                         },
                         })
                         if (botData.Player3FoldConfirm == false) {
