@@ -315,6 +315,7 @@ module.exports = {
         }
         if (botData.Player1State == false) {
             console.log("p1fold");
+            console.log(nowbetlocal);
             try {
                 await profileModel.findOneAndUpdate({
                     userID: botID,
@@ -330,6 +331,7 @@ module.exports = {
         }
         if (botData.Player2State == false) {
             console.log("p2fold");
+            console.log(nowbetlocal);
             try {
                 await profileModel.findOneAndUpdate({
                     userID: botID,
@@ -345,6 +347,7 @@ module.exports = {
         }
         if (botData.Player3State == false) {
             console.log("p3fold");
+            console.log(nowbetlocal);
             try {
                 await profileModel.findOneAndUpdate({
                     userID: botID,
