@@ -81,6 +81,7 @@ module.exports = {
         var amount = args[0];
         const allin = args[1];
         var PlayerAmountLocal = botData.PlayerAmount;
+        var nowbetlocal = botData.NowBet;
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
@@ -311,6 +312,48 @@ module.exports = {
         }
         if (amount >= p1max || amount >= p2max || amount >= p3max) {
             return message.channel.send("Amount is too big")
+        }
+        if (botData.Player1State == false) {
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player1NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (botData.Player2State == false) {
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player2NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (botData.Player3State == false) {
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    Player3NowBet: nowbetlocal,
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
         }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
