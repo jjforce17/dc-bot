@@ -2,8 +2,6 @@ const Discord = require('discord.js');
 require("dotenv").config();
 const client = new Discord.Client();
 const mongoose = require("mongoose");
-
-var ganggu = 0;
     
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
