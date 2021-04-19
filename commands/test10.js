@@ -7,13 +7,8 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return;
         const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
-        var userid = botData.player1; 
         if (botData.player1 == "000") return message.channel.send("User not found");
-        try {
-            const user = client.users.cache.get(userid);
-            message.channel.send(user.username);
-        } catch (error) {
-            console.log(error);
-        }
+        const user1 = client.users.cache.get(botData.player1);
+        message.channel.send(user.username);
     }
 }
