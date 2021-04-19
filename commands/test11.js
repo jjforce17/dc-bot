@@ -91,17 +91,17 @@ module.exports = {
             while (Player3Card2 == DealerCard1 || Player3Card2 == DealerCard3 || Player3Card2 == DealerCard4 ||Player3Card2 == DealerCard5 ||Player3Card2 == Player1Card1 || Player3Card2 == Player1Card2  ||Player3Card2 == Player2Card1  ||Player3Card2 ==  Player2Card2 ||Player3Card2 == Player3Card1  ||Player3Card2 == DealerCard2) {
                 Player3Card2 = Math.floor(Math.random() * 52) + 1;
             }
+            message.channel.send(DealerCard1);
+            message.channel.send(DealerCard2);
+            message.channel.send(DealerCard3);
+            message.channel.send(DealerCard4);
+            message.channel.send(DealerCard5);
             message.channel.send(Player1Card1);
             message.channel.send(Player1Card2);
             message.channel.send(Player2Card1);
             message.channel.send(Player2Card2);
             message.channel.send(Player3Card1);
             message.channel.send(Player3Card2);
-            message.channel.send(DealerCard1);
-            message.channel.send(DealerCard2);
-            message.channel.send(DealerCard3);
-            message.channel.send(DealerCard4);
-            message.channel.send(DealerCard5);
         var Dealer1 = {
             value: DealerCard1,
             symbol: "",
