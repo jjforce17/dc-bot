@@ -157,8 +157,38 @@ module.exports = {
             symbol: "",
             number: "",
         };
-        
         cardsym(Dealer1.value, Dealer1);
-        console.log(Dealer1.number + " " + Dealer1.symbol);
+        cardsym(Dealer2.value, Dealer2);
+        cardsym(Dealer3.value, Dealer3);
+        cardsym(Dealer4.value, Dealer4);
+        cardsym(Dealer5.value, Dealer5);
+        cardsym(P1N1.value, P1N1);
+        cardsym(P1N2.value, P1N2);
+        cardsym(P2N1.value, P2N1);
+        cardsym(P2N2.value, P2N2);
+        cardsym(P3N1.value, P3N1);
+        cardsym(P3N2.value, P3N2);
+        var CardD1 = Dealer1.number + " " + Dealer1.symbol;
+        var CardD2 = Dealer2.number + " " + Dealer2.symbol;
+        var CardD3 = Dealer3.number + " " + Dealer3.symbol;
+        var CardD4 = Dealer4.number + " " + Dealer4.symbol;
+        var CardD5 = Dealer5.number + " " + Dealer5.symbol;
+        var CardP1N1 = P1N1.number + " " + P1N1.symbol;
+        var CardP1N2 = P1N2.number + " " + P1N2.symbol;
+        var CardP2N1 = P2N1.number + " " + P2N1.symbol;
+        var CardP2N2 = P2N2.number + " " + P2N2.symbol;
+        var CardP3N1 = P3N1.number + " " + P3N1.symbol;
+        var CardP3N2 = P3N2.number + " " + P3N2.symbol;
+        message.channel.send(CardD1);
+        message.channel.send(CardD2);
+        message.channel.send(CardD3);
+        message.channel.send(CardD4);
+        message.channel.send(CardD5);
+        message.channel.send(CardP1N1);
+        message.channel.send(CardP1N2);
+        message.channel.send(CardP2N1);
+        message.channel.send(CardP2N2);
+        message.channel.send(CardP3N1);
+        message.channel.send(CardP3N2);
     }
 }
