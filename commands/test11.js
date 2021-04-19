@@ -158,7 +158,7 @@ module.exports = {
             number: "",
         };
         
-        cardsym(Dealer1.value, "Dealer1");
+        cardsym(Dealer1.value, Dealer1);
         console.log(Dealer1.number + " " + Dealer1.symbol);
     }
 }
