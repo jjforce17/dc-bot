@@ -151,8 +151,12 @@ module.exports = {
                 {
                     $set : {
                     Player1NowBet: nowbetlocal,
+                    Player1State: false,
+                    Player1FoldConfirm : true,
+                    p1continue : true,
                     },
                 })
+                p1continuelocal = true;
                 p1nowbetlocal = nowbetlocal;
             } catch (error) {
                 console.log(error);
@@ -166,8 +170,12 @@ module.exports = {
                 {
                     $set : {
                     Player2NowBet: nowbetlocal,
+                    Player2State: false,
+                    Player2FoldConfirm : true,
+                    p2continue : true,
                     },
                 })
+                p2continuelocal = true;
                 p2nowbetlocal = nowbetlocal;
             } catch (error) {
                 console.log(error);
@@ -181,8 +189,12 @@ module.exports = {
                 {
                     $set : {
                     Player3NowBet: nowbetlocal,
+                    Player3State: false,
+                    Player3FoldConfirm : true,
+                    p3continue : true,
                     },
                 })
+                p3continuelocal = true;
                 p3nowbetlocal = nowbetlocal;
             } catch (error) {
                 console.log(error);
