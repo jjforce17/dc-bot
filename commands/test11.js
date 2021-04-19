@@ -15,10 +15,6 @@ module.exports = {
             if(b1val == 1) {
                 bc1num = "Ace"
             }
-            else if(1 < b1val <= 10) {
-                stringnum = b1val.toString();
-                bc1num = stringnum;
-            }
             else if(b1val == 11) {
                 bc1num = "Jack"
             }
@@ -27,6 +23,10 @@ module.exports = {
             }
             else if(b1val == 13) {
                 bc1num = "King"
+            }
+            else if(1 < b1val <= 10) {
+                stringnum = b1val.toString();
+                bc1num = stringnum;
             }
         }
         if (botData.BCard1 <= 13) {
