@@ -9,7 +9,7 @@ module.exports = {
         const botData = await profileModel.findOne({ userID: botID });
         if (botData.player1 == "000") return message.channel.send("User not found");
         try {
-            const user = client.users.get(botData.player1);
+            const user = client.users.cache.get(botData.player1);
             message.channel.send(user.username);
         } catch (error) {
             console.log(error);
