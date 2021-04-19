@@ -85,13 +85,28 @@ module.exports = {
         var p2nowbetlocal = botData.Player2NowBet;
         var p3nowbetlocal = botData.Player3NowBet;
         var nowbetlocal = botData.NowBet;
+        try {
+            const p1user = client.users.cache.get(botData.player1);
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            const p2user = client.users.cache.get(botData.player2);
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            const p3user = client.users.cache.get(botData.player3);
+        } catch (error) {
+            console.log(error);
+        }
         if (message.author.id == Player1ID) {
             if (botData.Player1Turn == false) {
                 return message.channel.send("This in not your turn yet");
             }
             if (botData.Player1State == false) {
                 if(amount != "fold") {
-                    return message.channel.send("Player 1 has folded, please use ?betp fold")
+                    return message.channel.send(p1user.uesrname + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -101,7 +116,7 @@ module.exports = {
             }
             if (botData.Player2State == false) {
                 if(amount != "fold") {
-                    return message.channel.send("Player 2 has folded, please use ?betp fold")
+                    return message.channel.send(p2user.uesrname + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -111,7 +126,7 @@ module.exports = {
             }
             if (botData.Player3State == false) {
                 if(amount != "fold") {
-                    return message.channel.send("Player 3 has folded, please use ?betp fold")
+                    return message.channel.send(p3user.uesrname + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -216,7 +231,7 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send("Player 1 has folded");
+                        message.channel.send(p1user.uesrname + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
@@ -239,7 +254,7 @@ module.exports = {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send("Player 1 has folded");
+                    return message.channel.send(p1user.uesrname + " has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -269,7 +284,7 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send("Player 2 has folded");
+                        message.channel.send(p2user.uesrname + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
@@ -292,7 +307,7 @@ module.exports = {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send("Player 2 has folded");
+                    return message.channel.send(p2user.uesrname + " has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -323,7 +338,7 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send("Player 3 has folded");
+                        message.channel.send(p3user.uesrname + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
                         return callcard4();
@@ -346,7 +361,7 @@ module.exports = {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send("Player 3 has folded");
+                    return message.channel.send(p3user.uesrname + " has folded");
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -756,6 +771,16 @@ module.exports = {
             }
         } 
         
-        
+
+        if (botData.Player1State == true) {
+            message.channel.send("It is now " + p1user.username + "'s turn")
+        }
+        if (botData.Player2State == true) {
+            message.channel.send("It is now " + p2user.username + "'s turn")
+        }
+        if (botData.Player3State == true) {
+            message.channel.send("It is now " + p3user.username + "'s turn")
+        }
+
     }
 }

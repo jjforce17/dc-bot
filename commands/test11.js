@@ -49,6 +49,6 @@ module.exports = {
             b1val = botData.BCard1 - 39;
             valuecheckbc1();
         }
-        message.channel.send(bc1num + bc1sym)
+        message.channel.send(bc1num + " " + bc1sym)
     }
 }
