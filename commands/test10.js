@@ -12,7 +12,7 @@ module.exports = {
             const user = client.fetchUser(botData.player1);
             message.channel.send(user.username);
         } catch (error) {
-            console.log(érror);
+            console.log(error);
         }
     }
 }
