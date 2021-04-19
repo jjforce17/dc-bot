@@ -55,6 +55,17 @@ module.exports = {
                 console.log(error);
             }
         }
+        function currentuser() {
+            if(p1turnlocal = true) {
+                message.channel.send("It is now " + p1user.username + "'s turn")
+            }
+            if(p2turnlocal = true) {
+                message.channel.send("It is now " + p2user.username + "'s turn")
+            }
+            if(p3turnlocal = true) {
+                message.channel.send("It is now " + p3user.username + "'s turn")
+            }
+        }
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         const botID = "803868333341802499";
@@ -85,18 +96,21 @@ module.exports = {
         var p2nowbetlocal = botData.Player2NowBet;
         var p3nowbetlocal = botData.Player3NowBet;
         var nowbetlocal = botData.NowBet;
+        var p1turnlocal = botData.Player1Turn;
+        var p2turnlocal = botData.Player2Turn;
+        var p3turnlocal = botData.Player3Turn;
         try {
-            var p1user = client.users.cache.get(botData.player1);
+            const p1user = client.users.cache.get(botData.player1);
         } catch (error) {
             console.log(error);
         }
         try {
-            var p2user = client.users.cache.get(botData.player2);
+            const p2user = client.users.cache.get(botData.player2);
         } catch (error) {
             console.log(error);
         }
         try {
-            var p3user = client.users.cache.get(botData.player3);
+            const p3user = client.users.cache.get(botData.player3);
         } catch (error) {
             console.log(error);
         }
@@ -106,7 +120,7 @@ module.exports = {
             }
             if (botData.Player1State == false) {
                 if(amount != "fold") {
-                    return message.channel.send(p1user.uesrname + " has folded, please use ?betp fold")
+                    return message.channel.send(p1user.username + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -116,7 +130,7 @@ module.exports = {
             }
             if (botData.Player2State == false) {
                 if(amount != "fold") {
-                    return message.channel.send(p2user.uesrname + " has folded, please use ?betp fold")
+                    return message.channel.send(p2user.username + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -126,7 +140,7 @@ module.exports = {
             }
             if (botData.Player3State == false) {
                 if(amount != "fold") {
-                    return message.channel.send(p3user.uesrname + " has folded, please use ?betp fold")
+                    return message.channel.send(p3user.username + " has folded, please use ?betp fold")
                 }
             }
         }
@@ -222,8 +236,8 @@ module.exports = {
                             $set : {
                             BetStage: 2,
                             NowBet : 0,
-                            Player1Turn: false,
-                            Player2Turn: true,
+                            Player1Turn: true,
+                            Player2Turn: false,
                             Player3Turn: false,
                             NowBetSet: false,
                             p1continue: false,
@@ -231,10 +245,14 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send(p1user.uesrname + " has folded");
+                        p1turnlocal = true;
+                        p2turnlocal = false;
+                        p3turnlocal = false;
+                        message.channel.send(p1user.username + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
-                        return callcard4();
+                        callcard4();
+                        return currentuser();
                     }catch (error) {
                             console.log(error);
                         }
@@ -250,11 +268,15 @@ module.exports = {
                             Player3Turn: false,
                             },
                         })
+                        p1turnlocal = false;
+                        p2turnlocal = true;
+                        p3turnlocal = false;
                     } catch (error) {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send(p1user.uesrname + " has folded");
+                    message.channel.send(p1user.username + " has folded");
+                    return currentuser();
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -284,10 +306,14 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send(p2user.uesrname + " has folded");
+                        p1turnlocal = true;
+                        p2turnlocal = false;
+                        p3turnlocal = false;
+                        message.channel.send(p2user.username + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
-                        return callcard4();
+                        callcard4();
+                        return currentuser();
                         }catch (error) {
                             console.log(error);
                         }
@@ -303,11 +329,15 @@ module.exports = {
                             Player3Turn: true,
                             },
                         })
+                        p1turnlocal = false;
+                        p2turnlocal = false;
+                        p3turnlocal = true;
                     } catch (error) {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send(p2user.uesrname + " has folded");
+                    message.channel.send(p2user.username + " has folded");
+                    return currentuser();
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -338,10 +368,14 @@ module.exports = {
                             p3continue: false,
                             },
                         })
-                        message.channel.send(p3user.uesrname + " has folded");
+                        p1turnlocal = true;
+                        p2turnlocal = false;
+                        p3turnlocal = false;
+                        message.channel.send(p3user.username + " has folded");
                         message.channel.send("Betted " + amount);
                         message.channel.send("round 2");
-                        return callcard4();
+                        callcard4();
+                        return currentuser();
                         }catch (error) {
                             console.log(error);
                         }
@@ -357,11 +391,15 @@ module.exports = {
                             Player3Turn: false,
                             },
                         })
+                        p1turnlocal = true;
+                        p2turnlocal = false;
+                        p3turnlocal = false;
                     } catch (error) {
                         console.log(error);
                     }
                     console.log("folded");
-                    return message.channel.send(p3user.uesrname + " has folded");
+                    message.channel.send(p3user.username + " has folded");
+                    return currentuser();
                 }
                 else {
                     return message.channel.send("You have not folded.");
@@ -406,8 +444,12 @@ module.exports = {
                                         p1continue: true,
                                         },
                                     })
+                                    p1turnlocal = false;
+                                    p2turnlocal = true;
+                                    p3turnlocal = false;
                                     p1nowbetlocal =nowbetlocal;
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -453,6 +495,9 @@ module.exports = {
                                         p1continue: true,
                                         },
                                     })
+                                    p1turnlocal = false;
+                                    p2turnlocal = true;
+                                    p3turnlocal = false;
                                     p1continuelocal = true;
                                     p1nowbetlocal = nowbetlocal;
                                     if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
@@ -476,11 +521,16 @@ module.exports = {
                                             p3continue: false,
                                             },
                                         })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        return callcard4();
+                                        callcard4();
+                                        return currentuser();
                                     }
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -527,8 +577,12 @@ module.exports = {
                                         p2continue: true,
                                         },
                                     })
+                                    p1turnlocal = false;
+                                    p2turnlocal = false;
+                                    p3turnlocal = true;
                                     p2nowbetlocal = nowbetlocal;
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -575,6 +629,9 @@ module.exports = {
                                         p2continue: true,
                                         },
                                     })
+                                    p1turnlocal = false;
+                                    p2turnlocal = false;
+                                    p3turnlocal = true;
                                     p2nowbetlocal = nowbetlocal;
                                     p2continuelocal = true;
                                     if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
@@ -598,11 +655,16 @@ module.exports = {
                                             p3continue: false,
                                             },
                                         })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        return callcard4();
+                                        callcard4();
+                                        return currentuser();
                                     }
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -649,6 +711,9 @@ module.exports = {
                                         p3continue: true,
                                         },
                                     })
+                                    p1turnlocal = true;
+                                    p2turnlocal = false;
+                                    p3turnlocal = false;
                                     p3continuelocal = true;
                                     p3nowbetlocal = nowbetlocal;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
@@ -672,11 +737,16 @@ module.exports = {
                                             p3continue: false,
                                             },
                                         })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        return callcard4();
+                                        callcard4();
+                                        return currentuser();
                                     }
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -722,6 +792,9 @@ module.exports = {
                                         p3continue: true,
                                         },
                                     })
+                                    p1turnlocal = true;
+                                    p2turnlocal = false;
+                                    p3turnlocal = false;
                                     p3nowbetlocal = nowbetlocal;
                                     p3continuelocal =  true;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
@@ -746,11 +819,16 @@ module.exports = {
                                             p3continue: false,
                                             },
                                         })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
                                         message.channel.send("round 2");
-                                        return callcard4();
+                                        callcard4();
+                                        return currentuser();
                                     }
                                     message.channel.send("Betted " + amount);
+                                    return currentuser();
                                 } 
                                 else if (message.content.toUpperCase() == 'N') {
                                 message.channel.send('Cancelled');
@@ -771,16 +849,6 @@ module.exports = {
             }
         } 
         
-
-        if (botData.Player1State == true) {
-            message.channel.send("It is now " + p1user.username + "'s turn")
-        }
-        if (botData.Player2State == true) {
-            message.channel.send("It is now " + p2user.username + "'s turn")
-        }
-        if (botData.Player3State == true) {
-            message.channel.send("It is now " + p3user.username + "'s turn")
-        }
-
+        
     }
 }
