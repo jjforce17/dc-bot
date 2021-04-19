@@ -24,7 +24,7 @@ module.exports = {
             }
             else if(cardvalc <= 10) {
                 tostringc = cardvalc.toString();
-                namec.number = b1stringnum;
+                namec.number = tostringc;
             }
         }
         function cardsym(card, name) { //value(card.value) //varname
