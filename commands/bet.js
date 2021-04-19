@@ -56,6 +56,7 @@ module.exports = {
             }
         }
         function currentuser() {
+            try {
             if(p1turnlocal = true) {
                 message.channel.send("It is now " + p1user.username + "'s turn")
             }
@@ -65,6 +66,9 @@ module.exports = {
             if(p3turnlocal = true) {
                 message.channel.send("It is now " + p3user.username + "'s turn")
             }
+        } catch (error) {
+            console.log(error);
+        }
         }
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
