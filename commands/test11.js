@@ -34,17 +34,17 @@ module.exports = {
             b1val = botData.BCard1;
             valuecheckbc1();
         }
-        else if (14 <= botData.BCard1 <= 26) {
+        else if (14 <= botData.BCard1 && botData.BCard1 <= 26) {
             bc1sym = "clover";
             b1val = botData.BCard1 - 13;
             valuecheckbc1();
         }
-        else if (27 <= botData.BCard1 <= 39) {
+        else if (27 <= botData.BCard1 && botData.BCard1 <= 39) {
             bc1sym = "heart";
             b1val = botData.BCard1 - 26;
             valuecheckbc1();
         }
-        else if (40 <= botData.BCard1 <= 52) {
+        else if (40 <= botData.BCard1 && botData.BCard1 <= 52) {
             bc1sym = "spade";
             b1val = botData.BCard1 - 39;
             valuecheckbc1();

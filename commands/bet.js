@@ -86,17 +86,17 @@ module.exports = {
         var p3nowbetlocal = botData.Player3NowBet;
         var nowbetlocal = botData.NowBet;
         try {
-            const p1user = client.users.cache.get(botData.player1);
+            var p1user = client.users.cache.get(botData.player1);
         } catch (error) {
             console.log(error);
         }
         try {
-            const p2user = client.users.cache.get(botData.player2);
+            var p2user = client.users.cache.get(botData.player2);
         } catch (error) {
             console.log(error);
         }
         try {
-            const p3user = client.users.cache.get(botData.player3);
+            var p3user = client.users.cache.get(botData.player3);
         } catch (error) {
             console.log(error);
         }

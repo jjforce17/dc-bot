@@ -10,6 +10,7 @@ module.exports = {
         if (botData.player1 == "000") return message.channel.send("User not found");
         try {
             const user1 = client.users.cache.get(botData.player1);
+            message.channel.send(user1.username);
         } catch (error) {
             console.log(error);
         }
