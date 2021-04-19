@@ -57,13 +57,13 @@ module.exports = {
         }
         function currentuser() {
             try {
-            if(p1turnlocal = true) {
+            if(p1turnlocal == true) {
                 message.channel.send("It is now " + p1user.username + "'s turn")
             }
-            if(p2turnlocal = true) {
+            if(p2turnlocal == true) {
                 message.channel.send("It is now " + p2user.username + "'s turn")
             }
-            if(p3turnlocal = true) {
+            if(p3turnlocal == true) {
                 message.channel.send("It is now " + p3user.username + "'s turn")
             }
         } catch (error) {
