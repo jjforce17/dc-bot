@@ -50,7 +50,6 @@ module.exports = {
                 valuecheckbc1(cardval, name);
             }
         }
-        const botData = await profileModel.findOne({ userID: botID });
             var DealerCard1 = Math.floor(Math.random() * 52) + 1;
             var DealerCard2 = Math.floor(Math.random() * 52) + 1;
             var DealerCard3 = Math.floor(Math.random() * 52) + 1;
@@ -160,6 +159,6 @@ module.exports = {
         };
         
         cardsym(Dealer1.value, "Dealer1");
-        message.channel.send(Dealer1.number + " " + Dealer1.symbol);
+        console.log(Dealer1.number + " " + Dealer1.symbol);
     }
 }
