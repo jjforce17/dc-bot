@@ -5,6 +5,7 @@ module.exports = {
     description: "bet Poker",
     async execute(client, message, args, Discord, profileData) {
         function callcard4() {
+            message.channel.send("Round 2");
             message.channel.send("The 4 cards are");
             message.channel.send(botData.D1N);
             message.channel.send(botData.D2N);
@@ -12,6 +13,7 @@ module.exports = {
             message.channel.send(botData.D4N);
         }
         function callcard5() {
+            message.channel.send("Round 3");
             message.channel.send("The 5 cards are");
             message.channel.send(botData.D1N);
             message.channel.send(botData.D2N);
@@ -261,7 +263,6 @@ module.exports = {
                         p3turnlocal = false;
                         message.channel.send(p1user.username + " has folded");
                         message.channel.send("Betted " + amount);
-                        message.channel.send("round 2");
                         if(botData.BetStage == 1) {
                             callcard4();
                         }
@@ -327,7 +328,6 @@ module.exports = {
                         p3turnlocal = false;
                         message.channel.send(p2user.username + " has folded");
                         message.channel.send("Betted " + amount);
-                        message.channel.send("round 2");
                         if(botData.BetStage == 1) {
                             callcard4();
                         }
@@ -394,7 +394,6 @@ module.exports = {
                         p3turnlocal = false;
                         message.channel.send(p3user.username + " has folded");
                         message.channel.send("Betted " + amount);
-                        message.channel.send("round 2");
                         if(botData.BetStage == 1) {
                             callcard4();
                         }
@@ -551,7 +550,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard4();
                                         return currentuser();
                                     }
@@ -685,7 +683,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard4();
                                         return currentuser();
                                     }
@@ -767,7 +764,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard4();
                                         return currentuser();
                                     }
@@ -849,7 +845,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard4();
                                         return currentuser();
                                     }
@@ -984,7 +979,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard5();
                                         return currentuser();
                                     }
@@ -1118,7 +1112,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard5();
                                         return currentuser();
                                     }
@@ -1200,8 +1193,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
-                                        callcard5();
                                         return currentuser();
                                     }
                                     message.channel.send("Betted " + amount);
@@ -1282,7 +1273,6 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        message.channel.send("round 2");
                                         callcard5();
                                         return currentuser();
                                     }
