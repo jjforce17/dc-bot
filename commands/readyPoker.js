@@ -6,6 +6,7 @@ module.exports = {
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
+        if(message.channel.name != "poker1") return;
         const botID = "803868333341802499";
         botData = await profileModel.findOne({ userID: botID });
         var PlayerRandNum = Math.floor(Math.random() * 3) + 1;

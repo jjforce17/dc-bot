@@ -4,6 +4,9 @@ module.exports = {
     name: 'betp',
     description: "bet Poker",
     async execute(client, message, args, Discord, profileData) {
+        if(!message.member.roles.cache.some(r => r.name === "boi")) return;
+        if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
+        if(message.channel.name != "poker1") return
         function callcard4() {
             message.channel.send("Round 2");
             message.channel.send("The 4 cards are");
