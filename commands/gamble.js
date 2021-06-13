@@ -49,6 +49,7 @@ module.exports = {
         if (cardu1 == card1 || cardu1 == card2 || cardu1 == card3) {
             if (cardu2 == card1 || cardu2 == card2 || cardu2 == card3) {
                 message.channel.send("Nice! You got both right!");
+                message.channel.send("You earned " + win2amt);
                 await profileModel.findOneAndUpdate({
                     userID: message.author.id,
                 }, 
@@ -74,6 +75,7 @@ module.exports = {
         }
         else if (cardu2 == card1 || cardu2 == card2 || cardu2 == card3) {
             message.channel.send("Nice! You got one right!");
+            message.channel.send("You earned " + win2amt);
             await profileModel.findOneAndUpdate({
                 userID: message.author.id,
             }, 
@@ -85,7 +87,7 @@ module.exports = {
         );
         }
         else {
-            message.channel.send("rip rugi");
+            message.channel.send("You lost.");
         }
     }
             catch (err) {

@@ -14,22 +14,24 @@ module.exports = {
         var amount = 50;
         var cardval = "0";
         var tostringc = "0";
+        var unit = 0;
         function valuecheckbc1(cardvalc , namec) { //cardval //varname
             tostringc = "";
-            if(cardvalc == 1) {
+            if(cardvalc == 13) {
                 namec.number = "Ace"
             }
-            else if(cardvalc == 11) {
+            else if(cardvalc == 10) {
                 namec.number = "Jack"
             }
-            else if(cardvalc == 12) {
+            else if(cardvalc == 11) {
                 namec.number = "Queen"
             }
-            else if(cardvalc == 13) {
+            else if(cardvalc == 12) {
                 namec.number = "King"
             }
-            else if(cardvalc <= 10) {
-                tostringc = cardvalc.toString();
+            else if(cardvalc <= 9) {
+                unit = cardvalc + 1;
+                tostringc = unit.toString();
                 namec.number = tostringc;
             }
         }
