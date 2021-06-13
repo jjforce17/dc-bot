@@ -5,7 +5,7 @@ module.exports = {
     description: "psst",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
-        if(!message.channel.cache.some(r => r.name === "psst")) return;
+        if(!message.channel.name === "psst") return;
         const response = await profileModel.findOneAndUpdate({
             userID: message.author.id,
         }, 
@@ -13,6 +13,7 @@ module.exports = {
             $inc : {
                 dollar: 1,
             },
+
         }
     );
     }
