@@ -11,6 +11,7 @@ module.exports = {
         const mooney = profileData.dollar 
         if(mooney <= 1001) {
             message.channel.send('Not sufficient funds.');
+            return;
         }
         await profileModel.findOneAndUpdate({
             userID: message.author.id,
