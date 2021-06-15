@@ -3,7 +3,7 @@ const profileModel = require('../models/profileSchema');
 module.exports = {
     name: 'digitsc',
     description: "this is the ping command!",
-    execute(client, message, args, Discord, profileData) {
+    async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "horni boi")) return message.channel.send("You are already have this.");
         if(message.channel.name != "shop") return;
