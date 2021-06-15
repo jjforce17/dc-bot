@@ -24,5 +24,6 @@ module.exports = {
         }
     );
     message.member.roles.add(rolea).catch(console.error);
+    message.channel.send("Horni Boi acquired.")
     }
 }
