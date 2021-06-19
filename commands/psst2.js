@@ -5,14 +5,22 @@ module.exports = {
     description: "psst333",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
-        const response = await profileModel.findOneAndUpdate({
-            userID: message.author.id,
+        await profileModel.findOneAndUpdate({
+            userID: botID,
         }, 
         {
-            $set : {
-                dollar: 100,
+            $inc : {
+            dollar: -(amount - p1nowbetlocal),
             },
-        }
-    );
+            $set : {
+            NowBet : amount,
+            Player1NowBet : amount,
+            Player1Turn: false,
+            Player2Turn: true,
+            Player3Turn: false,
+            NowBetSet: true,
+            p1continue: true,
+            },
+        })
     }
 }

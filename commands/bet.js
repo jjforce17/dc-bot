@@ -465,9 +465,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -476,6 +473,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -519,9 +524,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -530,6 +532,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -603,9 +613,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -614,6 +621,14 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -657,9 +672,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -669,6 +681,14 @@ module.exports = {
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -742,9 +762,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -753,6 +770,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
@@ -825,9 +850,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -836,6 +858,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
@@ -912,9 +942,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -923,6 +950,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -966,9 +1001,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -977,6 +1009,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1050,9 +1090,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1061,6 +1098,14 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1104,9 +1149,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1116,6 +1158,14 @@ module.exports = {
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1189,9 +1239,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1200,6 +1247,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
@@ -1271,9 +1326,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1282,6 +1334,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
@@ -1358,9 +1418,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -1369,6 +1426,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1412,9 +1477,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -1423,6 +1485,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p1continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player1,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1496,9 +1566,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1507,6 +1574,14 @@ module.exports = {
                                         Player3Turn: true,
                                         NowBetSet: true,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1550,9 +1625,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1562,6 +1634,14 @@ module.exports = {
                                         NowBetSet: true,
                                         Player2TurnContinue: false,
                                         p2continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player2,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p2nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = false;
@@ -1635,9 +1715,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1646,6 +1723,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
@@ -1717,9 +1802,6 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
-                                        $inc : {
-                                        dollar: -(amount - p1nowbetlocal),
-                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1728,6 +1810,14 @@ module.exports = {
                                         Player3Turn: false,
                                         NowBetSet: true,
                                         p3continue: true,
+                                        },
+                                    })
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botData.player3,
+                                    }, 
+                                    {
+                                        $inc : {
+                                        dollar: -(amount - p3nowbetlocal),
                                         },
                                     })
                                     p1turnlocal = true;
