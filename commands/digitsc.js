@@ -8,7 +8,7 @@ module.exports = {
         if(message.member.roles.cache.some(r => r.name === "horni boi")) return message.channel.send("You are already have this.");
         if(message.channel.name != "shop") return;
         var rolea = message.guild.roles.cache.find(r => r.name === "horni boi");
-        const mooney = profileData.dollar 
+        const mooney = profileData.dollar; 
         if(mooney <= 1001) {
             message.channel.send('Not sufficient funds.');
             return;

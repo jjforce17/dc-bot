@@ -19,7 +19,7 @@ module.exports = {
             var win2 = parseInt(amount) + win2amt;
             const mooney = profileData.dollar - parseInt(amount); 
             if(mooney <= 0) {
-            return message.channel.send('dasar miskin');
+            return message.channel.send('Not sufficient funds.');
             }
             while (card2 == card1 || card2 == card3) {
                 card2 = Math.floor(Math.random() * 3) + 1;

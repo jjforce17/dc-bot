@@ -6,7 +6,7 @@ module.exports = {
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
-        if(message.channel.name != "poker1") return
+        if(message.channel.name != "poker1") return;
         function callcard4() {
             message.channel.send("Round 2");
             message.channel.send("The 4 cards are");
@@ -75,9 +75,6 @@ module.exports = {
             console.log(error);
         }
         }
-        if(!message.member.roles.cache.some(r => r.name === "boi")) return;
-        if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
-        const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
@@ -103,6 +100,11 @@ module.exports = {
         var p1turnlocal = botData.Player1Turn;
         var p2turnlocal = botData.Player2Turn;
         var p3turnlocal = botData.Player3Turn;
+        const mooney = profileData.dollar; 
+        if(mooney <= amount) {
+            message.channel.send('Not sufficient funds.');
+            return;
+        }
         try {
             var p1user = client.users.cache.get(botData.player1);
         } catch (error) {
@@ -1299,7 +1301,437 @@ module.exports = {
                     }
                 }
             }
-        } 
+        }
+        if (botData.BetStage == 3) {
+            if (botData.Player1Turn == true) {
+                if (botData.Player1State == true) {
+                    if (botData.NowBetSet == false) {
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first();
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: true,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        p1continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = false;
+                                    p2turnlocal = true;
+                                    p3turnlocal = false;
+                                    p1nowbetlocal =nowbetlocal;
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player1NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: true,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        p1continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = false;
+                                    p2turnlocal = true;
+                                    p3turnlocal = false;
+                                    p1continuelocal = true;
+                                    p1nowbetlocal = nowbetlocal;
+                                    if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
+                                        EndRoundTake();
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            BetStage: 1,
+                                            },
+                                            $set : {
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
+                                            },
+                                        })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
+                                        message.channel.send("Betted " + amount);
+                                        callcard5();
+                                        return currentuser();
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
+            if (botData.Player2Turn == true) {
+                if (botData.Player2State == true) {
+                    if (botData.NowBetSet == false) {
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player2NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: false,
+                                        Player3Turn: true,
+                                        NowBetSet: true,
+                                        p2continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = false;
+                                    p2turnlocal = false;
+                                    p3turnlocal = true;
+                                    p2nowbetlocal = nowbetlocal;
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player2NowBet : amount,
+                                        Player1Turn: false,
+                                        Player2Turn: false,
+                                        Player3Turn: true,
+                                        NowBetSet: true,
+                                        Player2TurnContinue: false,
+                                        p2continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = false;
+                                    p2turnlocal = false;
+                                    p3turnlocal = true;
+                                    p2nowbetlocal = nowbetlocal;
+                                    p2continuelocal = true;
+                                    if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
+                                        EndRoundTake();
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            BetStage: 1,
+                                            },
+                                            $set : {
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
+                                            },
+                                        })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
+                                        message.channel.send("Betted " + amount);
+                                        callcard5();
+                                        return currentuser();
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
+            if (botData.Player3Turn == true) {
+                if (botData.Player3State == true) {
+                    if (botData.NowBetSet == false) {
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player3NowBet : amount,
+                                        Player1Turn: true,
+                                        Player2Turn: false,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        p3continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = true;
+                                    p2turnlocal = false;
+                                    p3turnlocal = false;
+                                    p3continuelocal = true;
+                                    p3nowbetlocal = nowbetlocal;
+                                    if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
+                                        EndRoundTake();
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            BetStage: 1,
+                                            },
+                                            $set : {
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
+                                            },
+                                        })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
+                                        message.channel.send("Betted " + amount);
+                                        return currentuser();
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                    if (botData.NowBetSet == true) {
+                        if (amount < botData.NowBet) {
+                            return message.channel.send("Bet must be same or bigger than previous bet.")
+                        }
+                        try {
+                        let filter = m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
+                            message.channel.send("Press Y to confirm, N to cancel").then(() => {
+                            message.channel.awaitMessages(filter, {
+                                max: 1,
+                                time: 15000,
+                                errors: ['time']
+                             })
+                            .then(async (message) => {
+                                message = message.first()
+                                if (message.content.toUpperCase() == 'Y') {
+                                    await profileModel.findOneAndUpdate({
+                                        userID: botID,
+                                    }, 
+                                    {
+                                        $set : {
+                                        NowBet : amount,
+                                        Player3NowBet : amount,
+                                        Player1Turn: true,
+                                        Player2Turn: false,
+                                        Player3Turn: false,
+                                        NowBetSet: true,
+                                        p3continue: true,
+                                        },
+                                    })
+                                    p1turnlocal = true;
+                                    p2turnlocal = false;
+                                    p3turnlocal = false;
+                                    p3nowbetlocal = nowbetlocal;
+                                    p3continuelocal =  true;
+                                    if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
+                                        console.log("p3end");
+                                        EndRoundTake();
+                                        await profileModel.findOneAndUpdate({
+                                            userID: botID,
+                                        }, 
+                                        {
+                                            $inc : {
+                                            TotalBet: amount * PlayerAmountLocal,
+                                            BetStage: 1,
+                                            },
+                                            $set : {
+                                            NowBet : 0,
+                                            Player1Turn: true,
+                                            Player2Turn: false,
+                                            Player3Turn: false,
+                                            NowBetSet: false,
+                                            p1continue: false,
+                                            p2continue: false,
+                                            p3continue: false,
+                                            },
+                                        })
+                                        p1turnlocal = true;
+                                        p2turnlocal = false;
+                                        p3turnlocal = false;
+                                        message.channel.send("Betted " + amount);
+                                        callcard5();
+                                        return currentuser();
+                                    }
+                                    message.channel.send("Betted " + amount);
+                                    return currentuser();
+                                } 
+                                else if (message.content.toUpperCase() == 'N') {
+                                message.channel.send('Cancelled');
+                                }
+                                else {
+                                message.channel.send('Invalid response');
+                                }
+                                })
+                                .catch(collected => {
+                                    message.channel.send('Timed out');
+                                });
+                        })        
+                        } catch (err) {
+                            console.log(err);
+                            }
+                    }
+                }
+            }
+        }
+
+        
         
         
     }

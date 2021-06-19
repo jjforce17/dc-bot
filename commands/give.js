@@ -10,8 +10,13 @@ module.exports = {
         const target = message.mentions.users.first();
         const targetData = await profileModel.findOne({ userID: target.id});
         if(!target) return message.channel.send("User doesn't exist");
-        if (!targetData) return message.channel.send("user doesn't have an account");
+        if (!targetData) return message.channel.send("Iser doesn't have an account");
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
+        const mooney = profileData.dollar; 
+        if(mooney <= amount) {
+            message.channel.send('Not sufficient funds.');
+            return;
+        }
         try {
             let filter = m => m => m.author.id === message.author.id && m.content == "y" || m.content == "Y"|| m.content == "n"|| m.content == "N";;
                 message.channel.send("Press Y to confirm, N to cancel").then(() => {
