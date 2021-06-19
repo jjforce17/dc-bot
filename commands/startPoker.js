@@ -7,7 +7,6 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         if(message.channel.name != "poker1") return;
-        if (botData.GameState != 0) return message.channel.send("Game has started."); 
         const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
         var Player1ID = botData.player1;
@@ -17,6 +16,7 @@ module.exports = {
         var cardval = "0";
         var tostringc = "0";
         var unit = 0;
+        if (botData.GameState != 0) return message.channel.send("Game has started."); 
         function valuecheckbc1(cardvalc , namec) { //cardval //varname
             tostringc = "";
             if(cardvalc == 13) {
