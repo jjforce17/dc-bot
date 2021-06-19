@@ -24,42 +24,42 @@ module.exports = {
             message.channel.send(botData.D4N);
             message.channel.send(botData.D5N);
         }
-        async function EndRoundTake() {
-            try {
-                if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
-                    await profileModel.findOneAndUpdate({
-                        userID: botData.player1,
-                    }, 
-                    {
-                        $inc : {
-                        dollar: -amount,
-                        },
-                    })
-                }
-                if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
-                    await profileModel.findOneAndUpdate({
-                        userID: botData.player2,
-                    }, 
-                    {
-                        $inc : {
-                        dollar: -amount,
-                        },
-                    })
-                }
-                if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
-                    await profileModel.findOneAndUpdate({
-                        userID: botData.player3,
-                    }, 
-                    {
-                        $inc : {
-                        dollar: -amount,
-                        },
-                    })
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
+        // async function EndRoundTake() {
+        //     try {
+        //         if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
+        //             await profileModel.findOneAndUpdate({
+        //                 userID: botData.player1,
+        //             }, 
+        //             {
+        //                 $inc : {
+        //                 dollar: -amount,
+        //                 },
+        //             })
+        //         }
+        //         if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
+        //             await profileModel.findOneAndUpdate({
+        //                 userID: botData.player2,
+        //             }, 
+        //             {
+        //                 $inc : {
+        //                 dollar: -amount,
+        //                 },
+        //             })
+        //         }
+        //         if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
+        //             await profileModel.findOneAndUpdate({
+        //                 userID: botData.player3,
+        //             }, 
+        //             {
+        //                 $inc : {
+        //                 dollar: -amount,
+        //                 },
+        //             })
+        //         }
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
         function currentuser() {
             try {
             if(p1turnlocal == true) {
@@ -244,7 +244,7 @@ module.exports = {
                 if (botData.Player1State == false) {
                     if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                         try{
-                        EndRoundTake();
+                        // EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -309,7 +309,7 @@ module.exports = {
                 if (botData.Player2State == false) {
                     if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                         try{
-                        EndRoundTake();
+                        // EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -375,7 +375,7 @@ module.exports = {
                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                         console.log("endfold3");
                         try{
-                        EndRoundTake();
+                        // EndRoundTake();
                         await profileModel.findOneAndUpdate({
                             userID: botID,
                         }, 
@@ -465,6 +465,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -516,6 +519,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -532,7 +538,7 @@ module.exports = {
                                     p1continuelocal = true;
                                     p1nowbetlocal = nowbetlocal;
                                     if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -597,6 +603,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -648,6 +657,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -665,7 +677,7 @@ module.exports = {
                                     p2nowbetlocal = nowbetlocal;
                                     p2continuelocal = true;
                                     if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -730,6 +742,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -746,7 +761,7 @@ module.exports = {
                                     p3continuelocal = true;
                                     p3nowbetlocal = nowbetlocal;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -810,6 +825,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -827,7 +845,7 @@ module.exports = {
                                     p3continuelocal =  true;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                                         console.log("p3end");
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -894,6 +912,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -945,6 +966,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -961,7 +985,7 @@ module.exports = {
                                     p1continuelocal = true;
                                     p1nowbetlocal = nowbetlocal;
                                     if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1026,6 +1050,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1077,6 +1104,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1094,7 +1124,7 @@ module.exports = {
                                     p2nowbetlocal = nowbetlocal;
                                     p2continuelocal = true;
                                     if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1159,6 +1189,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1175,7 +1208,7 @@ module.exports = {
                                     p3continuelocal = true;
                                     p3nowbetlocal = nowbetlocal;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1238,6 +1271,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1255,7 +1291,7 @@ module.exports = {
                                     p3continuelocal =  true;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                                         console.log("p3end");
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1322,6 +1358,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -1373,6 +1412,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player1NowBet : amount,
@@ -1389,7 +1431,7 @@ module.exports = {
                                     p1continuelocal = true;
                                     p1nowbetlocal = nowbetlocal;
                                     if (amount == p2nowbetlocal && p2nowbetlocal == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1454,6 +1496,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1505,6 +1550,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player2NowBet : amount,
@@ -1522,7 +1570,7 @@ module.exports = {
                                     p2nowbetlocal = nowbetlocal;
                                     p2continuelocal = true;
                                     if (p1nowbetlocal == amount && amount == p3nowbetlocal && p3nowbetlocal == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1587,6 +1635,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1603,7 +1654,7 @@ module.exports = {
                                     p3continuelocal = true;
                                     p3nowbetlocal = nowbetlocal;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
@@ -1666,6 +1717,9 @@ module.exports = {
                                         userID: botID,
                                     }, 
                                     {
+                                        $inc : {
+                                        dollar: -(amount - p1nowbetlocal),
+                                        },
                                         $set : {
                                         NowBet : amount,
                                         Player3NowBet : amount,
@@ -1683,7 +1737,7 @@ module.exports = {
                                     p3continuelocal =  true;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
                                         console.log("p3end");
-                                        EndRoundTake();
+                                        // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
                                         }, 
