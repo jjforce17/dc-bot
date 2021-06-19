@@ -74,7 +74,8 @@ module.exports = {
         } catch (error) {
             console.log(error);
         }
-        }
+        } 
+        const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
