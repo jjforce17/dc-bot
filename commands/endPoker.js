@@ -4,7 +4,6 @@ module.exports = {
     name: 'endp',
     description: "endp",
     async execute(client, message, args, Discord, profileData) {
-        
         if(!message.member.roles.cache.some(r => r.name === "boi")) return message.channel.send("Admin Command");
         const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
@@ -54,7 +53,7 @@ module.exports = {
         catch (err) {
             console.log(err);
          }
-        function ender() {
+        async function ender() {
         try {
             await profileModel.findOneAndUpdate({ userID: botID }, 
             {$set: {
