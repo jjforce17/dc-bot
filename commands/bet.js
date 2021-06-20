@@ -789,7 +789,7 @@ function starter() {
   document.write("player 3  <br><br>");
   winner();
 }
-function winner () {
+async function winner () {
 	var wiener = [player.p1, player.p2, player.p3];
     wiener.sort(function(a,b) {return b - a});
     if(wiener[0] == player1.p1) {
