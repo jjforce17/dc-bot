@@ -49,12 +49,7 @@ const profileSchema = new mongoose.Schema({
     D3N: { type: String },
     D4N: { type: String },
     D5N: { type: String },
-    // P1N1: { type: String },
-    // P1N2: { type: String },
-    // P2N1: { type: String },
-    // P2N2: { type: String },
-    // P3N1: { type: String },
-    // P3N2: { type: String },
+    poker1winner : { type: String },
 });
 
 const model = mongoose.model("ProfileModels", profileSchema);

@@ -24,6 +24,829 @@ module.exports = {
             message.channel.send(botData.D4N);
             message.channel.send(botData.D5N);
         }
+        var card1 = {
+            value: botData.BCard1,
+            numval: 0,
+            symbol: "",
+        };
+        var card2 = {
+            value: botData.BCard2,
+            numval: 0,
+            symbol: "",
+        };
+        var card3 = {
+            value: botData.BCard3,
+            numval: 0,
+            symbol: "",
+        };
+        var card4 = {
+            value: botData.BCard4,
+            numval: 0,
+            symbol: "",
+        };
+        var card5 = {
+            value: botData.BCard5,
+            numval: 0,
+            symbol: "",
+        };
+        var p1card1 = {
+            value: botData.P1Card1,
+            numval: 0,
+            symbol: "",
+        };
+        var p1card2 = {
+            value: botData.P1Card2,
+            numval: 0,
+            symbol: "",
+        };
+        var p2card1 = {
+            value: botData.P2Card1,
+            numval: 0,
+            symbol: "",
+        };
+        var p2card2 = {
+            value: botData.P2Card2,
+            numval: 0,
+            symbol: "",
+        };
+        var p3card1 = {
+            value: botData.P3Card1,
+            numval: 0,
+            symbol: "",
+        };
+        var p3card2 = {
+            value: botData.P3Card2,
+            numval: 0,
+            symbol: "",
+        };
+        var player = {
+            p1 : 1,
+            p2 : 2,
+            p3 : 3,
+        };
+        var straightconf = false;
+        var compmultarray = [0,0,0,0,0,0,0];
+        var mult1 = [0,0];
+        var mult2 = [0,0];
+        var mult3 = [0,0];
+        var mult4 = 0;
+        var mult5 = 0;
+        var stret1 = 0;
+        var stret2 = 0;
+        var maxcval = 0;
+        var maxcsym = "";
+        var maxcval1 = 0;
+        var maxcval2 = 0;
+        var maxcval3 = 0;
+        var maxcval4 = 0;
+        var maxcval5 = [0,0,0,0];
+        var maxcval2 = 0;
+        var maxcsym2 = "";
+        var maxcval21 = 0;
+        var maxcval22 = 0;
+        var maxcval25 = [0,0];
+        var rfc = false;
+        var sfc = false;
+        var fkc = false;
+        var fhc = false;
+        var flc = false;
+        var stc = false;
+        var tkc = false;
+        var tpc = false;
+        var opc = false;
+        var ucardsc = 0;
+        var add1 = 0;
+        var add2 = 0;
+        var add3 = 0;
+        var add4 = 0;
+        var addition1 = 0;
+        var flushsnv = [];
+        var flushhnv = [];
+        var flushcnv = [];
+        var flushdnv = [];
+        var flush1 = 0;
+        var flush2 = 0;
+        var sflush1 = 0;
+        var sflush2 = 0;
+        
+        
+        function compareflush(ucard1,ucard2) {
+        compareflush2(card1);
+        compareflush2(card2);
+        compareflush2(card3);
+        compareflush2(card4);
+        compareflush2(card5);
+        compareflush2(ucard1);
+        compareflush2(ucard2);
+        compareflush3(ucard1,ucard2);
+        }
+        
+        function compareflush2(cardf) {
+        
+        if(39 < cardf.value && cardf.value <= 52){
+        flushsnv.push(cardf.numval);
+        }
+        else if(26 < cardf.value && cardf.value <= 39){
+        flushhnv.push(cardf.numval);
+
+        }
+        else if(13 < cardf.value && cardf.value <= 26){
+        flushcnv.push(cardf.numval);
+
+        }
+        else if(cardf.value <= 13){
+        flushdnv.push(cardf.numval);
+		}
+        
+        }
+        
+        function compareflush3(ucard1, ucard2){
+        if(flushsnv.length >= 5 && (flushsnv.includes(ucard1.numval) || flushsnv.includes(ucard2.numval))){
+        flc = true;
+        flushsnv.sort(function(a,b){return b - a});
+        flush1 = flushsnv[0] * 10 + 4;
+        if(flushsnv.includes(ucard1.numval) && flushsnv.includes(ucard2.numval)) {
+        if(ucard2.numval > ucard1.numval) {
+        flush2  = ucard2.numval * 10 + 4;
+        }
+        else if(ucard2.numval < ucard1.numval) {
+        flush2  = ucard1.numval * 10 + 4;
+        }
+        }
+        if(flushsnv.includes(ucard1.numval) && !flushsnv.includes(ucard2.numval)) {
+        flush2  = ucard1.numval * 10 + 4;
+        }
+        if(!flushsnv.includes(ucard1.numval) && flushsnv.includes(ucard2.numval)) {
+        flush2  = ucard2.numval * 10 + 4;
+        }
+        compareflush4(flushsnv, 4, ucard1, ucard2);
+        }
+        else if(flushhnv.length >= 5 && (flushhnv.includes(ucard1.numval) || flushhnv.includes(ucard2.numval))){
+        flc = true;
+        flushhnv.sort(function(a,b){return b - a});
+        flush1 = flushhnv[0] * 10 + 3;
+        if(flushhnv.includes(ucard1.numval) && flushhnv.includes(ucard2.numval)) {
+        if(ucard2.numval > ucard1.numval) {
+        flush2  = ucard2.numval * 10 + 3;
+        }
+        else if(ucard2.numval < ucard1.numval) {
+        flush2  = ucard1.numval * 10 + 3;
+        }
+        }
+        if(flushhnv.includes(ucard1.numval) && !flushhnv.includes(ucard2.numval)) {
+        flush2  = ucard1.numval * 10 + 3;
+        }
+        if(!flushhnv.includes(ucard1.numval) && flushhnv.includes(ucard2.numval)) {
+        flush2  = ucard2.numval * 10 + 3;
+        }
+        compareflush4(flushhnv, 3, ucard1, ucard2);
+        }
+        else if(flushcnv.length >= 5 && (flushcnv.includes(ucard1.numval) || flushcnv.includes(ucard2.numval))){
+        flc = true;
+        flushcnv.sort(function(a,b){return b - a});
+        flush1 = flushcnv[0] * 10 + 2;
+        if(flushcnv.includes(ucard1.numval) && flushcnv.includes(ucard2.numval)) {
+        if(ucard2.numval > ucard1.numval) {
+        flush2  = ucard2.numval * 10 + 2;
+        }
+        else if(ucard2.numval < ucard1.numval) {
+        flush2  = ucard1.numval * 10 + 2;
+        }
+        }
+        if(flushcnv.includes(ucard1.numval) && !flushcnv.includes(ucard2.numval)) {
+        flush2  = ucard1.numval * 10 + 2;
+        }
+        if(!flushcnv.includes(ucard1.numval) && flushcnv.includes(ucard2.numval)) {
+        flush2  = ucard2.numval * 10 + 2;
+        }
+        compareflush4(flushcnv, 2, ucard1, ucard2);
+        }
+        else if(flushdnv.length >= 5 && (flushdnv.includes(ucard1.numval) || flushdnv.includes(ucard2.numval))){
+        flc = true;
+        flushdnv.sort(function(a,b){return b - a});
+        flush1 = flushdnv[0] * 10 + 1;
+        if(flushdnv.includes(ucard1.numval) && flushdnv.includes(ucard2.numval)) {
+        if(ucard2.numval > ucard1.numval) {
+        flush2  = ucard2.numval * 10 + 1;
+        }
+        else if(ucard2.numval < ucard1.numval) {
+        flush2  = ucard1.numval * 10 + 1;
+        }
+        }
+        if(flushdnv.includes(ucard1.numval) && !flushdnv.includes(ucard2.numval)) {
+        flush2  = ucard1.numval * 10 + 1;
+        }
+        if(!flushdnv.includes(ucard1.numval) && flushdnv.includes(ucard2.numval)) {
+        flush2  = ucard2.numval * 10 + 1;
+        }
+        compareflush4(flushdnv, 1, ucard1, ucard2);
+        }
+        }
+        function compareflush4(arrayn, val, ucard1, ucard2) {
+        arrayn.sort(function(a,b) {return a-b});
+        var opop = 2;
+  var scgf = [arrayn[opop],arrayn[opop + 1],arrayn[opop+2],arrayn[opop+3],arrayn[opop+4]];
+  while(opop >= 0) {
+  scgf = [arrayn[opop],arrayn[opop + 1],arrayn[opop+2],arrayn[opop+3],arrayn[opop+4]];
+	if(arrayn[opop] == arrayn[opop + 1] -1 && arrayn[opop] ==  arrayn[opop + 2] -2 && arrayn[opop] ==  arrayn[opop + 3] -3 && arrayn[opop] ==  arrayn[opop + 4] -4) {
+    if(scgf.includes(ucard1.numval) && scgf.includes(ucard2.numval)){
+    if(ucard2.numval > ucard1.numval){
+    sflush1 = arrayn[opop+4] * 10 + val;
+    sflush2 = ucard2.numval * 10 + val;
+    }
+    else if(ucard1.numval > ucard2.numval){
+    sflush1 = arrayn[opop+4] * 10 + val;
+    sflush2 = ucard1.numval * 10 + val;
+    }
+    else if(ucard2.numval == ucard1.numval){
+    sflush1 = arrayn[opop+4] * 10 + val;
+    sflush2 = ucard1.numval * 10 + val;
+    }
+    }
+    if(scgf.includes(ucard1.numval) && !scgf.includes(ucard2.numval)) {
+    sflush1 = arrayn[opop+4] * 10 + val;
+    sflush2 = ucard1.numval * 10 + val;
+    }
+    if(!scgf.includes(ucard1.numval) && scgf.includes(ucard2.numval)) {
+    sflush1 = arrayn[opop+4] * 10 + val;
+    sflush2 = ucard2.numval * 10 + val;
+    }
+    if(scgf.includes(ucard1.numval) || scgf.includes(ucard2.numval)){
+    if (sflush1 != 0){
+    sfc = true;
+    if(sflush1/10 > 12.9 && sflush1/10 < 13.5) {
+    rfc = true;
+    }
+    opop = -1;
+    }
+    
+    }
+    }
+    opop = opop -1;
+  }
+        }
+   
+        
+        function comparemultiple(userc1, userc2) {
+        compmultarray = [0,0,0,0,0,0,0];
+        mult1 = [0,0];
+        mult2 = [0,0];
+        mult3 = [0,0];
+        mult4 = 0;
+        mult5 = 0;
+        ucardsc = 0;
+        compmultarray = [card1.numval,card2.numval,card3.numval,card4.numval,card5.numval,userc1.numval, userc2.numval];
+        compmultarray.sort(function(a,b){return a - b})
+        for(let a1 = 0; a1 in compmultarray; a1++){
+        if(compmultarray[a1] != compmultarray[a1+1]) {
+        compmultarray.splice(a1,1);
+        a1 = a1 - 1;
+        }
+        }
+        var b1 = 0;
+        var b2 = 1;
+        var b3 = 1;
+        
+        for (i = 0; i in compmultarray; i++){
+        b2 = 1;
+        b3 = 1;
+
+  			while(compmultarray[b1] == compmultarray[b1 + b2]) {
+            b3 += 1;
+            b2 += 1;
+            }
+            if (b1 > 0 && compmultarray[b1] == compmultarray[b1 - 1]) {
+            b3 = -1;
+            }
+            if(b3 > 0){
+            if(mult1[1] == 0) {
+            mult1[0] = compmultarray[b1];
+            mult1[1] = b3 +1;
+            }
+            else if(mult2[1] == 0) {
+            mult2[0] = compmultarray[b1];
+            mult2[1] = b3 +1 ;
+            }
+            else if(mult3[1] == 0) {
+            mult3[0] = compmultarray[b1];
+            mult3[1] = b3 +1;
+            }
+            }
+                        b1 += 1;
+            }
+            
+            
+            if(compmultarray.includes(userc1.numval) || compmultarray.includes(userc2.numval)){
+            if(mult3[1] == 4 && (mult3[0] == userc1.numval ||  mult3[0] == userc2.numval)){
+            fkc = true;
+            mult4 = mult3[0];
+            mult5 = mult3[0];
+            }
+            else if(mult2[1] == 4 && (mult2[0] == userc1.numval || mult2[0] == userc2.numval)) {
+            fkc = true;
+            mult4 = mult2[0];
+            mult5 = mult2[0];
+            }
+            else if(mult1[1] == 4 && (mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            fkc = true;
+            mult4 = mult1[0];
+            mult5 = mult1[0];
+            }
+            
+            else if(mult3[1] == 3 && (mult2[1] == 3 || mult2[1] == 2) && (mult3[0] == userc1.numval || mult3[0] == userc2.numval || mult2[0] == userc1.numval || mult2[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult3[0];
+            mult5 = mult2[0];
+            }
+            else if(mult3[1] == 3 && (mult1[1] == 3 || mult1[1] == 2) && (mult3[0] == userc1.numval || mult3[0] == userc2.numval || mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult3[0];
+            mult5 = mult1[0];
+            }
+            else if(mult2[1] == 3 && mult3[1] == 2 && (mult3[0] == userc1.numval || mult3[0] == userc2.numval || mult2[0] == userc1.numval || mult2[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult2[0];
+            mult5 = mult3[0];
+            }
+            else if(mult2[1] == 3 && (mult1[1] == 3 || mult1[1] == 2) && (mult2[0] == userc1.numval || mult2[0] == userc2.numval || mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult2[0];
+            mult5 = mult1[0];
+            }
+            else if(mult1[1] == 3 && (mult3[1] == 3 || mult3[1] == 2) && (mult3[0] == userc1.numval || mult3[0] == userc2.numval || mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult1[0];
+            mult5 = mult3[0];
+            }
+            else if(mult1[1] == 3 && (mult2[1] == 3 || mult2[1] == 2) && (mult2[0] == userc1.numval || mult2[0] == userc2.numval || mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            fhc = true;
+            mult4 = mult1[0];
+            mult5 = mult2[0];
+            }
+            
+            else if(mult3[1] == 3 && (mult3[0] == userc1.numval || mult3[0] == userc2.numval)) {
+            tkc = true;
+            mult4 = mult3[0];
+            mult5 = mult3[0];
+            }
+            else if(mult2[1] == 3 && (mult2[0] == userc1.numval || mult2[0] == userc2.numval)) {
+            tkc = true;
+            mult4 = mult2[0];
+            mult5 = mult2[0];
+            }
+            else if(mult1[1] == 3 && (mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            tkc = true;
+            mult4 = mult1[0];
+            mult5 = mult1[0];
+            }
+           
+            else if(mult3[1] == 2 && (mult3[0] == userc1.numval || mult3[0] == userc2.numval)) {
+            opc = true;
+            mult4 = mult3[0];
+            mult5 = mult3[0];
+            if (mult2[1] == 2) {
+            tpc = true;
+            mult5 = mult2[0];
+            }
+            else if (mult1[1] == 2) {
+            tpc = true;
+            mult5 = mult1[0];
+            }
+            }
+            else if(mult2[1] == 2 && (mult2[0] == userc1.numval || mult2[0] == userc2.numval)) {
+            opc = true;
+            mult4 = mult2[0];
+            mult5 = mult2[0];
+            if (mult3[1] == 2) {
+            tpc = true;
+            mult5 = mult3[0];
+            }
+            else if (mult1[1] == 2) {
+            tpc = true;
+            mult5 = mult1[0];
+            }
+            }
+            else if(mult1[1] == 2 && (mult1[0] == userc1.numval || mult1[0] == userc2.numval)) {
+            opc = true;
+            mult4 = mult1[0];
+            mult5 = mult1[0];
+            if (mult3[1] == 2) {
+            tpc = true;
+            mult5 = mult3[0];
+            }
+            else if (mult2[1] == 2) {
+            tpc = true;
+            mult5 = mult2[0];
+            }
+            }
+            }
+            if(tpc == true) {
+            if(mult5 > mult4) {
+            mult4, mult5 = mult5, mult4;
+            }
+            }
+        }
+        function maxchecka1(ccard, ucard1, ucard2) {
+        maxcval2 = 0;
+        maxcsym2 = "";
+        maxcval21 = 0;
+        maxcval22 = 0;
+        maxcval25 = [0,0];
+        var maxcvalc2 = 0;
+        maxchecka2(ccard, ucard1);
+        maxchecka2(ccard, ucard2);
+        maxchecka3();
+        maxchecka4(ucard1);
+        maxchecka4(ucard2);
+        }
+        function maxchecka2(ccard1, ccard2) {
+        if(ccard1 == ccard2.numval) {
+        if(maxcval21 == 0) {
+        maxcval21 = ccard2.value;
+        }
+        else if(maxcval22 == 0) {
+        maxcval22 = ccard2.value;
+        }
+        }
+        }
+        function maxchecka3() {
+        maxcval25 = [maxcval21, maxcval22];
+        maxcval25.sort(function(a,b) {a-b});
+        maxcvalc2 = maxcval25[0];
+        }
+        function maxchecka4(ccard) {
+        if(maxcvalc2 == ccard.value) {
+        maxcsym2 = ccard.symbol;
+        maxcval2 = ccard.numval;
+        }
+        }
+        function maxcheck(ccard, ucard1, ucard2) {
+        maxcval = 0;
+        maxcsym = "";
+        maxcval1 = 0;
+        maxcval2 = 0;
+        maxcval3 = 0;
+        maxcval4 = 0;
+        maxcval5 = [0,0,0,0];
+        var maxcvalc = 0;
+        maxcheck2(ccard, card1);
+        maxcheck2(ccard, card2);
+        maxcheck2(ccard, card3);
+        maxcheck2(ccard, card4);
+        maxcheck2(ccard, card5);
+        maxcheck2(ccard, ucard1);
+        maxcheck2(ccard, ucard2);
+        maxcheck3();
+        maxcheck4(card1);
+        maxcheck4(card2);
+        maxcheck4(card3);
+        maxcheck4(card4);
+        maxcheck4(card5);
+        maxcheck4(ucard1);
+        maxcheck4(ucard2);
+        }
+        function maxcheck2(ccard1, ccard2) {
+        if(ccard1 == ccard2.numval) {
+        if(maxcval1 == 0) {
+        maxcval1 = ccard2.value
+        }
+        else if(maxcval2 == 0) {
+        maxcval2 = ccard2.value
+        }
+        else if(maxcval3 == 0) {
+        maxcval3 = ccard2.value
+        }
+        else if(maxcval4 == 0) {
+        maxcval4 = ccard2.value
+        }
+        }
+        }
+        function maxcheck3() {
+        maxcval5 = [maxcval1,maxcval2,maxcval3,maxcval4];
+        maxcval5.sort(function(a,b) {return b-a});
+        maxcvalc = maxcval5[0];
+        }
+        function maxcheck4(ccard) {
+        if(maxcvalc == ccard.value) {
+        maxcsym = ccard.symbol;
+        maxcval = ccard.numval;
+        }
+        }
+        function smolchecksym(namae) {
+            if (namae.value <= 13) {
+                namae.symbol = "diamond";
+            }
+            else if (14 <=namae.value && namae.value <= 26) {
+                namae.symbol = "clover";
+            }
+            else if (27 <= namae.value && namae.value <= 39) {
+                namae.symbol = "heart";
+            }
+            else if (40 <= namae.value && namae.value <= 52) {
+                namae.symbol = "spade";
+            }
+        }
+        function cardvalcheck(name) { //value(card.value) //varname
+            if (name.value <= 13) {
+                name.numval = name.value;
+            }
+            else if (14 <= name.value && name.value <= 26) {
+                name.numval = name.value - 13;
+            }
+            else if (27 <= name.value && name.value <= 39) {
+                name.numval = name.value - 26;
+            }
+            else if (40 <= name.value && name.value <= 52) {
+                name.numval = name.value - 39;
+            }
+        }
+        function addition(card,sym) {
+        addition1 = 0;
+        var symval = 0;
+        if(sym == "spade") {
+        symval = 4;
+        }
+        else if(sym == "heart") {
+        symval = 3;
+        }
+        else if(sym == "clover") {
+        symval = 2;
+        }
+        else if(sym == "diamond") {
+        symval = 1;
+        }
+        addition1 = card*10 + symval;
+        }
+function sorter(name1, name2, nowplayer) { //p1card1, p2card2, player.p
+let ordervalue = [name1.value, name2.value, card1.value, card2.value, card3.value, card4.value, card5.value];
+smolchecksym(name1);
+smolchecksym(name2);
+smolchecksym(card1);
+smolchecksym(card2);
+smolchecksym(card3);
+smolchecksym(card4);
+smolchecksym(card5);
+cardvalcheck(name1);
+cardvalcheck(name2);
+cardvalcheck(card1);
+cardvalcheck(card2);
+cardvalcheck(card3);
+cardvalcheck(card4);
+cardvalcheck(card5);
+let ordernumval = [name1.numval, name2.numval, card1.numval, card2.numval, card3.numval, card4.numval, card5.numval];
+ordervalue.sort(function(a, b) {return a - b});
+ordernumval.sort(function(a, b) {return a - b});
+check(nowplayer, name1, name2, ordernumval, ordervalue);
+        }
+function check(currentplayer, ucard1, ucard2, numvalueorder, valueorder) {
+straightconf = false;
+ 		var a = numvalueorder[0];
+        var b = numvalueorder[1];
+        var c = numvalueorder[2];
+        var d = numvalueorder[3];
+        var e = numvalueorder[4];
+        var f = numvalueorder[5];
+        var g = numvalueorder[6];
+  var j = [1,1,1,1,1,1,1];
+  var h = 0;
+  var f = [a,b,c,d,e,f,g];
+  var o = 0;
+  var p = 1;
+  var g = true;
+  var osd = 0;
+  var straightcheck = numvalueorder;
+  add1 = 0;
+  add2 = 0;
+  add3 = 0;
+  add4 = 0;
+  mult4 = 0;
+  mult5 = 0;
+  rfc = false;
+  sfc = false;
+  fkc = false;
+  fhc = false;
+  flc = false;
+  stc = false;
+  tkc = false;
+  tpc = false;
+  opc = false;
+  addition1 = 0;
+  flushsnv = [];
+  flushhnv = [];
+  flushcnv = [];
+  flushdnv = [];
+  flush1 = 0;
+  flush2 = 0;
+  sflush1 = 0;
+  sflush2 = 0;
+  stret1 = 0;
+  stret2 = 0;
+  for(i = 0; i in straightcheck; i++) {
+  if (straightcheck[osd] == straightcheck[osd+1]) {
+  straightcheck.splice(osd,1);
+  }
+  osd++
+  }
+
+ var opop = 2;
+ var scg = [straightcheck[opop],straightcheck[opop + 1],straightcheck[opop+2],straightcheck[opop+3],straightcheck[opop+4]];
+  while(opop >= 0) {
+  scg = [straightcheck[opop],straightcheck[opop + 1],straightcheck[opop+2],straightcheck[opop+3],straightcheck[opop+4]];
+	if(straightcheck[opop] == straightcheck[opop + 1] -1 && straightcheck[opop] ==  straightcheck[opop + 2] -2 && straightcheck[opop] ==  straightcheck[opop + 3] -3 && straightcheck[opop] ==  straightcheck[opop + 4] -4) {
+    if(scg.includes(ucard1.numval) && scg.includes(ucard2.numval)){
+    if(ucard2.numval > ucard1.numval){
+    stret1 = straightcheck[opop+4];
+    stret2 = ucard2.numval
+    }
+    else if(ucard1.numval > ucard2.numval){
+    stret1 = straightcheck[opop+4];
+    stret2 = ucard1.numval
+    }
+    else if(ucard2.numval == ucard1.numval){
+    stret1 = straightcheck[opop+4];
+    stret2 = ucard1.numval
+    }
+    }
+    if(scg.includes(ucard1.numval) && !scg.includes(ucard2.numval)) {
+    stret1 = straightcheck[opop+4];
+    stret2 = ucard1.numval
+    }
+    if(!scg.includes(ucard1.numval) && scg.includes(ucard2.numval)) {
+    stret1 = straightcheck[opop+4];
+    stret2 = ucard2.numval
+    }
+    if(scg.includes(ucard1.numval) || scg.includes(ucard2.numval)){
+    if (stret1 != 0){
+    stc = true;
+    opop = -1;
+    }
+    }
+    }
+    opop = opop -1;
+  }
+  //make sure check ucard1 or ucard2 >
+  comparemultiple(ucard1, ucard2);
+  compareflush(ucard1,ucard2);
+  //score = combo(100),c1,c2,c3,c4(100)(450.071.132.063.041)
+  if(rfc == true) {
+  currentplayer =  450 * 1000000000000 + sflush1 * 1000000000 + sflush2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(sfc == true) {
+  currentplayer =  400 * 1000000000000 + sflush1 * 1000000000 + sflush2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(fkc == true) {maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add2= addition1;
+    currentplayer =  350* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(fhc == true) {
+    maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    maxcheck(mult5, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add2 = addition1;
+    maxchecka1(mult4, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add3 = addition1;
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add4 = addition1;
+    currentplayer =  300* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(flc == true) {
+  currentplayer =  250 * 1000000000000 + flush1 * 1000000000 + flush2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(stc == true) {
+  
+   maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add2= addition1;
+    currentplayer =  200* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(tkc == true) {maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add2= addition1;
+    currentplayer =  150* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(tpc == true) {
+    maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    maxcheck(mult5, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add2 = addition1;
+    maxchecka1(mult4, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add3 = addition1;
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add4 = addition1;
+    currentplayer =  100* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(opc == true) {
+  maxcheck(mult4, ucard1, ucard2);
+    addition(maxcval, maxcsym);
+    add1 = addition1;
+    
+    maxchecka1(mult5, ucard1, ucard2);
+    addition(maxcval2, maxcsym2);
+    add2= addition1;
+    currentplayer =  50* 1000000000000 + add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else {
+  addition(ucard1.numval, ucard1.symbol);
+  add1 = addition1;
+  addition(ucard2.numval, ucard2.symbol);
+  add2 = addition1;
+  if (add1 > add2){
+    currentplayer = add1 * 1000000000 + add2 *1000000 + add3 * 1000 + add4;
+  }
+  else if(add2 > add1) {
+    currentplayer = add2 * 1000000000 + add1 *1000000 + add3 * 1000 + add4;
+  }
+  }
+  }
+
+function starter() {
+  sorter(p1card1, p1card2, player.p1);
+  document.write("player 1  <br><br>");
+  sorter(p2card1, p2card2, player.p2);
+  document.write("player 2  <br><br>");
+  sorter(p3card1, p3card2, player.p3);
+  document.write("player 3  <br><br>");
+  winner();
+}
+function winner () {
+	var wiener = [player.p1, player.p2, player.p3];
+    wiener.sort(function(a,b) {return b - a});
+    if(wiener[0] == player1.p1) {
+        if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
+            message.channel.send(p1user.username + " is the winner.");
+            message.channel.send("Use ?endp to collect rewards");
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    poker1winner: "p1",
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+    if(wiener[0] == player1.p2) {
+        if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
+            message.channel.send(p2user.username + " is the winner.");
+            message.channel.send("Use ?endp to collect rewards");
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    poker1winner: "p2",
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+    if(wiener[0] == player1.p3) {
+        if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
+            message.channel.send(p3user.username + " is the winner.");
+            message.channel.send("Use ?endp to collect rewards");
+            try {
+                await profileModel.findOneAndUpdate({
+                    userID: botID,
+                }, 
+                {
+                    $set : {
+                    poker1winner: "p3",
+                    },
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+}
         // async function EndRoundTake() {
         //     try {
         //         if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
@@ -108,15 +931,7 @@ module.exports = {
         }
         try {
             var p1user = client.users.cache.get(botData.player1);
-        } catch (error) {
-            console.log(error);
-        }
-        try {
             var p2user = client.users.cache.get(botData.player2);
-        } catch (error) {
-            console.log(error);
-        }
-        try {
             var p3user = client.users.cache.get(botData.player3);
         } catch (error) {
             console.log(error);
@@ -445,6 +1260,9 @@ module.exports = {
         }
         if (amount >= p1max || amount >= p2max || amount >= p3max) {
             return message.channel.send("Amount is too big")
+        }
+        if (botData.BetStage > 3) {
+            return message.channel.send("Game has ended, use ?endp to claim rewards.")
         }
         if (botData.BetStage == 1) {
             if (botData.Player1Turn == true) {
@@ -1525,8 +2343,7 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        callcard5();
-                                        return currentuser();
+                                        return starter();
                                     }
                                     message.channel.send("Betted " + amount);
                                     return currentuser();
@@ -1674,8 +2491,7 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        callcard5();
-                                        return currentuser();
+                                        return starter();
                                     }
                                     message.channel.send("Betted " + amount);
                                     return currentuser();
@@ -1851,8 +2667,7 @@ module.exports = {
                                         p2turnlocal = false;
                                         p3turnlocal = false;
                                         message.channel.send("Betted " + amount);
-                                        callcard5();
-                                        return currentuser();
+                                        return starter();
                                     }
                                     message.channel.send("Betted " + amount);
                                     return currentuser();

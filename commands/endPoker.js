@@ -4,8 +4,57 @@ module.exports = {
     name: 'endp',
     description: "endp",
     async execute(client, message, args, Discord, profileData) {
-        if(!message.member.roles.cache.some(r => r.name === "Big boi")) return message.channel.send("Admin Command");
+        
+        if(!message.member.roles.cache.some(r => r.name === "boi")) return message.channel.send("Admin Command");
         const botID = "803868333341802499";
+        const botData = await profileModel.findOne({ userID: botID });
+        try {
+            var p1user = client.users.cache.get(botData.player1);
+            var p2user = client.users.cache.get(botData.player2);
+            var p3user = client.users.cache.get(botData.player3);
+        } catch (error) {
+            console.log(error);
+        }
+        try {
+            if(botData.poker1winner == "p1") {
+            await profileModel.findOneAndUpdate({
+                userID: botData.player1,
+                }, 
+                {
+                    $inc : {
+                    dollar: TotalBet,
+                    },
+                })
+                document.write(p1user.username + " won " + botData.TotalBet + " coins.")
+            }
+            if(botData.poker1winner == "p2") {
+                await profileModel.findOneAndUpdate({
+                    userID: botData.player2,
+                    }, 
+                    {
+                        $inc : {
+                        dollar: TotalBet,
+                        },
+                    })
+                    document.write(p2user.username + " won " + botData.TotalBet + " coins.")
+                }
+                if(botData.poker1winner == "p3") {
+                    await profileModel.findOneAndUpdate({
+                        userID: botData.player3,
+                        }, 
+                        {
+                            $inc : {
+                            dollar: TotalBet,
+                            },
+                        })
+                        document.write(p3user.username + " won " + botData.TotalBet + " coins.")
+                    }
+                ender();
+        }
+        catch (err) {
+            console.log(err);
+         }
+        function ender() {
         try {
             await profileModel.findOneAndUpdate({ userID: botID }, 
             {$set: {
@@ -44,14 +93,17 @@ module.exports = {
                     Player3FoldConfirm : false,
                     Player1NowBet: 0,
                     Player2NowBet: 0,
-                    Player3NowBet: 0, 
+                    Player3NowBet: 0,
+                    poker1winner: "...", 
                 }
             })
         message.channel.send("Ended");
         } catch (err) {
             console.log(err);
             }
-        
+        }
+
+
     }
 }
 
