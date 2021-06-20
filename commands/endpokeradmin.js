@@ -2,7 +2,7 @@ const profileModel = require('../models/profileSchema');
 
 module.exports = {
     name: 'endpa',
-    description: "endpa",
+    description: "endpadmin",
     async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "Big boi")) return message.channel.send("Admin Command");
         const botID = "803868333341802499";
