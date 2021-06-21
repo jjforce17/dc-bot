@@ -25,7 +25,7 @@ module.exports = {
                     dollar: winnings,
                     },
                 })
-                document.write(p1user.username + " won " + winnings + " coins.")
+                message.channel.send(p1user.username + " won " + winnings + " coins.")
             }
             if(botData.poker1winner == "p2") {
                 await profileModel.findOneAndUpdate({
@@ -36,7 +36,7 @@ module.exports = {
                         dollar: winnings,
                         },
                     })
-                    document.write(p2user.username + " won " + botData.winnings + " coins.")
+                    message.channel.send(p2user.username + " won " + botData.winnings + " coins.")
                 }
                 if(botData.poker1winner == "p3") {
                     await profileModel.findOneAndUpdate({
@@ -47,7 +47,7 @@ module.exports = {
                             dollar: winnings,
                             },
                         })
-                        document.write(p3user.username + " won " + winnings + " coins.")
+                        message.channel.send(p3user.username + " won " + winnings + " coins.")
                     }
                 ender();
         }
