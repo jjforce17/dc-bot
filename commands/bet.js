@@ -784,11 +784,8 @@ straightconf = false;
 
 function starter() {
   sorter(p1card1, p1card2, player.p1);
-  document.write("player 1  <br><br>");
   sorter(p2card1, p2card2, player.p2);
-  document.write("player 2  <br><br>");
   sorter(p3card1, p3card2, player.p3);
-  document.write("player 3  <br><br>");
   winner();
 }
 async function winner () {
