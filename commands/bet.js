@@ -4,6 +4,8 @@ module.exports = {
     name: 'betp',
     description: "bet Poker",
     async execute(client, message, args, Discord, profileData) {
+        const botID = "803868333341802499";
+        const botData = await profileModel.findOne({ userID: botID });
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if(!message.member.roles.cache.some(r => r.name === "Poker1")) return message.channel.send("Please join a room");
         if(message.channel.name != "poker1") return;
@@ -898,8 +900,6 @@ async function winner () {
             console.log(error);
         }
         } 
-        const botID = "803868333341802499";
-        const botData = await profileModel.findOne({ userID: botID });
         const Player1ID = botData.player1;
         const Player2ID = botData.player2;
         const Player3ID = botData.player3;
