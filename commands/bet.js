@@ -791,7 +791,7 @@ function starter() {
 async function winner () {
 	var wiener = [player.p1, player.p2, player.p3];
     wiener.sort(function(a,b) {return b - a});
-    if(wiener[0] == player1.p1) {
+    if(wiener[0] == player.p1) {
         if (botData.Player1State == true && botData.Player1FoldConfirm == false) {
             message.channel.send(p1user.username + " is the winner.");
             message.channel.send("Use ?endp to collect rewards");
@@ -809,7 +809,7 @@ async function winner () {
             }
         }
     }
-    if(wiener[0] == player1.p2) {
+    if(wiener[0] == player.p2) {
         if (botData.Player2State == true && botData.Player2FoldConfirm == false) {
             message.channel.send(p2user.username + " is the winner.");
             message.channel.send("Use ?endp to collect rewards");
@@ -827,7 +827,7 @@ async function winner () {
             }
         }
     }
-    if(wiener[0] == player1.p3) {
+    if(wiener[0] == player.p3) {
         if (botData.Player3State == true && botData.Player3FoldConfirm == false) {
             message.channel.send(p3user.username + " is the winner.");
             message.channel.send("Use ?endp to collect rewards");
