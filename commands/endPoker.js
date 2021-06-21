@@ -101,8 +101,14 @@ module.exports = {
         } catch (err) {
             console.log(err);
             }
-        }
-
+        var rolea = message.guild.roles.cache.find(r => r.name === "Poker1");
+        rolea.members.forEach((member, i) => { // Looping through the members of Role.
+            setTimeout(() => {
+                member.roles.remove(rolea); // Removing the Role.
+            }, i * 1000);
+        });
+    } 
+        
 
     }
 }
