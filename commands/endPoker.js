@@ -7,6 +7,7 @@ module.exports = {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return message.channel.send("Admin Command");
         const botID = "803868333341802499";
         const botData = await profileModel.findOne({ userID: botID });
+        var winnings = botData.TotalBet;
         try {
             var p1user = client.users.cache.get(botData.player1);
             var p2user = client.users.cache.get(botData.player2);
@@ -21,10 +22,10 @@ module.exports = {
                 }, 
                 {
                     $inc : {
-                    dollar: TotalBet,
+                    dollar: winnings,
                     },
                 })
-                document.write(p1user.username + " won " + botData.TotalBet + " coins.")
+                document.write(p1user.username + " won " + winnings + " coins.")
             }
             if(botData.poker1winner == "p2") {
                 await profileModel.findOneAndUpdate({
@@ -32,10 +33,10 @@ module.exports = {
                     }, 
                     {
                         $inc : {
-                        dollar: TotalBet,
+                        dollar: winnings,
                         },
                     })
-                    document.write(p2user.username + " won " + botData.TotalBet + " coins.")
+                    document.write(p2user.username + " won " + botData.winnings + " coins.")
                 }
                 if(botData.poker1winner == "p3") {
                     await profileModel.findOneAndUpdate({
@@ -43,10 +44,10 @@ module.exports = {
                         }, 
                         {
                             $inc : {
-                            dollar: TotalBet,
+                            dollar: winnings,
                             },
                         })
-                        document.write(p3user.username + " won " + botData.TotalBet + " coins.")
+                        document.write(p3user.username + " won " + winnings + " coins.")
                     }
                 ender();
         }
