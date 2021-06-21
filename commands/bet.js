@@ -1262,6 +1262,7 @@ async function winner () {
             return message.channel.send("Amount is too big")
         }
         if (botData.BetStage > 3) {
+            starter();
             return message.channel.send("Game has ended, use ?endp to claim rewards.")
         }
         if (botData.BetStage == 1) {
@@ -2642,7 +2643,7 @@ async function winner () {
                                     p3nowbetlocal = nowbetlocal;
                                     p3continuelocal =  true;
                                     if (p1nowbetlocal == p2nowbetlocal && p2nowbetlocal == amount && amount == botData.NowBet && p1continuelocal == true && p2continuelocal == true && p3continuelocal == true) {
-                                        console.log("p3end");
+                                        console.log("p3endr3");
                                         // EndRoundTake();
                                         await profileModel.findOneAndUpdate({
                                             userID: botID,
