@@ -3,7 +3,7 @@ const profileModel = require('../models/profileSchema');
 module.exports = {
     name: 'give',
     description: "normal give",
-    async execute(client, message, args, Discord) {
+    async execute(client, message, args, Discord, profileData) {
         if(!message.member.roles.cache.some(r => r.name === "boi")) return;
         if (!args.length) return;
         const amount  = args[1];
@@ -12,7 +12,7 @@ module.exports = {
         if(!target) return message.channel.send("User doesn't exist");
         if (!targetData) return message.channel.send("Iser doesn't have an account");
         if(amount % 1 != 0) return message.channel.send("Value must be a whole number");
-        const mooney = profileData.dollar; 
+        const mooney = profileData.dollar;
         if(mooney <= amount) {
             message.channel.send('Not sufficient funds.');
             return;
