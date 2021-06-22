@@ -63,6 +63,7 @@ module.exports = {
             }
             else {
                 message.channel.send("Nice! You got one right!");
+                message.channel.send("You earned " + win1amt);
                 await profileModel.findOneAndUpdate({
                     userID: message.author.id,
                 }, 
@@ -76,7 +77,7 @@ module.exports = {
         }
         else if (cardu2 == card1 || cardu2 == card2 || cardu2 == card3) {
             message.channel.send("Nice! You got one right!");
-            message.channel.send("You earned " + win2amt);
+            message.channel.send("You earned " + win1amt);
             await profileModel.findOneAndUpdate({
                 userID: message.author.id,
             }, 
